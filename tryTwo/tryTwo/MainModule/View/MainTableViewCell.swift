@@ -61,7 +61,6 @@ final class MainTableViewCell: UITableViewCell {
         votedLabel.textColor = .white
         votedLabel.font = .boldSystemFont(ofSize: 18)
         votedLabel.textAlignment = .center
-        
     }
     
     //MARK: - Internal methods
