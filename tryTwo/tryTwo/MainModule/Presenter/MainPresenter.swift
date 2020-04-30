@@ -17,7 +17,6 @@ final class MainPresenter: MainViewOutput {
     //MARK: - Private properties
     private let link = LinkBuilder()
     
-    
     //MARK: - lifeCycle
     func viewLoaded() {
         loadData()

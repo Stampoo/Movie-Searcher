@@ -62,9 +62,8 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         createMainTable()
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
-        
-        
     }
+    
     //refresh handler
     @objc private func reloadTable() {
         mainTable.reloadData()
@@ -93,15 +92,15 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 
 //MARK: - Extensions
 extension MainViewController: MainViewInput {
+    
     func setupInitialState() {
-        print("")
+        //TODO: create initial setup
     }
     
     func configure(with list: [Result]) {
         popular = list
         mainTable.reloadData()
     }
-    
     
 }
 
@@ -112,6 +111,7 @@ extension MainViewController: UITableViewDataSource {
         print(displayData.count)
         return displayData.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifire, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
         cell.configureCell(displayData[indexPath.row])
