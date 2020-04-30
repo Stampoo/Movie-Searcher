@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340B01B2245B7C6800082C55 /* Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B01B1245B7C6800082C55 /* Use.swift */; };
 		3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0EF245A0B8A00432678 /* AppDelegate.swift */; };
 		3444A0F4245A0B8A00432678 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0F3245A0B8A00432678 /* MainViewController.swift */; };
 		3444A0F9245A0B8B00432678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3444A0F8245A0B8B00432678 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		340B01B1245B7C6800082C55 /* Use.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Use.swift; sourceTree = "<group>"; };
 		3444A0EC245A0B8900432678 /* tryTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tryTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444A0EF245A0B8A00432678 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3444A0F3245A0B8A00432678 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				3496F6D9245B5E4700FB2997 /* ErrorCases.swift */,
 				3444A108245A0C6700432678 /* Movie.swift */,
 				3496F6BC245AC0DC00FB2997 /* MovieList.swift */,
+				340B01B1245B7C6800082C55 /* Use.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				3444A0F4245A0B8A00432678 /* MainViewController.swift in Sources */,
 				3496F6D3245B57B300FB2997 /* Configurator.swift in Sources */,
 				346E473D245B6AA4002F9948 /* UILabel.swift in Sources */,
+				340B01B2245B7C6800082C55 /* Use.swift in Sources */,
 				3496F6C9245B004300FB2997 /* MainRouter.swift in Sources */,
 				3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */,
 				3444A109245A0C6700432678 /* Movie.swift in Sources */,

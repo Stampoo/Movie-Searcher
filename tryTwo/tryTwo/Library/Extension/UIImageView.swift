@@ -10,6 +10,7 @@ import UIKit
 
 //MARK: - load data from server and set this data to imgaeView instance
 extension UIImageView {
+    
     func loadImage(_ path: String?) {
         guard let path = path else { return }
         guard let url = URL(string: path) else { return }
@@ -35,11 +36,9 @@ extension UIImageView {
                     
                 }.resume()
             }
-        } catch {
-            print("image not loaded")
         }
-        
     }
+    
 }
 
 

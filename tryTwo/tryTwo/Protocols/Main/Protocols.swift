@@ -17,7 +17,7 @@ protocol MainViewInput: class {
     func setupInitialState()
     
     //configure view
-    func configure(with list: [Result])
+    func configure(with list: [Result],  use: Use)
     
 }
 
@@ -30,6 +30,9 @@ protocol MainViewOutput: class {
     
     //reload view
     func reload()
+
+    //sendData
+    func send(key word: String)
     
 }
 

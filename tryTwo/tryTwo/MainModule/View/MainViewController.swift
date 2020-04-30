@@ -34,23 +34,28 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     }()
     private var isSearch = false {
         willSet {
-            print(self.isSearch)
-            if newValue == false {
+            if newValue {
+                displayData = searchData
                 DispatchQueue.main.async {
-                    self.displayData = self.popular
+                    self.mainTable.reloadData()
+                }
+            } else {
+                displayData = popular
+                DispatchQueue.main.async {
                     self.mainTable.reloadData()
                 }
             }
         }
     }
-    private var displayData = [Result]()
+    private var displayData = [Result]() {
+        didSet {
+            mainTable.reloadData()
+        }
+    }
     private var searchData = [Result]()
     private var popular = [Result]() {
         didSet {
-            DispatchQueue.main.async {
-                self.displayData = self.popular
-                self.mainTable.reloadData()
-            }
+            mainTable.reloadData()
         }
     }
     private let link = LinkBuilder()
@@ -58,6 +63,9 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController.searchBar.showsCancelButton = true
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         createMainTable()
         output?.viewLoaded()
@@ -97,9 +105,15 @@ extension MainViewController: MainViewInput {
         //TODO: create initial setup
     }
     
-    func configure(with list: [Result]) {
-        popular = list
-        mainTable.reloadData()
+    func configure(with list: [Result], use: Use) {
+        switch use {
+        case .popularResultUpdate:
+            displayData = list
+            mainTable.reloadData()
+        case .searchResultUpdate:
+            displayData = list
+            mainTable.reloadData()
+        }
     }
     
 }
@@ -108,7 +122,6 @@ extension MainViewController: MainViewInput {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(displayData.count)
         return displayData.count
     }
     
@@ -118,4 +131,22 @@ extension MainViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+//SearchExtension
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, text.count > 2 {
+            self.output?.send(key: text)
+            self.output?.reload()
+            self.isSearch = true
+        }
+    }
+}
+
+extension MainViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearch = false
+        mainTable.reloadData()
+    }
 }

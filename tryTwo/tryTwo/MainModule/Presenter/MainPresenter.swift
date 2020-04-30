@@ -16,25 +16,48 @@ final class MainPresenter: MainViewOutput {
     
     //MARK: - Private properties
     private let link = LinkBuilder()
+    private let loading = GetData()
+    private var keyWords = ""
     
     //MARK: - lifeCycle
     func viewLoaded() {
-        loadData()
+        loadPopularData()
     }
     
-    func reload() { }
+    func reload() {
+        loadSearchResult(keyWords)
+    }
+    
+    func send(key word: String) {
+        keyWords = word
+        
+    }
+    
     
     //load data from network
-    func loadData() {
-        let loading = GetData()
+    func loadPopularData() {
         loading.request(link: link.popular(page: 1), onComplete: { [weak self] (movieList) in
             guard let self = self else {
                 return
             }
-            self.view?.configure(with: movieList)
-            print(movieList)
+            self.view?.configure(with: movieList, use: .popularResultUpdate)
         }) { stuck in
             //TODO - create error case
+        }
+    }
+    
+    //Load search result
+    
+    func loadSearchResult(_ key: String) {
+        loading.searchRequest(link: link.query(target: .movie, keyWords: key), onComplete: { [weak self] (movieList) in
+            guard let self = self else {
+                return
+            }
+            print(self.link.query(target: .movie, keyWords: key))
+            print(movieList)
+            self.view?.configure(with: movieList, use: .searchResultUpdate)
+        }) { (stuck) in
+            //TODO: - create error case
         }
     }
     
