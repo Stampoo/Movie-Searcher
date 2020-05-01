@@ -63,10 +63,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.showsCancelButton = true
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
+        configureSearch()
         createMainTable()
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
@@ -78,6 +75,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         refresh.endRefreshing()
     }
     
+    //configure mainTable
     private func createMainTable() {
         let nib = UINib(nibName: Constants.MainTableViewCellNib, bundle: nil)
         mainTable.register(nib, forCellReuseIdentifier: Constants.cellIdentifire)
@@ -89,9 +87,18 @@ final class MainViewController: UIViewController, ModuleTransitionable {
             mainTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
         mainTable.dataSource = self
+        mainTable.delegate = self
         mainTable.separatorStyle = .none
         mainTable.backgroundColor = .white
         mainTable.addSubview(refresh)
+    }
+    
+    //configureSearch
+    private func configureSearch() {
+        searchController.searchBar.showsCancelButton = true
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
     }
     
 }
@@ -103,6 +110,7 @@ extension MainViewController: MainViewInput {
     
     func setupInitialState() {
         //TODO: create initial setup
+        print("fuck")
     }
     
     func configure(with list: [Result], use: Use) {
@@ -148,5 +156,11 @@ extension MainViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearch = false
         mainTable.reloadData()
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        output?.present(with: displayData[indexPath.row].id)
     }
 }

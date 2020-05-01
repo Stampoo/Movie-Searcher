@@ -18,6 +18,7 @@ final class MainPresenter: MainViewOutput {
     private let link = LinkBuilder()
     private let loading = GetData()
     private var keyWords = ""
+    private var id: Int?
     
     //MARK: - lifeCycle
     func viewLoaded() {
@@ -30,9 +31,12 @@ final class MainPresenter: MainViewOutput {
     
     func send(key word: String) {
         keyWords = word
-        
     }
     
+    func present(with data: Int) {
+        id = data
+        router?.showModule(self)
+    }
     
     //load data from network
     func loadPopularData() {
@@ -47,18 +51,27 @@ final class MainPresenter: MainViewOutput {
     }
     
     //Load search result
-    
     func loadSearchResult(_ key: String) {
         loading.searchRequest(link: link.query(target: .movie, keyWords: key), onComplete: { [weak self] (movieList) in
             guard let self = self else {
                 return
             }
-            print(self.link.query(target: .movie, keyWords: key))
-            print(movieList)
             self.view?.configure(with: movieList, use: .searchResultUpdate)
         }) { (stuck) in
             //TODO: - create error case
         }
+    }
+    
+}
+
+extension MainPresenter: ModuleOutput {
+    
+    func moduleEdited(complition: (_ data: Int) -> Void) {
+        guard let id = id else {
+            print("suka")
+            return
+        }
+        complition(id)
     }
     
 }

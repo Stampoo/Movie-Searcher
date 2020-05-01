@@ -14,8 +14,9 @@ final class MainRouter: RouterInput {
    weak var view: ModuleTransitionable? // Транзит
     
     //MARK: - Private Properties
-    func showModule() {
-        print("showModule")
+    func showModule(_ moduleOutput: ModuleOutput) {
+        let detailVc = DetailModuleConfigurator().configure(moduleOutput)
+        view?.presentModule(module: detailVc, animation: true, completion: nil)
     }
     
 }

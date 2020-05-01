@@ -34,6 +34,9 @@ protocol MainViewOutput: class {
     //sendData
     func send(key word: String)
     
+    //present module
+    func present(with data: Int)
+    
 }
 
 //ModuleInput
@@ -50,7 +53,7 @@ protocol ModuleInput: class {
 protocol ModuleOutput: class {
     
     //notify
-    func moduleEdited()
+    func moduleEdited(complition: (_ data: Int) -> Void)
     
 }
 
@@ -59,7 +62,7 @@ protocol ModuleOutput: class {
 
 protocol RouterInput {
     
-    func showModule()
+    func showModule(_ moduleOutput: ModuleOutput)
 
 }
 
