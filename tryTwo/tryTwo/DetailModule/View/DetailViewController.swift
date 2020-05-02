@@ -24,7 +24,13 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
-    private var movie: Movie?
+    private var movie: Movie? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -66,6 +72,7 @@ extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let movie = movie else {
+            print("Не получил")
             return UITableViewCell()
         }
         switch indexPath.row {

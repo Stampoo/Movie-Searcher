@@ -10,7 +10,7 @@ import Foundation
 
 final class MainPresenter: MainViewOutput {
     
-    //MARK:- Properties
+    //MARK:- PropertiesT
     var view: MainViewInput?
     var router: RouterInput?
     

@@ -14,11 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         //MARK: - App entry point
+        let mainTabBar = UITabBarController()
         let mainVc = MainModuleConfigurator().configure()
+        let favoriteVc = FavoriteConfigurator().configure()
         let nc = UINavigationController(rootViewController: mainVc)
+        mainTabBar.setViewControllers([nc, favoriteVc], animated: true)
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = nc
+        window?.rootViewController = mainTabBar
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
         

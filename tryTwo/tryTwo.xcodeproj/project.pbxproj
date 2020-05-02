@@ -18,6 +18,12 @@
 		34159817245C31B1005B0EA6 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34159815245C31B0005B0EA6 /* TitleTableViewCell.swift */; };
 		3415981A245C36CC005B0EA6 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34159818245C36CC005B0EA6 /* TitleTableViewCell.xib */; };
 		3415981B245C36CC005B0EA6 /* PosterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34159819245C36CC005B0EA6 /* PosterTableViewCell.xib */; };
+		3415981F245C63EE005B0EA6 /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415981E245C63EE005B0EA6 /* CustomActivityIndicatorView.swift */; };
+		34228B74245D66CA009F85A1 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B73245D66CA009F85A1 /* FavoriteRouter.swift */; };
+		34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B76245D6722009F85A1 /* FavoriteProtocols.swift */; };
+		34228B7A245D70C1009F85A1 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B79245D70C1009F85A1 /* FavoritePresenter.swift */; };
+		34228B7C245D7109009F85A1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B7B245D7109009F85A1 /* FavoriteViewController.swift */; };
+		34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */; };
 		3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0EF245A0B8A00432678 /* AppDelegate.swift */; };
 		3444A0F4245A0B8A00432678 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0F3245A0B8A00432678 /* MainViewController.swift */; };
 		3444A0F9245A0B8B00432678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3444A0F8245A0B8B00432678 /* Assets.xcassets */; };
@@ -30,7 +36,7 @@
 		346E473E245B6AA4002F9948 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E473A245B6AA4002F9948 /* Misc.swift */; };
 		346E4740245B6AE7002F9948 /* MonthPick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E473F245B6AE7002F9948 /* MonthPick.swift */; };
 		3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6BC245AC0DC00FB2997 /* MovieList.swift */; };
-		3496F6C0245AE4F000FB2997 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6BF245AE4F000FB2997 /* Protocols.swift */; };
+		3496F6C0245AE4F000FB2997 /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6BF245AE4F000FB2997 /* MainProtocols.swift */; };
 		3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */; };
 		3496F6C7245AFE0000FB2997 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6C6245AFE0000FB2997 /* MainPresenter.swift */; };
 		3496F6C9245B004300FB2997 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6C8245B004300FB2997 /* MainRouter.swift */; };
@@ -54,6 +60,12 @@
 		34159815245C31B0005B0EA6 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		34159818245C36CC005B0EA6 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
 		34159819245C36CC005B0EA6 /* PosterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PosterTableViewCell.xib; sourceTree = "<group>"; };
+		3415981E245C63EE005B0EA6 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
+		34228B73245D66CA009F85A1 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		34228B76245D6722009F85A1 /* FavoriteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocols.swift; sourceTree = "<group>"; };
+		34228B79245D70C1009F85A1 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		34228B7B245D7109009F85A1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteConfigurator.swift; sourceTree = "<group>"; };
 		3444A0EC245A0B8900432678 /* tryTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tryTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444A0EF245A0B8A00432678 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3444A0F3245A0B8A00432678 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +80,7 @@
 		346E473A245B6AA4002F9948 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Misc.swift; path = tryTwo/Library/Misc.swift; sourceTree = SOURCE_ROOT; };
 		346E473F245B6AE7002F9948 /* MonthPick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthPick.swift; sourceTree = "<group>"; };
 		3496F6BC245AC0DC00FB2997 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
-		3496F6BF245AE4F000FB2997 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		3496F6BF245AE4F000FB2997 /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
 		3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionProtocols.swift; sourceTree = "<group>"; };
 		3496F6C6245AFE0000FB2997 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		3496F6C8245B004300FB2997 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
@@ -163,6 +175,57 @@
 			path = Basic;
 			sourceTree = "<group>";
 		};
+		34228B6E245D580E009F85A1 /* FavoriteModule */ = {
+			isa = PBXGroup;
+			children = (
+				34228B72245D5952009F85A1 /* Router */,
+				34228B71245D594C009F85A1 /* Presenter */,
+				34228B70245D594A009F85A1 /* View */,
+				34228B6F245D5948009F85A1 /* Configurator */,
+			);
+			path = FavoriteModule;
+			sourceTree = "<group>";
+		};
+		34228B6F245D5948009F85A1 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		34228B70245D594A009F85A1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				34228B7B245D7109009F85A1 /* FavoriteViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		34228B71245D594C009F85A1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				34228B79245D70C1009F85A1 /* FavoritePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		34228B72245D5952009F85A1 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				34228B73245D66CA009F85A1 /* FavoriteRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		34228B75245D66DA009F85A1 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				34228B76245D6722009F85A1 /* FavoriteProtocols.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		3444A0E3245A0B8900432678 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +251,7 @@
 				3444A104245A0BE800432678 /* Model */,
 				3496F6D0245B573B00FB2997 /* MainModule */,
 				341597FF245C1657005B0EA6 /* DetailModule */,
+				34228B6E245D580E009F85A1 /* FavoriteModule */,
 				3444A10D245A12EF00432678 /* Resources */,
 				3444A10C245A12D500432678 /* Application */,
 			);
@@ -247,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				346E473A245B6AA4002F9948 /* Misc.swift */,
+				3415981E245C63EE005B0EA6 /* CustomActivityIndicatorView.swift */,
 				346E4736245B6AA4002F9948 /* Extension */,
 			);
 			path = Library;
@@ -266,8 +331,9 @@
 			isa = PBXGroup;
 			children = (
 				34159811245C1C52005B0EA6 /* Basic */,
-				3415980E245C18A9005B0EA6 /* Detail */,
 				3496F6D1245B578400FB2997 /* Main */,
+				3415980E245C18A9005B0EA6 /* Detail */,
+				34228B75245D66DA009F85A1 /* Favorite */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -294,7 +360,7 @@
 		3496F6D1245B578400FB2997 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3496F6BF245AE4F000FB2997 /* Protocols.swift */,
+				3496F6BF245AE4F000FB2997 /* MainProtocols.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -391,22 +457,28 @@
 				346E4733245B6A33002F9948 /* MainTableViewCell.swift in Sources */,
 				3496F6D6245B5DDF00FB2997 /* Network.swift in Sources */,
 				34159808245C173B005B0EA6 /* DetailPresenter.swift in Sources */,
+				34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */,
 				34159816245C31B1005B0EA6 /* PosterTableViewCell.swift in Sources */,
 				3444A0F4245A0B8A00432678 /* MainViewController.swift in Sources */,
 				34159810245C18C4005B0EA6 /* DetailPorotocols.swift in Sources */,
 				3496F6D3245B57B300FB2997 /* MainModuleConfigurator.swift in Sources */,
+				34228B7A245D70C1009F85A1 /* FavoritePresenter.swift in Sources */,
 				34159806245C16D7005B0EA6 /* DetailViewController.swift in Sources */,
 				3415980C245C17A4005B0EA6 /* DetailModuleConfigurator.swift in Sources */,
 				346E473D245B6AA4002F9948 /* UILabel.swift in Sources */,
+				3415981F245C63EE005B0EA6 /* CustomActivityIndicatorView.swift in Sources */,
 				340B01B2245B7C6800082C55 /* Use.swift in Sources */,
 				3496F6C9245B004300FB2997 /* MainRouter.swift in Sources */,
 				3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */,
 				3444A109245A0C6700432678 /* Movie.swift in Sources */,
+				34228B74245D66CA009F85A1 /* FavoriteRouter.swift in Sources */,
 				346E4740245B6AE7002F9948 /* MonthPick.swift in Sources */,
+				34228B7C245D7109009F85A1 /* FavoriteViewController.swift in Sources */,
 				3496F6D8245B5E1200FB2997 /* LinkBuilder.swift in Sources */,
+				34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */,
 				3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */,
 				3496F6C7245AFE0000FB2997 /* MainPresenter.swift in Sources */,
-				3496F6C0245AE4F000FB2997 /* Protocols.swift in Sources */,
+				3496F6C0245AE4F000FB2997 /* MainProtocols.swift in Sources */,
 				3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */,
 				3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */,
 			);

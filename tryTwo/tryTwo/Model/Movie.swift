@@ -10,11 +10,10 @@ import Foundation
 
 //MARK: - Struct for transfer film data from JSON into this struct
 struct Movie: Codable {
-    let backdropPath: String
-    let budget: Int
-    let homepage: String
-    let id: Int
-    let originalTitle: String
+    let backdropPath: String?
+    let homepage: String?
+    let id: Int?
+    let originalTitle: String?
     let overview: String
     let popularity: Double
     let posterPath: String

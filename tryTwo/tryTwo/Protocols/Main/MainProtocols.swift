@@ -40,7 +40,7 @@ protocol MainViewOutput: class {
 }
 
 //ModuleInput
-//Реализует Presenter
+//Реализует Presenter, который вызывает второй модуль 
 protocol ModuleInput: class {
     
     //configure
@@ -49,7 +49,7 @@ protocol ModuleInput: class {
 }
 
 //ModuleOutput
-//Реализует Presenter, на модуль которого осуществляется переход
+//Реализует Presenter, который вызывает второй модуль
 protocol ModuleOutput: class {
     
     //notify
