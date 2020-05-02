@@ -9,12 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="180" id="rgc-Ht-a82" customClass="MainTableViewCell" customModule="filmInfo" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="180" id="rgc-Ht-a82" customClass="MainTableViewCell" customModule="tryTwo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rgc-Ht-a82" id="0h0-m6-Sjs">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rgc-Ht-a82" translatesAutoresizingMaskIntoConstraints="NO" id="0h0-m6-Sjs">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
-                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MN5-u1-uxQ">
                         <rect key="frame" x="20" y="10" width="374" height="159"/>
@@ -103,6 +102,12 @@
                     <constraint firstItem="MN5-u1-uxQ" firstAttribute="leading" secondItem="0h0-m6-Sjs" secondAttribute="leading" constant="20" id="WYi-Zp-5Ev"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="0h0-m6-Sjs" firstAttribute="leading" secondItem="rgc-Ht-a82" secondAttribute="leading" id="Uc7-SR-lbL"/>
+                <constraint firstAttribute="trailing" secondItem="0h0-m6-Sjs" secondAttribute="trailing" id="Ws2-kI-JeE"/>
+                <constraint firstItem="0h0-m6-Sjs" firstAttribute="top" secondItem="rgc-Ht-a82" secondAttribute="top" id="bZX-XW-u1M"/>
+                <constraint firstAttribute="bottom" secondItem="0h0-m6-Sjs" secondAttribute="bottom" id="cEs-mS-QYE"/>
+            </constraints>
             <connections>
                 <outlet property="aboutLabel" destination="NcW-In-mzy" id="RGi-kk-1Qf"/>
                 <outlet property="filmLabel" destination="3dk-7k-zub" id="WS6-7S-3Fc"/>

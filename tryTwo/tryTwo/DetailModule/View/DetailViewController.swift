@@ -11,26 +11,24 @@ import UIKit
 final class DetailViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
-       private enum Constants {
-           static let posterIdentifire: String = "detailCell"
-           static let titleIdentifire: String = "titleCell"
-           static let posterCellNib: String = "PosterTableViewCell"
-           static let titleCellNib: String = "TitleTableViewCell"
-           static let constructDetailList: Int = 2
-       }
+    private enum Constants {
+        static let posterIdentifire: String = "detailCell"
+        static let posterCellNib: String = "PosterTableViewCell"
+        static let titleIdentifire: String = "titleCell"
+        static let titleCellNib: String = "TitleTableViewCell"
+        static let castIdentifire: String = "castCell"
+        static let castCellNib: String = "CastTableViewCell"
+        static let alsoIdentifire: String = "alsoCell"
+        static let alsoCellNib: String = "AlsoSeeTableViewCell"
+        static let constructDetailList: Int = 4
+    }
     
     //MARK: - Properties
     var presenter: DetailViewOutput?
     
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
-    private var movie: Movie? {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    private var movie: Movie?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -44,8 +42,12 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     private func configureTableView() {
         let nib = UINib(nibName: Constants.posterCellNib, bundle: nil)
         let nibTitle = UINib(nibName: Constants.titleCellNib, bundle: nil)
+        let nibCast = UINib(nibName: Constants.castCellNib, bundle: nil)
+        let nibAlso = UINib(nibName: Constants.alsoCellNib, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.posterIdentifire)
         tableView.register(nibTitle, forCellReuseIdentifier: Constants.titleIdentifire)
+        tableView.register(nibCast, forCellReuseIdentifier: Constants.castIdentifire)
+        tableView.register(nibAlso, forCellReuseIdentifier: Constants.alsoIdentifire)
         tableView.dataSource = self
     }
     
@@ -54,7 +56,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
 //MARK: - Extensions
 extension DetailViewController: DetailViewInput {
     func setupInitialState() {
-        print("setup")
+        tableView.reloadData()
     }
     
     func configure(with target: Movie) {
@@ -71,22 +73,38 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        func reloadRows() {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         guard let movie = movie else {
-            print("Не получил")
             return UITableViewCell()
+        }
+        func castCell(identifire: String) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
+            return cell
         }
         switch indexPath.row {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.posterIdentifire, for: indexPath) as? PosterTableViewCell else {
+            guard let cell = castCell(identifire: Constants.posterIdentifire) as? PosterTableViewCell else {
                 return UITableViewCell()
             }
             cell.configurePoster(movie)
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleIdentifire, for: indexPath) as? TitleTableViewCell else {
+            guard let cell = castCell(identifire: Constants.titleIdentifire) as? TitleTableViewCell else {
                 return UITableViewCell()
             }
-            configure(with: movie)
+            cell.configureCell(film: movie)
+            return cell
+        case 2:
+            guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
+                return UITableViewCell()
+            }
+            return cell
+        case 3:
+            guard let cell = castCell(identifire: Constants.alsoIdentifire) as? AlsoSeeTableViewCell else {
+                return UITableViewCell()
+            }
             return cell
         default:
             return UITableViewCell()

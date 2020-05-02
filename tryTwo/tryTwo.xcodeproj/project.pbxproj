@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		340B01B2245B7C6800082C55 /* Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B01B1245B7C6800082C55 /* Use.swift */; };
+		34147559245DCB8C006AEC6C /* AlsoSeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34147557245DCB8C006AEC6C /* AlsoSeeTableViewCell.swift */; };
+		3414755A245DCB8C006AEC6C /* AlsoSeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34147558245DCB8C006AEC6C /* AlsoSeeTableViewCell.xib */; };
+		3414755D245DCBB4006AEC6C /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3414755B245DCBB4006AEC6C /* CastTableViewCell.swift */; };
+		3414755E245DCBB4006AEC6C /* CastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3414755C245DCBB4006AEC6C /* CastTableViewCell.xib */; };
 		34159806245C16D7005B0EA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34159805245C16D7005B0EA6 /* DetailViewController.swift */; };
 		34159808245C173B005B0EA6 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34159807245C173B005B0EA6 /* DetailPresenter.swift */; };
 		3415980A245C1769005B0EA6 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34159809245C1769005B0EA6 /* DetailRouter.swift */; };
@@ -50,6 +54,10 @@
 
 /* Begin PBXFileReference section */
 		340B01B1245B7C6800082C55 /* Use.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Use.swift; sourceTree = "<group>"; };
+		34147557245DCB8C006AEC6C /* AlsoSeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlsoSeeTableViewCell.swift; sourceTree = "<group>"; };
+		34147558245DCB8C006AEC6C /* AlsoSeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlsoSeeTableViewCell.xib; sourceTree = "<group>"; };
+		3414755B245DCBB4006AEC6C /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
+		3414755C245DCBB4006AEC6C /* CastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastTableViewCell.xib; sourceTree = "<group>"; };
 		34159805245C16D7005B0EA6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		34159807245C173B005B0EA6 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		34159809245C1769005B0EA6 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
@@ -131,6 +139,10 @@
 				34159814245C31B0005B0EA6 /* PosterTableViewCell.swift */,
 				34159815245C31B0005B0EA6 /* TitleTableViewCell.swift */,
 				34159812245C30C7005B0EA6 /* DetailViewController.xib */,
+				34147557245DCB8C006AEC6C /* AlsoSeeTableViewCell.swift */,
+				34147558245DCB8C006AEC6C /* AlsoSeeTableViewCell.xib */,
+				3414755B245DCBB4006AEC6C /* CastTableViewCell.swift */,
+				3414755C245DCBB4006AEC6C /* CastTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -432,7 +444,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3414755A245DCB8C006AEC6C /* AlsoSeeTableViewCell.xib in Resources */,
 				3415981A245C36CC005B0EA6 /* TitleTableViewCell.xib in Resources */,
+				3414755E245DCBB4006AEC6C /* CastTableViewCell.xib in Resources */,
 				3496F6CD245B274F00FB2997 /* LaunchScreen.storyboard in Resources */,
 				3444A0F9245A0B8B00432678 /* Assets.xcassets in Resources */,
 				34159813245C30C7005B0EA6 /* DetailViewController.xib in Resources */,
@@ -456,6 +470,7 @@
 				346E473C245B6AA4002F9948 /* UIImageView.swift in Sources */,
 				346E4733245B6A33002F9948 /* MainTableViewCell.swift in Sources */,
 				3496F6D6245B5DDF00FB2997 /* Network.swift in Sources */,
+				34147559245DCB8C006AEC6C /* AlsoSeeTableViewCell.swift in Sources */,
 				34159808245C173B005B0EA6 /* DetailPresenter.swift in Sources */,
 				34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */,
 				34159816245C31B1005B0EA6 /* PosterTableViewCell.swift in Sources */,
@@ -468,6 +483,7 @@
 				346E473D245B6AA4002F9948 /* UILabel.swift in Sources */,
 				3415981F245C63EE005B0EA6 /* CustomActivityIndicatorView.swift in Sources */,
 				340B01B2245B7C6800082C55 /* Use.swift in Sources */,
+				3414755D245DCBB4006AEC6C /* CastTableViewCell.swift in Sources */,
 				3496F6C9245B004300FB2997 /* MainRouter.swift in Sources */,
 				3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */,
 				3444A109245A0C6700432678 /* Movie.swift in Sources */,

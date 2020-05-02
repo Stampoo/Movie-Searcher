@@ -13,7 +13,7 @@ final class DetailPresenter {
     //MARK: - Properties
     weak var view: DetailViewInput?
     var router: DetailRouterInput?
-    var previousModule: ModuleOutput?
+    var outputModule: ModuleOutput?
     
     //MARK: - Private Properties
     private var id: Int?
@@ -25,11 +25,9 @@ final class DetailPresenter {
         }
         let link = LinkBuilder()
         let service = GetData()
-        service.request(link: link.movie(id: id), complition: { [weak self] (movie) in
-            guard let self = self else {
-                return
-            }
+        service.request(link: link.movie(id: id), complition: {(movie) in
             self.view?.configure(with: movie)
+            self.view?.setupInitialState()
         }) { (stuck) in
             //TODO: - create stuck action
         }
@@ -42,15 +40,13 @@ final class DetailPresenter {
 extension DetailPresenter: DetailViewOutput {
     
     func viewLoaded() {
-        previousModule?.moduleEdited(complition: { (id) in
-            print(id)
+        outputModule?.moduleEdited(complition: { (id) in
             self.id = id
         })
         loadData()
     }
     
     func reload() {
-        print("reload view")
     }
     
 }

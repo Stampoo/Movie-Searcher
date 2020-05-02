@@ -19,11 +19,9 @@ final class FavoriteViewController: UIViewController, ModuleTransitionable {
 extension FavoriteViewController: FavoriteViewInput {
     
     func configure() {
-        print("configure")
     }
     
     func setupInitialState() {
-        print("setupInitialState")
     }
     
 }

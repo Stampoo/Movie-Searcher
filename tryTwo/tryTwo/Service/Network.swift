@@ -44,17 +44,17 @@ final class GetData {
             guard let data = data else {
                 return ifError(.errorResponce)
             }
-            let queue = DispatchQueue.global(qos: .utility)
+            //let queue = DispatchQueue.global(qos: .utility)
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 //try translate recive data to struct
                 let parce: Movie = try decoder.decode(Movie.self, from: data)
-                queue.async {
+                DispatchQueue.main.async {
                     complition(parce)
                 }
             } catch {
-                queue.async {
+                DispatchQueue.main.async {
                     ifError(.errorParcing)
                     print(error)
                 }

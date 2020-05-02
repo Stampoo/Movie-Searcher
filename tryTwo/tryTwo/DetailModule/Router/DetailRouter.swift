@@ -21,7 +21,6 @@ final class DetailRouter {
 extension DetailRouter: DetailRouterInput {
     
     func showModule() {
-        print("show module")
     }
 
 }
