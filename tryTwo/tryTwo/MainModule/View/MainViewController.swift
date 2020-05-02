@@ -110,7 +110,6 @@ extension MainViewController: MainViewInput {
     
     func setupInitialState() {
         //TODO: create initial setup
-        print("fuck")
     }
     
     func configure(with list: [Result], use: Use) {

@@ -68,7 +68,6 @@ extension MainPresenter: ModuleOutput {
     
     func moduleEdited(complition: (_ data: Int) -> Void) {
         guard let id = id else {
-            print("suka")
             return
         }
         complition(id)
