@@ -14,7 +14,7 @@ final class FavorioteRouter: RouterInput {
     weak var view: ModuleTransitionable?
     
     func showModule(_ moduleOutput: ModuleOutput) {
-        let detailVC = DetailModuleConfigurator().configure(moduleOutput)
+        let detailVC = DetailModuleConfigurator().configure(with: moduleOutput)
         view?.presentModule(module: detailVC, animation: true, completion: nil)
     }
 

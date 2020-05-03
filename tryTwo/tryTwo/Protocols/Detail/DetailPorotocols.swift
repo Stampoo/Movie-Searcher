@@ -17,7 +17,7 @@ protocol DetailViewInput: class {
     func setupInitialState()
     
     //configure view
-    func configure(with target: Movie)
+    func configure(with target: Any)
     
 }
 

@@ -11,13 +11,14 @@ import Foundation
 //MARK: - for simple link constructor
 struct LinkBuilder {
     
-    private var key: String = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
-    private var mainPath: String = "https://api.themoviedb.org/3/"
-    private var baseUrl: String = "https://image.tmdb.org/t/p/"
-    private var lng: String = "&language=en-US"
-    private var popularity: String = "movie/popular"
-    private var page: String = "&page="
-    private var movie: String = "movie/"
+    private let key: String = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
+    private let mainPath: String = "https://api.themoviedb.org/3/"
+    private let baseUrl: String = "https://image.tmdb.org/t/p/"
+    private let lng: String = "&language=en-US"
+    private let popularity: String = "movie/popular"
+    private let page: String = "&page="
+    private let movie: String = "movie/"
+    private let cast: String = "/credits"
     
     
     
@@ -35,6 +36,10 @@ struct LinkBuilder {
     func posterPath(path: String?, size: PosterSize) -> String {
         guard let path = path else { return ""}
         return self.baseUrl + size.rawValue + path
+    }
+    
+    func cast(_ id: String) -> String {
+        return mainPath + movie + id + cast + key
     }
     
     func query(target: QuerySearch, keyWords: String) -> String {

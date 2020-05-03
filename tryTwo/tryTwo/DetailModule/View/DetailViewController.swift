@@ -29,6 +29,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
     private var movie: Movie?
+    private var cast: [Cast]?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -55,14 +56,23 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
 
 //MARK: - Extensions
 extension DetailViewController: DetailViewInput {
+    
     func setupInitialState() {
         tableView.reloadData()
     }
     
-    func configure(with target: Movie) {
-        self.movie = target
+    func configure(with target: Any) {
+        switch target {
+        case is Movie:
+            self.movie = target as? Movie
+        case is [Cast]:
+            self.cast = target as? [Cast]
+        default:
+            break
+            //TODO: - create default case
+        }
     }
-
+    
 }
 
 //dataSource
@@ -73,9 +83,6 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        func reloadRows() {
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
         guard let movie = movie else {
             return UITableViewCell()
         }
@@ -100,6 +107,7 @@ extension DetailViewController: UITableViewDataSource {
             guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
                 return UITableViewCell()
             }
+            cell.configure(cast)
             return cell
         case 3:
             guard let cell = castCell(identifire: Constants.alsoIdentifire) as? AlsoSeeTableViewCell else {
@@ -107,8 +115,9 @@ extension DetailViewController: UITableViewDataSource {
             }
             return cell
         default:
+            print("default")
             return UITableViewCell()
         }
     }
-    
 }
+

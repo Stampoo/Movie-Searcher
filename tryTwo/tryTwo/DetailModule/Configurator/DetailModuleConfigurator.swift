@@ -11,12 +11,12 @@ import UIKit
 final class DetailModuleConfigurator {
     
     //configure entry point in DetailViewModule
-    func configure(_ previousModule: ModuleOutput) -> DetailViewController {
+    func configure(with outputModule: ModuleOutput) -> DetailViewController {
         let view = DetailViewController()
         let presenter = DetailPresenter()
         let router = DetailRouter()
         
-        presenter.previousModule = previousModule
+        presenter.outputModule = outputModule
         view.presenter = presenter
         presenter.router = router
         presenter.view = view

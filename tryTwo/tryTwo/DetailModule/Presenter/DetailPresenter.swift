@@ -31,6 +31,12 @@ final class DetailPresenter {
         }) { (stuck) in
             //TODO: - create stuck action
         }
+        service.castRequest(link: link.cast("\(id)"), onComplete: { (cast) in
+            self.view?.configure(with: cast)
+            self.view?.setupInitialState()
+        }) { (stuck) in
+            //TODO: - create stuck
+        }
     }
     
     
