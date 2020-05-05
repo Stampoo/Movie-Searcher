@@ -18,7 +18,13 @@ final class CastTableViewCell: UITableViewCell {
     
     //MARK: - Private Properties
     @IBOutlet private weak var castCollectionView: UICollectionView!
-    private var castArray = [Cast]()
+    private var castArray = [Cast]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.castCollectionView.reloadData()
+            }
+        }
+    }
     
 
     //MARK: - LifeCycle
@@ -49,6 +55,7 @@ final class CastTableViewCell: UITableViewCell {
 extension CastTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(castArray.count)
         return castArray.count
     }
     

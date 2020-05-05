@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController, ModuleTransitionable {
+final class DetailViewController: UIViewController, ModuleTransitionable, UITableViewDelegate  {
     
     //MARK: - Constants
     private enum Constants {
@@ -50,6 +50,9 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         tableView.register(nibCast, forCellReuseIdentifier: Constants.castIdentifire)
         tableView.register(nibAlso, forCellReuseIdentifier: Constants.alsoIdentifire)
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
     }
     
 }
@@ -115,7 +118,6 @@ extension DetailViewController: UITableViewDataSource {
             }
             return cell
         default:
-            print("default")
             return UITableViewCell()
         }
     }

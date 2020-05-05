@@ -29,14 +29,18 @@ final class CastCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Maethods
     func configureCell(with cast: Cast) {
-        posterImageView.loadImage(cast.profilePath)
+        posterImageView.loadImage(LinkBuilder().posterPath(path: cast.profilePath, size: .w500))
         nameLabel.text = cast.name
         castLabel.text = cast.character
     }
     
     //MARK: - Private methods
     private func configureUI() {
+        
+        shadowView.layer.cornerRadius = 12
         shadowView.createShadow()
+        
+        cardView.clipsToBounds = true
         cardView.layer.cornerRadius = 12
         
         nameLabel.font = .boldSystemFont(ofSize: 13)
