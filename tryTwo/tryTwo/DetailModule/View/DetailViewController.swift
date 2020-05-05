@@ -30,7 +30,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
     private var movie: Movie?
-    var cast: [Cast]?
+    private var cast: [Cast]?
     private var also: [Result]?
     
     //MARK: - LifeCycle
@@ -41,10 +41,6 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     }
     
     //MARK: - Internal methods
-    func presentModule(with id: Int) {
-        presenter?.present(with: id)
-        print("lol")
-    }
     
     //MARK: - Private methods
     //configure cell from nib
@@ -123,7 +119,6 @@ extension DetailViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configure(cast)
-            cell.transferSelf(self)
             return cell
         case 4:
             let cell = castCell(identifire: Constants.castIdentifire)
@@ -135,6 +130,10 @@ extension DetailViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configure(also)
+            cell.pushDetail = { [weak self] id in
+                self?.presenter?.present(with: id)
+                print("present")
+            }
             return cell
         default:
             return UITableViewCell()

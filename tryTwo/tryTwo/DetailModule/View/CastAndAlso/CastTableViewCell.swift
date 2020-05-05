@@ -10,11 +10,17 @@ import UIKit
 
 final class CastTableViewCell: UITableViewCell {
     
+    //MARK: - TypeAlias
+    typealias IdCloser = (_ id: Int) -> Void
+    
     //MARK: - Constants
     enum Constants {
         static let collectionCellIdentifire = "castCollectionCell"
         static let collectionCellNib = "CastCollectionViewCell"
     }
+    
+    //MARK: - Properties
+    var pushDetail: IdCloser?
     
     //MARK: - Private Properties
     @IBOutlet private weak var castCollectionView: UICollectionView!
@@ -25,7 +31,6 @@ final class CastTableViewCell: UITableViewCell {
             }
         }
     }
-    private var detailVc: DetailViewController = DetailViewController()
     
 
     //MARK: - LifeCycle
@@ -36,12 +41,6 @@ final class CastTableViewCell: UITableViewCell {
     }
     
     //MARK: - Methods
-    func transferSelf(_ view: DetailViewController) {
-        detailVc = view
-        print(detailVc.cast?[0])
-        print("sdad")
-    }
-    
     func configure(_ with: Any){
         switch with {
         case is [Cast]:
@@ -112,8 +111,8 @@ extension CastTableViewCell: UICollectionViewDataSource {
 extension CastTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = displayArray as? [Result] {
-            detailVc.presentModule(with: data[indexPath.row].id)
-            print("1231")
+            pushDetail?(data[indexPath.row].id)
+            print(pushDetail)
         }
     }
 }
