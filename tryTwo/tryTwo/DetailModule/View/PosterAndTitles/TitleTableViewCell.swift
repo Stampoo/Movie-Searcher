@@ -17,7 +17,7 @@ final class TitleTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var yearLabel: UILabel!
     
-    @IBOutlet private weak var aboutTextView: UITextView!
+    @IBOutlet weak var aboutTextLabel: UILabel!
     
     //state and data containers
     private var filmState = false
@@ -33,7 +33,7 @@ final class TitleTableViewCell: UITableViewCell {
     //transfer data into cell through this method
     func configureCell(film: Movie) {
         titleLabel.text = film.title
-        aboutTextView.text = film.overview
+        aboutTextLabel.text = film.overview
         originalTitleLabel.text = film.originalTitle
         yearLabel.setYear(film)
     }
@@ -41,7 +41,7 @@ final class TitleTableViewCell: UITableViewCell {
     //MARK: - Private Methods
     //configure cell
     private func configureUICell() {
-        aboutTextView.isUserInteractionEnabled = false
+        aboutTextLabel.numberOfLines = 0
         
         titleLabel.font = .boldSystemFont(ofSize: 24)
         
