@@ -33,6 +33,11 @@ final class CastCollectionViewCell: UICollectionViewCell {
         nameLabel.text = cast.name
         castLabel.text = cast.character
     }
+    func configureCell(with cast: Result) {
+        posterImageView.loadImage(LinkBuilder().posterPath(path: cast.posterPath, size: .w500))
+        nameLabel.text = cast.title
+        castLabel.text = cast.releaseDate
+    }
     
     //MARK: - Private methods
     private func configureUI() {

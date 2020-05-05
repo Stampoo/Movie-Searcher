@@ -37,6 +37,12 @@ final class DetailPresenter {
         }) { (stuck) in
             //TODO: - create stuck
         }
+        service.request(link: link.seeAlso("\(id)"), onComplete: { (also) in
+            self.view?.configure(with: also)
+            self.view?.setupInitialState()
+        }) { (stuck) in
+            //TODO: - create stuck
+        }
     }
     
     
@@ -44,6 +50,11 @@ final class DetailPresenter {
 
 //MARK: - Extensions
 extension DetailPresenter: DetailViewOutput {
+    
+    func present(with data: Int) {
+        router?.showModule(self)
+        print("lol")
+    }
     
     func viewLoaded() {
         outputModule?.moduleEdited(complition: { (id) in
@@ -53,6 +64,13 @@ extension DetailPresenter: DetailViewOutput {
     }
     
     func reload() {
+    }
+    
+}
+
+extension DetailPresenter: ModuleOutput {
+    func moduleEdited(complition: (Int) -> Void) {
+        
     }
     
 }

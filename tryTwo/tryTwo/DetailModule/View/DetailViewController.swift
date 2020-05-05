@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController, ModuleTransitionable, UITableViewDelegate  {
+final class DetailViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
     private enum Constants {
@@ -20,7 +20,8 @@ final class DetailViewController: UIViewController, ModuleTransitionable, UITabl
         static let castCellNib: String = "CastTableViewCell"
         static let alsoIdentifire: String = "alsoCell"
         static let alsoCellNib: String = "AlsoSeeTableViewCell"
-        static let constructDetailList: Int = 4
+        static let constructDetailList: Int = 6
+        static let rowHeightAlsoAndCast: CGFloat = 200.0
     }
     
     //MARK: - Properties
@@ -29,7 +30,8 @@ final class DetailViewController: UIViewController, ModuleTransitionable, UITabl
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
     private var movie: Movie?
-    private var cast: [Cast]?
+    var cast: [Cast]?
+    private var also: [Result]?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -38,20 +40,23 @@ final class DetailViewController: UIViewController, ModuleTransitionable, UITabl
         presenter?.viewLoaded()
     }
     
+    //MARK: - Internal methods
+    func presentModule(with id: Int) {
+        presenter?.present(with: id)
+        print("lol")
+    }
+    
     //MARK: - Private methods
     //configure cell from nib
     private func configureTableView() {
         let nib = UINib(nibName: Constants.posterCellNib, bundle: nil)
         let nibTitle = UINib(nibName: Constants.titleCellNib, bundle: nil)
         let nibCast = UINib(nibName: Constants.castCellNib, bundle: nil)
-        let nibAlso = UINib(nibName: Constants.alsoCellNib, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.posterIdentifire)
         tableView.register(nibTitle, forCellReuseIdentifier: Constants.titleIdentifire)
         tableView.register(nibCast, forCellReuseIdentifier: Constants.castIdentifire)
-        tableView.register(nibAlso, forCellReuseIdentifier: Constants.alsoIdentifire)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
     }
     
@@ -70,6 +75,8 @@ extension DetailViewController: DetailViewInput {
             self.movie = target as? Movie
         case is [Cast]:
             self.cast = target as? [Cast]
+        case is [Result]:
+            self.also = target as? [Result]
         default:
             break
             //TODO: - create default case
@@ -107,19 +114,44 @@ extension DetailViewController: UITableViewDataSource {
             cell.configureCell(film: movie)
             return cell
         case 2:
+            let cell = castCell(identifire: Constants.castIdentifire)
+            cell.textLabel?.font = .boldSystemFont(ofSize: 27)
+            cell.textLabel?.text = "Cast"
+            return cell
+        case 3:
             guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
                 return UITableViewCell()
             }
             cell.configure(cast)
+            cell.transferSelf(self)
             return cell
-        case 3:
-            guard let cell = castCell(identifire: Constants.alsoIdentifire) as? AlsoSeeTableViewCell else {
+        case 4:
+            let cell = castCell(identifire: Constants.castIdentifire)
+            cell.textLabel?.font = .boldSystemFont(ofSize: 27)
+            cell.textLabel?.text = "Also see"
+            return cell
+        case 5:
+            guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
                 return UITableViewCell()
             }
+            cell.configure(also)
             return cell
         default:
             return UITableViewCell()
         }
     }
+    
 }
 
+
+
+extension DetailViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 || indexPath.row == 5 {
+            return Constants.rowHeightAlsoAndCast
+        }
+        return UITableView.automaticDimension
+    }
+    
+}

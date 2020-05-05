@@ -16,7 +16,7 @@ final class MainRouter: RouterInput {
     //MARK: - Private Properties
     func showModule(_ moduleOutput: ModuleOutput) {
         let detailVc = DetailModuleConfigurator().configure(with: moduleOutput)
-        view?.presentModule(module: detailVc, animation: true, completion: nil)
+        view?.pushModule(module: detailVc, animation: true)
     }
     
 }

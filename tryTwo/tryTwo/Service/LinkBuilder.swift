@@ -19,6 +19,7 @@ struct LinkBuilder {
     private let page: String = "&page="
     private let movie: String = "movie/"
     private let cast: String = "/credits"
+    private let recommendation: String = "/recommendations"
     
     
     
@@ -53,6 +54,10 @@ struct LinkBuilder {
             }
         }
         return self.mainPath + target.rawValue + self.key + "&query=\(finalKeyWords)"
+    }
+    
+    func seeAlso(_ id: String) -> String {
+        return mainPath + movie + id + recommendation + key + lng + page + "\(1)"
     }
     
 }

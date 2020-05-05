@@ -31,6 +31,9 @@ protocol DetailViewOutput: class {
     //reload view
     func reload()
     
+    //present module
+      func present(with data: Int)
+    
 }
 
 
@@ -38,7 +41,7 @@ protocol DetailViewOutput: class {
 //Реализует роутер, ссылка у презентера
 protocol DetailRouterInput {
     
-    func showModule()
+    func showModule(_ moduleOutput: ModuleOutput)
 
 }
 

@@ -10,21 +10,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castCell" rowHeight="507" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-i7-Jjw" customClass="CastTableViewCell" customModule="tryTwo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="428" height="507"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castCell" rowHeight="261" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-i7-Jjw" customClass="CastTableViewCell" customModule="tryTwo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="261"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="428" height="507"/>
+                <rect key="frame" x="0.0" y="0.0" width="428" height="261"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Gcs-e6-k9y">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="507"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="261"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="507" id="Ot3-eu-EmS"/>
-                            <constraint firstAttribute="width" constant="428" id="vjo-SD-LrX"/>
+                            <constraint firstAttribute="width" constant="428" id="Ecz-j1-vke"/>
+                            <constraint firstAttribute="height" constant="261" id="Xi2-v1-Vas"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WMf-Zi-3Ma">
-                            <size key="itemSize" width="150" height="300"/>
+                            <size key="itemSize" width="140" height="260"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -32,17 +32,16 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Gcs-e6-k9y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7ok-MO-KUl"/>
-                    <constraint firstAttribute="trailing" secondItem="Gcs-e6-k9y" secondAttribute="trailing" id="KhL-Ox-rZB"/>
-                    <constraint firstAttribute="bottom" secondItem="Gcs-e6-k9y" secondAttribute="bottom" id="VU5-Ik-2ym"/>
-                    <constraint firstItem="Gcs-e6-k9y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uw2-Bb-6pa"/>
+                    <constraint firstItem="Gcs-e6-k9y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8tj-oB-nxX"/>
+                    <constraint firstItem="Gcs-e6-k9y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Gmx-RB-uuA"/>
+                    <constraint firstAttribute="trailing" secondItem="Gcs-e6-k9y" secondAttribute="trailing" id="pBh-DC-YSN"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="castCollectionView" destination="Gcs-e6-k9y" id="A9G-vj-FFa"/>
             </connections>
-            <point key="canvasLocation" x="155.07246376811597" y="116.85267857142857"/>
+            <point key="canvasLocation" x="155.07246376811597" y="34.486607142857139"/>
         </tableViewCell>
     </objects>
 </document>

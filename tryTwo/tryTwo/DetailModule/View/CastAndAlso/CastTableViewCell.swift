@@ -18,13 +18,14 @@ final class CastTableViewCell: UITableViewCell {
     
     //MARK: - Private Properties
     @IBOutlet private weak var castCollectionView: UICollectionView!
-    private var castArray = [Cast]() {
+    private var displayArray: Any? {
         didSet {
             DispatchQueue.main.async {
                 self.castCollectionView.reloadData()
             }
         }
     }
+    private var detailVc: DetailViewController = DetailViewController()
     
 
     //MARK: - LifeCycle
@@ -35,11 +36,21 @@ final class CastTableViewCell: UITableViewCell {
     }
     
     //MARK: - Methods
-    func configure(_ with: [Cast]?){
-        guard let castArray = with else {
-            return
+    func transferSelf(_ view: DetailViewController) {
+        detailVc = view
+        print(detailVc.cast?[0])
+        print("sdad")
+    }
+    
+    func configure(_ with: Any){
+        switch with {
+        case is [Cast]:
+            self.displayArray = with as? [Cast]
+        case is [Result]:
+            self.displayArray = with as? [Result]
+        default:
+            break
         }
-        self.castArray = castArray
     }
     
     //MARK: - Private Methods
@@ -48,23 +59,62 @@ final class CastTableViewCell: UITableViewCell {
         let castCollectionNib = UINib(nibName: Constants.collectionCellNib, bundle: nil)
         castCollectionView.register(castCollectionNib, forCellWithReuseIdentifier: Constants.collectionCellIdentifire)
         castCollectionView.dataSource = self
+        castCollectionView.delegate = self
     }
     
 }
 
+//MARK: - Extensions
 extension CastTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(castArray.count)
-        return castArray.count
+        switch displayArray {
+        case is [Cast]:
+            guard let display = displayArray as? [Cast] else {
+                return 0
+            }
+            return display.count
+        case is [Result]:
+            guard let display = displayArray as? [Result] else {
+                return 0
+            }
+            return display.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionCellIdentifire, for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureCell(with: castArray[indexPath.row])
-        return cell
+        switch displayArray {
+        case is [Cast]:
+            guard let display = displayArray as? [Cast] else {
+                return UICollectionViewCell()
+            }
+            cell.configureCell(with: display[indexPath.row])
+            return cell
+        case is [Result]:
+            guard let display = displayArray as? [Result] else {
+                return UICollectionViewCell()
+            }
+            cell.configureCell(with: display[indexPath.row])
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
     }
     
 }
+
+//Did select
+extension CastTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let data = displayArray as? [Result] {
+            detailVc.presentModule(with: data[indexPath.row].id)
+            print("1231")
+        }
+    }
+}
+
