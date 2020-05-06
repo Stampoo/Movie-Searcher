@@ -90,6 +90,9 @@ final class PosterTableViewCell: UITableViewCell {
     
     //method call animation and add pressed data to test singletone container
     private func buttonAnim(_ buttonState: Bool) {
+        guard let movie = movie else {
+            return
+        }
         switch buttonState {
         case false:
             UIView.animate(withDuration: 0.5, animations: {
@@ -97,6 +100,7 @@ final class PosterTableViewCell: UITableViewCell {
                 self.addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
                 self.addFavoriteButton.setTitle("♥️", for: .normal)
             })
+            StorageService().saveMovie(movie)
             self.buttonState = !self.buttonState
         case true:
             UIView.animate(withDuration: 0.5, animations: {

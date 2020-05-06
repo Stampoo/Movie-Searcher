@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class FavorioteRouter: RouterInput {
+final class FavoriteRouter: RouterInput {
     
     //MARK: - Properties
     weak var view: ModuleTransitionable?

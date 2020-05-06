@@ -33,6 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainVc.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         favoriteVc.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
         
+        if let data = UserDefaults.standard.array(forKey: "favoriteStorage") as? [Data] {
+            print(data)
+            
+        } else {
+            UserDefaults.standard.set([Data](), forKey: "favoriteStorage")
+            print("yea")
+        }
+        
         return true
     }
 

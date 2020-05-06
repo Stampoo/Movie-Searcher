@@ -22,10 +22,12 @@
 		3415981B245C36CC005B0EA6 /* PosterTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 34159819245C36CC005B0EA6 /* PosterTableViewCell.xib */; };
 		3415981F245C63EE005B0EA6 /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415981E245C63EE005B0EA6 /* CustomActivityIndicatorView.swift */; };
 		3416CEA12462F7C7000E597F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CE9F2462F7C7000E597F /* FavoriteTableViewCell.swift */; };
+		3416CEA424631882000E597F /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CEA224631882000E597F /* FavoriteViewController.swift */; };
+		3416CEB024633280000E597F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CEAF24633280000E597F /* StorageService.swift */; };
+		3416CEB124633F7C000E597F /* FavoriteTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3416CEA02462F7C7000E597F /* FavoriteTableViewCell.xib */; };
 		34228B74245D66CA009F85A1 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B73245D66CA009F85A1 /* FavoriteRouter.swift */; };
 		34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B76245D6722009F85A1 /* FavoriteProtocols.swift */; };
 		34228B7A245D70C1009F85A1 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B79245D70C1009F85A1 /* FavoritePresenter.swift */; };
-		34228B7C245D7109009F85A1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B7B245D7109009F85A1 /* FavoriteViewController.swift */; };
 		34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */; };
 		3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0EF245A0B8A00432678 /* AppDelegate.swift */; };
 		3444A0F4245A0B8A00432678 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A0F3245A0B8A00432678 /* MainViewController.swift */; };
@@ -49,7 +51,7 @@
 		3496F6CB245B273E00FB2997 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6CA245B273E00FB2997 /* Main.storyboard */; };
 		3496F6CD245B274F00FB2997 /* LaunchScreen.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6CC245B274F00FB2997 /* LaunchScreen.storyboard */; };
 		3496F6D3245B57B300FB2997 /* MainModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D2245B57B300FB2997 /* MainModuleConfigurator.swift */; };
-		3496F6D6245B5DDF00FB2997 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D5245B5DDF00FB2997 /* Network.swift */; };
+		3496F6D6245B5DDF00FB2997 /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D5245B5DDF00FB2997 /* GetData.swift */; };
 		3496F6D8245B5E1200FB2997 /* LinkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D7245B5E1200FB2997 /* LinkBuilder.swift */; };
 		3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D9245B5E4700FB2997 /* ErrorCases.swift */; };
 /* End PBXBuildFile section */
@@ -69,13 +71,14 @@
 		34159818245C36CC005B0EA6 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
 		34159819245C36CC005B0EA6 /* PosterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PosterTableViewCell.xib; sourceTree = "<group>"; };
 		3415981E245C63EE005B0EA6 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
-		3416CE9E2462F7C7000E597F /* FavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
 		3416CE9F2462F7C7000E597F /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		3416CEA02462F7C7000E597F /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
+		3416CEA224631882000E597F /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		3416CEA324631882000E597F /* FavoriteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
+		3416CEAF24633280000E597F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		34228B73245D66CA009F85A1 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
 		34228B76245D6722009F85A1 /* FavoriteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocols.swift; sourceTree = "<group>"; };
 		34228B79245D70C1009F85A1 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
-		34228B7B245D7109009F85A1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteConfigurator.swift; sourceTree = "<group>"; };
 		3444A0EC245A0B8900432678 /* tryTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tryTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444A0EF245A0B8A00432678 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +104,7 @@
 		3496F6CA245B273E00FB2997 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3496F6CC245B274F00FB2997 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3496F6D2245B57B300FB2997 /* MainModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleConfigurator.swift; sourceTree = "<group>"; };
-		3496F6D5245B5DDF00FB2997 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		3496F6D5245B5DDF00FB2997 /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 		3496F6D7245B5E1200FB2997 /* LinkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkBuilder.swift; sourceTree = "<group>"; };
 		3496F6D9245B5E4700FB2997 /* ErrorCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,10 +212,10 @@
 		34228B70245D594A009F85A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				34228B7B245D7109009F85A1 /* FavoriteViewController.swift */,
 				3416CE9F2462F7C7000E597F /* FavoriteTableViewCell.swift */,
 				3416CEA02462F7C7000E597F /* FavoriteTableViewCell.xib */,
-				3416CE9E2462F7C7000E597F /* FavoriteViewController.xib */,
+				3416CEA224631882000E597F /* FavoriteViewController.swift */,
+				3416CEA324631882000E597F /* FavoriteViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,8 +409,9 @@
 		3496F6D4245B5DC200FB2997 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				3496F6D5245B5DDF00FB2997 /* Network.swift */,
+				3496F6D5245B5DDF00FB2997 /* GetData.swift */,
 				3496F6D7245B5E1200FB2997 /* LinkBuilder.swift */,
+				3416CEAF24633280000E597F /* StorageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -469,14 +473,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3416CEB124633F7C000E597F /* FavoriteTableViewCell.xib in Sources */,
 				346E473B245B6AA4002F9948 /* UIViewController.swift in Sources */,
 				3415980A245C1769005B0EA6 /* DetailRouter.swift in Sources */,
 				34159817245C31B1005B0EA6 /* TitleTableViewCell.swift in Sources */,
 				346E473E245B6AA4002F9948 /* Misc.swift in Sources */,
+				3416CEA424631882000E597F /* FavoriteViewController.swift in Sources */,
 				3416CEA12462F7C7000E597F /* FavoriteTableViewCell.swift in Sources */,
 				346E473C245B6AA4002F9948 /* UIImageView.swift in Sources */,
 				346E4733245B6A33002F9948 /* MainTableViewCell.swift in Sources */,
-				3496F6D6245B5DDF00FB2997 /* Network.swift in Sources */,
+				3496F6D6245B5DDF00FB2997 /* GetData.swift in Sources */,
 				34159808245C173B005B0EA6 /* DetailPresenter.swift in Sources */,
 				34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */,
 				34159816245C31B1005B0EA6 /* PosterTableViewCell.swift in Sources */,
@@ -496,12 +502,12 @@
 				3444A109245A0C6700432678 /* Movie.swift in Sources */,
 				34228B74245D66CA009F85A1 /* FavoriteRouter.swift in Sources */,
 				346E4740245B6AE7002F9948 /* MonthPick.swift in Sources */,
-				34228B7C245D7109009F85A1 /* FavoriteViewController.swift in Sources */,
 				347BFFE0245ECDFA00F1E1B1 /* Cast.swift in Sources */,
 				3496F6D8245B5E1200FB2997 /* LinkBuilder.swift in Sources */,
 				34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */,
 				3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */,
 				3496F6C7245AFE0000FB2997 /* MainPresenter.swift in Sources */,
+				3416CEB024633280000E597F /* StorageService.swift in Sources */,
 				3496F6C0245AE4F000FB2997 /* MainProtocols.swift in Sources */,
 				3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */,
 				3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */,

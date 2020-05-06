@@ -16,6 +16,7 @@ final class FavoritePresenter: FavoriteViewOutput {
     
     //MARK: - Methods
     func viewLoaded() {
+        view?.setupInitialState()
     }
     
     func reload() {

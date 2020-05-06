@@ -13,7 +13,7 @@ class FavoriteConfigurator {
     func configure() -> FavoriteViewController {
         let view = FavoriteViewController()
         let presenter = FavoritePresenter()
-        let router = FavorioteRouter()
+        let router = FavoriteRouter()
         
         presenter.view = view
         presenter.router = router
