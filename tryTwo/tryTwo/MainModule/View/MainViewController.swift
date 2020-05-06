@@ -67,6 +67,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         createMainTable()
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        navigationItem.title = "Popular"
     }
     
     //refresh handler
@@ -159,7 +160,10 @@ extension MainViewController: UISearchBarDelegate {
 }
 
 extension MainViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         output?.present(with: displayData[indexPath.row].id)
     }
+    
 }
+

@@ -27,6 +27,8 @@ final class MainTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var votedLabel: UILabel!
     
+    private var movie: Result?
+    
     //MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +68,7 @@ final class MainTableViewCell: UITableViewCell {
     //MARK: - Internal methods
     //transfer data into this controller
     func configureCell(_ film: Result) {
+        self.movie = film
         let link = LinkBuilder()
         posterView.loadImage(link.posterPath(path: film.posterPath, size: .w500))
         yearLabel.setYear(film)
@@ -73,6 +76,14 @@ final class MainTableViewCell: UITableViewCell {
         aboutLabel.text = film.overview
         votedLabel.text = "\(film.voteAverage)"
         votedView.backgroundColor = ColorVote().calculateColor(film.voteAverage)
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        guard let movie = movie else {
+            return
+        }
+        configureCell(movie)
+        
     }
     
 }

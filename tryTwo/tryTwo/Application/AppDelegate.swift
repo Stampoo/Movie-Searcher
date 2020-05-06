@@ -26,6 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
         
+        //title size
+        nc.navigationBar.prefersLargeTitles = true
+        
+        //tabbar item
+        mainVc.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        favoriteVc.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+        
         return true
     }
 

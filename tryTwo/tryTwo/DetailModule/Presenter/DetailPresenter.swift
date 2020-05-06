@@ -52,8 +52,8 @@ final class DetailPresenter {
 extension DetailPresenter: DetailViewOutput {
     
     func present(with data: Int) {
+        id = data
         router?.showModule(self)
-        print("lol")
     }
     
     func viewLoaded() {
@@ -70,7 +70,10 @@ extension DetailPresenter: DetailViewOutput {
 
 extension DetailPresenter: ModuleOutput {
     func moduleEdited(complition: (Int) -> Void) {
-        
+        guard let id = id else {
+                return
+            }
+            complition(id)
     }
     
 }
