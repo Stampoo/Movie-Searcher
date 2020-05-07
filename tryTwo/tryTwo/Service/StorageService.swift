@@ -23,9 +23,15 @@ final class StorageService {
     private let storage = UserDefaults.standard
     
     func saveMovie(_ data: Movie) {
-        var currentList = decodeData()
-        currentList.append(data)
-        save(list: currentList)
+        guard let actualData = dataFromStorage as? [Data] else {
+            return
+        }
+        if !actualData.contains(encodeMovie(data)) {
+            var currentList = decodeData()
+            currentList.append(data)
+            save(list: currentList)
+        }
+        
     }
     
     func deleteMovie(_ data: Movie) {
