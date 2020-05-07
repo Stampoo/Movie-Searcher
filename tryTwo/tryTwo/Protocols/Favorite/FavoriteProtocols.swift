@@ -10,7 +10,7 @@ import Foundation
 
 protocol FavoriteViewInput: class {
     
-    func  configure()
+    func configure(_ actualData: [Movie])
     
     func setupInitialState()
     
