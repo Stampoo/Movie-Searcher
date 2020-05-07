@@ -51,7 +51,6 @@ extension CustomTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController == favoriteVc {
             favoriteVc.checkEmptyState()
-            print("lol")
         }
     }
     

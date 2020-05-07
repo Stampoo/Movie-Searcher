@@ -17,8 +17,10 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         static let titleIdentifire: String = "titleCell"
         static let titleCellNib: String = "TitleTableViewCell"
         static let castIdentifire: String = "castCell"
+        static let castTitleIdentifire: String = "castTitleCell"
         static let castCellNib: String = "CastTableViewCell"
         static let alsoIdentifire: String = "alsoCell"
+        static let alsoTitleIdentifire: String = "alsoTitleCell"
         static let alsoCellNib: String = "AlsoSeeTableViewCell"
         static let constructDetailList: Int = 6
         static let rowHeightAlsoAndCast: CGFloat = 200.0
@@ -51,6 +53,8 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         tableView.register(nib, forCellReuseIdentifier: Constants.posterIdentifire)
         tableView.register(nibTitle, forCellReuseIdentifier: Constants.titleIdentifire)
         tableView.register(nibCast, forCellReuseIdentifier: Constants.castIdentifire)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.castTitleIdentifire)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.alsoTitleIdentifire)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 50
@@ -119,7 +123,7 @@ extension DetailViewController: UITableViewDataSource {
             cell.configureCell(film: movie)
             return cell
         case 2:
-            let cell = castCell(identifire: Constants.castIdentifire)
+            let cell = castCell(identifire: Constants.castTitleIdentifire)
             cell.textLabel?.font = .boldSystemFont(ofSize: 27)
             cell.textLabel?.text = "Cast"
             return cell
@@ -130,7 +134,7 @@ extension DetailViewController: UITableViewDataSource {
             cell.configure(cast)
             return cell
         case 4:
-            let cell = castCell(identifire: Constants.castIdentifire)
+            let cell = castCell(identifire: Constants.alsoTitleIdentifire)
             cell.textLabel?.font = .boldSystemFont(ofSize: 27)
             cell.textLabel?.text = "Also see"
             return cell

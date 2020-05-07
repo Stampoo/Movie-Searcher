@@ -35,7 +35,6 @@ final class MainPresenter: MainViewOutput {
     
     func present(with data: Int) {
         id = data
-        print(id)
         router?.showModule(self)
     }
     
