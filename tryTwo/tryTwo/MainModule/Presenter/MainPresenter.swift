@@ -46,6 +46,7 @@ final class MainPresenter: MainViewOutput {
                 return
             }
             self.view?.configure(with: movieList, use: .popularResultUpdate)
+            self.view?.setupInitialState(movieList)
         }) { stuck in
             //TODO - create error case
         }
