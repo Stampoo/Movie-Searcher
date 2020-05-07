@@ -22,4 +22,10 @@ struct Movie: Codable {
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
+    let genres: [Genres?]
+}
+
+struct Genres: Codable {
+    let id: Int
+    let name: String
 }

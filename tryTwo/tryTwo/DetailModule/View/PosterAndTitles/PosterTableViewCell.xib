@@ -23,8 +23,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.93337959051132202" green="0.93327516317367554" blue="0.93734568357467651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-hu-PqP">
-                        <rect key="frame" x="125" y="241" width="162" height="31"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-hu-PqP">
+                        <rect key="frame" x="125" y="241" width="162" height="56"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="162" id="SUE-vJ-Vt5"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,8 +35,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRV-J5-4Q3">
                         <rect key="frame" x="295" y="240" width="42" height="42"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SU-mc-Mcf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SU-mc-Mcf">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -41,10 +45,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="0SU-mc-Mcf" secondAttribute="bottom" id="30H-Ga-yXD"/>
-                            <constraint firstAttribute="trailing" secondItem="0SU-mc-Mcf" secondAttribute="trailing" id="i6O-ZD-1DP"/>
-                            <constraint firstItem="0SU-mc-Mcf" firstAttribute="top" secondItem="jRV-J5-4Q3" secondAttribute="top" id="nqY-e1-KLy"/>
-                            <constraint firstItem="0SU-mc-Mcf" firstAttribute="leading" secondItem="jRV-J5-4Q3" secondAttribute="leading" id="yL8-38-r9F"/>
+                            <constraint firstAttribute="height" constant="42" id="bdy-8f-k1u"/>
+                            <constraint firstAttribute="width" constant="42" id="pNe-Oi-SUd"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,14 +55,12 @@
                     <constraint firstItem="4xZ-MF-HAB" firstAttribute="leading" secondItem="GDg-R2-GqM" secondAttribute="trailing" constant="-117" id="4j1-f4-Ou1"/>
                     <constraint firstItem="4xZ-MF-HAB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BrN-Sc-p6D"/>
                     <constraint firstItem="4xZ-MF-HAB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="K9y-ZK-sT8"/>
-                    <constraint firstAttribute="trailing" secondItem="0SU-mc-Mcf" secondAttribute="trailing" constant="6" id="MxM-w4-45K"/>
+                    <constraint firstItem="jRV-J5-4Q3" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="8" id="Kkk-xD-HSi"/>
+                    <constraint firstItem="jRV-J5-4Q3" firstAttribute="leading" secondItem="LZ4-hu-PqP" secondAttribute="trailing" constant="8" id="NgO-Yo-rDA"/>
                     <constraint firstItem="LZ4-hu-PqP" firstAttribute="leading" secondItem="GDg-R2-GqM" secondAttribute="trailing" constant="8" id="S7M-D3-y7V"/>
-                    <constraint firstAttribute="trailing" secondItem="jRV-J5-4Q3" secondAttribute="trailing" constant="6" id="gJF-wf-zzy"/>
                     <constraint firstItem="LZ4-hu-PqP" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="8.5" id="mhO-bE-5EG"/>
                     <constraint firstItem="GDg-R2-GqM" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="-63" id="nVh-Jc-L0H"/>
-                    <constraint firstAttribute="bottom" secondItem="LZ4-hu-PqP" secondAttribute="bottom" constant="37" id="pKa-4F-faF"/>
-                    <constraint firstAttribute="bottom" secondItem="jRV-J5-4Q3" secondAttribute="bottom" constant="26" id="tBZ-ix-Trc"/>
-                    <constraint firstItem="jRV-J5-4Q3" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="8" id="wsF-a1-5HC"/>
+                    <constraint firstAttribute="bottom" secondItem="LZ4-hu-PqP" secondAttribute="bottom" constant="36" id="pKa-4F-faF"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>
