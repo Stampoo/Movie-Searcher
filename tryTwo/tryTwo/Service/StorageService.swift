@@ -22,6 +22,7 @@ final class StorageService {
     //MARK: - Private properties
     private let storage = UserDefaults.standard
     
+    //MARK: - Methods
     func saveMovie(_ data: Movie) {
         guard let actualData = dataFromStorage as? [Data] else {
             return

@@ -44,7 +44,6 @@ final class GetData {
             guard let data = data else {
                 return ifError(.errorResponce)
             }
-            //let queue = DispatchQueue.global(qos: .utility)
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
