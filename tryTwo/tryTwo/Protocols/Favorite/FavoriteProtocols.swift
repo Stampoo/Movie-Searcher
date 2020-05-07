@@ -22,10 +22,12 @@ protocol FavoriteViewOutput: class {
     
     func reload()
     
+    func present(with id: Int)
+    
 }
 
 protocol FavoriteRouterInput: class {
     
-    func showModule()
+    func showModule(_ moduleOutput: ModuleOutput)
     
 }

@@ -14,6 +14,9 @@ final class FavoritePresenter: FavoriteViewOutput {
     weak var view: FavoriteViewInput?
     var router: RouterInput?
     
+    //MARK: - Private Properties
+    private var id: Int?
+    
     //MARK: - Methods
     func viewLoaded() {
         view?.setupInitialState()
@@ -23,6 +26,23 @@ final class FavoritePresenter: FavoriteViewOutput {
         let service = StorageService()
         let actualList = service.decodeData()
         view?.configure(actualList)
+    }
+    
+    func present(with id: Int) {
+        self.id = id
+        router?.showModule(self)
+    }
+    
+    
+}
+
+extension FavoritePresenter: ModuleOutput {
+    
+    func moduleEdited(complition: (Int) -> Void) {
+        guard let id = id else {
+            return
+        }
+        complition(id)
     }
     
     

@@ -35,7 +35,6 @@ final class MainPresenter: MainViewOutput {
     
     func present(with data: Int) {
         id = data
-        print(id)
         router?.showModule(self)
     }
     
@@ -46,6 +45,7 @@ final class MainPresenter: MainViewOutput {
                 return
             }
             self.view?.configure(with: movieList, use: .popularResultUpdate)
+            self.view?.setupInitialState(movieList)
         }) { stuck in
             //TODO - create error case
         }

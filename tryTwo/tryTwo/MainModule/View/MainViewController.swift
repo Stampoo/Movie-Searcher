@@ -109,8 +109,8 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 //MARK: - Extensions
 extension MainViewController: MainViewInput {
     
-    func setupInitialState() {
-        //TODO: create initial setup
+    func setupInitialState(_ data: [Result]) {
+        popular = data
     }
     
     func configure(with list: [Result], use: Use) {
@@ -153,10 +153,15 @@ extension MainViewController: UISearchResultsUpdating {
 }
 
 extension MainViewController: UISearchBarDelegate {
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearch = false
-        mainTable.reloadData()
+        displayData = popular
+        DispatchQueue.main.async {
+            self.mainTable.reloadData()
+        }
     }
+    
 }
 
 extension MainViewController: UITableViewDelegate {

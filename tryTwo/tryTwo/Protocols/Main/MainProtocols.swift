@@ -14,7 +14,7 @@ import Foundation
 protocol MainViewInput: class {
     
     //initial setup
-    func setupInitialState()
+    func setupInitialState(_ data: [Result])
     
     //configure view
     func configure(with list: [Result],  use: Use)
