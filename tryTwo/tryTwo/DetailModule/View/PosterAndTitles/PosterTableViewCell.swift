@@ -64,7 +64,7 @@ final class PosterTableViewCell: UITableViewCell {
         mainPosterView.loadImage(link.posterPath(path: poster.posterPath, size: .w500))
         scoreLabel.text = "\(poster.voteAverage)"
         scoreView.backgroundColor = ColorVote().calculateColor(poster.voteAverage)
-        durationLabel.text = "\(poster.voteCount)"
+        durationLabel.text = (poster.genres[0]?.name ?? "Undefined") + ", " + (poster.genres[1]?.name ?? "Undefined")
         self.movie = poster
         
     }
@@ -101,6 +101,8 @@ final class PosterTableViewCell: UITableViewCell {
         scoreLabel.textAlignment = .center
         
         scoreView.layer.cornerRadius = 4
+
+        durationLabel.numberOfLines = 0
     }
     
     //this method call buttonAnim at touch button
