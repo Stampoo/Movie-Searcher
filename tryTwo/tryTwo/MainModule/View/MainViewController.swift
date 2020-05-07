@@ -34,23 +34,28 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     }()
     private var isSearch = false {
         willSet {
-            print(self.isSearch)
-            if newValue == false {
+            if newValue {
+                displayData = searchData
                 DispatchQueue.main.async {
-                    self.displayData = self.popular
+                    self.mainTable.reloadData()
+                }
+            } else {
+                displayData = popular
+                DispatchQueue.main.async {
                     self.mainTable.reloadData()
                 }
             }
         }
     }
-    private var displayData = [Result]()
+    private var displayData = [Result]() {
+        didSet {
+            mainTable.reloadData()
+        }
+    }
     private var searchData = [Result]()
     private var popular = [Result]() {
         didSet {
-            DispatchQueue.main.async {
-                self.displayData = self.popular
-                self.mainTable.reloadData()
-            }
+            mainTable.reloadData()
         }
     }
     private let link = LinkBuilder()
@@ -58,19 +63,20 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.searchController = searchController
+        configureSearch()
         createMainTable()
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
-        
-        
+        navigationItem.title = "Popular"
     }
+    
     //refresh handler
     @objc private func reloadTable() {
         mainTable.reloadData()
         refresh.endRefreshing()
     }
     
+    //configure mainTable
     private func createMainTable() {
         let nib = UINib(nibName: Constants.MainTableViewCellNib, bundle: nil)
         mainTable.register(nib, forCellReuseIdentifier: Constants.cellIdentifire)
@@ -82,9 +88,18 @@ final class MainViewController: UIViewController, ModuleTransitionable {
             mainTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
         mainTable.dataSource = self
+        mainTable.delegate = self
         mainTable.separatorStyle = .none
         mainTable.backgroundColor = .white
         mainTable.addSubview(refresh)
+    }
+    
+    //configureSearch
+    private func configureSearch() {
+        searchController.searchBar.showsCancelButton = true
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
     }
     
 }
@@ -93,15 +108,21 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 
 //MARK: - Extensions
 extension MainViewController: MainViewInput {
+    
     func setupInitialState() {
-        print("")
+        //TODO: create initial setup
     }
     
-    func configure(with list: [Result]) {
-        popular = list
-        mainTable.reloadData()
+    func configure(with list: [Result], use: Use) {
+        switch use {
+        case .popularResultUpdate:
+            displayData = list
+            mainTable.reloadData()
+        case .searchResultUpdate:
+            displayData = list
+            mainTable.reloadData()
+        }
     }
-    
     
 }
 
@@ -109,9 +130,9 @@ extension MainViewController: MainViewInput {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(displayData.count)
         return displayData.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifire, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
         cell.configureCell(displayData[indexPath.row])
@@ -119,3 +140,30 @@ extension MainViewController: UITableViewDataSource {
     }
     
 }
+
+//SearchExtension
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, text.count > 2 {
+            self.output?.send(key: text)
+            self.output?.reload()
+            self.isSearch = true
+        }
+    }
+}
+
+extension MainViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearch = false
+        mainTable.reloadData()
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        output?.present(with: displayData[indexPath.row].id)
+    }
+    
+}
+

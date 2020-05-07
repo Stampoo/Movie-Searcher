@@ -17,7 +17,7 @@ protocol MainViewInput: class {
     func setupInitialState()
     
     //configure view
-    func configure(with list: [Result])
+    func configure(with list: [Result],  use: Use)
     
 }
 
@@ -30,11 +30,17 @@ protocol MainViewOutput: class {
     
     //reload view
     func reload()
+
+    //sendData
+    func send(key word: String)
+    
+    //present module
+    func present(with data: Int)
     
 }
 
 //ModuleInput
-//Реализует Presenter
+//Реализует Presenter, который вызывает второй модуль 
 protocol ModuleInput: class {
     
     //configure
@@ -43,11 +49,11 @@ protocol ModuleInput: class {
 }
 
 //ModuleOutput
-//Реализует Presenter, на модуль которого осуществляется переход
+//Реализует Presenter, который вызывает второй модуль
 protocol ModuleOutput: class {
     
     //notify
-    func moduleEdited()
+    func moduleEdited(complition: (_ data: Int) -> Void)
     
 }
 
@@ -56,7 +62,7 @@ protocol ModuleOutput: class {
 
 protocol RouterInput {
     
-    func showModule()
+    func showModule(_ moduleOutput: ModuleOutput)
 
 }
 

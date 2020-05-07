@@ -10,9 +10,18 @@ import UIKit
 
 //MARK: - load data from server and set this data to imgaeView instance
 extension UIImageView {
+    
     func loadImage(_ path: String?) {
-        guard let path = path else { return }
-        guard let url = URL(string: path) else { return }
+        self.contentMode = .scaleAspectFill
+        guard let path = path else {
+            
+            self.image = UIImage(named: "posterNotFound")
+            return
+        }
+        guard let url = URL(string: path) else {
+            self.image = UIImage(named: "posterNotFound")
+            return
+        }
         do {
             let cache = URLCache.shared
             let request = URLRequest(url: url)
@@ -30,16 +39,13 @@ extension UIImageView {
                         DispatchQueue.main.async {
                             self.image = UIImage(data: data)
                         }
-                        
                     }
                     
                 }.resume()
             }
-        } catch {
-            print("image not loaded")
         }
-        
     }
+    
 }
 
 

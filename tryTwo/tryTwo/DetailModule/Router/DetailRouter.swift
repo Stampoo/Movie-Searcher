@@ -1,22 +1,28 @@
 //
-//  MainRouter.swift
+//  DetailRouter.swift
 //  tryTwo
 //
-//  Created by fivecoil on 30/04/2020.
+//  Created by fivecoil on 01/05/2020.
 //  Copyright © 2020 fivecoil. All rights reserved.
 //
 
 import Foundation
 
-final class MainRouter: RouterInput {
+final class DetailRouter {
     
     //MARK: - Properties
-   weak var view: ModuleTransitionable? // Транзит
+    var view: ModuleTransitionable?
     
     //MARK: - Private Properties
+    
+}
+
+//MARK: - Extensions
+extension DetailRouter: DetailRouterInput {
+    
     func showModule(_ moduleOutput: ModuleOutput) {
         let detailVc = DetailModuleConfigurator().configure(with: moduleOutput)
         view?.pushModule(module: detailVc, animation: true)
     }
-    
+
 }

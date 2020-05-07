@@ -44,17 +44,17 @@ final class GetData {
             guard let data = data else {
                 return ifError(.errorResponce)
             }
-            let queue = DispatchQueue.global(qos: .utility)
+            //let queue = DispatchQueue.global(qos: .utility)
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 //try translate recive data to struct
                 let parce: Movie = try decoder.decode(Movie.self, from: data)
-                queue.async {
+                DispatchQueue.main.async {
                     complition(parce)
                 }
             } catch {
-                queue.async {
+                DispatchQueue.main.async {
                     ifError(.errorParcing)
                     print(error)
                 }
@@ -64,6 +64,7 @@ final class GetData {
         task.resume()
     }
     
+    //MARK: - Search request
     func searchRequest(link: String, onComplete: @escaping ([Result]) -> Void, onError: @escaping (StuckMoment) -> Void) {
         guard let url = URL(string: link) else {
             return onError(.badLink)
@@ -81,6 +82,24 @@ final class GetData {
             }
             DispatchQueue.main.async {
                 onComplete(result.results)
+            }
+        }.resume()
+    }
+    func castRequest(link: String, onComplete: @escaping ([Cast]) -> Void, onError: @escaping (StuckMoment) -> Void) {
+        guard let url = URL(string: link) else {
+            return onError(.badLink)
+        }
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return onError(.errorResponce)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let result = try? decoder.decode(CastArray.self, from: data) else {
+                return onError(.errorParcing)
+            }
+            DispatchQueue.main.async {
+                onComplete(result.cast)
             }
         }.resume()
     }
