@@ -79,7 +79,6 @@ extension DetailViewController: DetailViewInput {
             self.also = target as? [Result]
         default:
             break
-            //TODO: - create default case
         }
     }
     

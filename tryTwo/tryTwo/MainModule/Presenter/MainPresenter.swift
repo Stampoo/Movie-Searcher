@@ -47,7 +47,6 @@ final class MainPresenter: MainViewOutput {
             self.view?.configure(with: movieList, use: .popularResultUpdate)
             self.view?.setupInitialState(movieList)
         }) { stuck in
-            //TODO - create error case
         }
     }
     
@@ -59,7 +58,6 @@ final class MainPresenter: MainViewOutput {
             }
             self.view?.configure(with: movieList, use: .searchResultUpdate)
         }) { (stuck) in
-            //TODO: - create error case
         }
     }
     

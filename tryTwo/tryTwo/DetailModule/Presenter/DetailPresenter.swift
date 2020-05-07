@@ -29,22 +29,18 @@ final class DetailPresenter {
             self.view?.configure(with: movie)
             self.view?.setupInitialState()
         }) { (stuck) in
-            //TODO: - create stuck action
         }
         service.castRequest(link: link.cast("\(id)"), onComplete: { (cast) in
             self.view?.configure(with: cast)
             self.view?.setupInitialState()
         }) { (stuck) in
-            //TODO: - create stuck
         }
         service.request(link: link.seeAlso("\(id)"), onComplete: { (also) in
             self.view?.configure(with: also)
             self.view?.setupInitialState()
         }) { (stuck) in
-            //TODO: - create stuck
         }
     }
-    
     
 }
 
@@ -70,7 +66,6 @@ extension DetailPresenter: DetailViewOutput {
             service.deleteMovie(target)
         case .save:
             service.saveMovie(target)
-            print("save")
         }
     }
     func checkState(when data: Movie) -> Bool {
