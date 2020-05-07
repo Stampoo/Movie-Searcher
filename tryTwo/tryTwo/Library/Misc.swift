@@ -30,3 +30,8 @@ struct ColorVote {
         return .black
     }
 }
+
+enum DeleteOrSave {
+    case del
+    case save
+}

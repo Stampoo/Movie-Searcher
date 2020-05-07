@@ -20,6 +20,7 @@ final class FavoritePresenter: FavoriteViewOutput {
     }
     
     func reload() {
+        view?.configure()
     }
     
     

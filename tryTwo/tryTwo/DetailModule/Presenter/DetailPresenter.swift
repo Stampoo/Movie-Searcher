@@ -63,7 +63,26 @@ extension DetailPresenter: DetailViewOutput {
         loadData()
     }
     
-    func reload() {
+    func reload(action: DeleteOrSave, target: Movie) {
+        let service = StorageService()
+        switch action {
+        case .del:
+            service.deleteMovie(target)
+        case .save:
+            service.saveMovie(target)
+        }
+    }
+    func checkState(when data: Movie) -> Bool {
+        let service = StorageService()
+        let movie = service.encodeMovie(data)
+        guard let currentList = service.dataFromStorage as? [Data] else {
+            return false
+        }
+        if currentList.contains(movie) {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
@@ -77,4 +96,5 @@ extension DetailPresenter: ModuleOutput {
     }
     
 }
+
 

@@ -102,6 +102,15 @@ extension DetailViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configurePoster(movie)
+            cell.saveToStorage = { [weak self] movie in
+                self?.presenter?.reload(action: .save, target: movie)
+            }
+            cell.deleteFromStorage = { [weak self] movie in
+                self?.presenter?.reload(action: .del, target: movie)
+            }
+            if let booleanValue = presenter?.checkState(when: movie) {
+                cell.buttonInitial(when: booleanValue)
+            }
             return cell
         case 1:
             guard let cell = castCell(identifire: Constants.titleIdentifire) as? TitleTableViewCell else {
@@ -132,7 +141,6 @@ extension DetailViewController: UITableViewDataSource {
             cell.configure(also)
             cell.pushDetail = { [weak self] id in
                 self?.presenter?.present(with: id)
-                print("present")
             }
             return cell
         default:

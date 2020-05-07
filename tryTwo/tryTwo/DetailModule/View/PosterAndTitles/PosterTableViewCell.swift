@@ -10,9 +10,16 @@ import UIKit
 
 final class PosterTableViewCell: UITableViewCell {
     
+    //MARK: - typealias
+    typealias MovieSaveClouser = (Movie) -> Void
+    
+    //MARK: - Properties
+    var saveToStorage: MovieSaveClouser?
+    var deleteFromStorage: MovieSaveClouser?
+    
     //MARK: Private properties
     //Data and state containers
-    private var buttonState: Bool = false
+    private var buttonState = true
     private var movie: Movie? = nil
     
     @IBOutlet private weak var posterImageView: UIImageView!
@@ -41,7 +48,6 @@ final class PosterTableViewCell: UITableViewCell {
     //MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.addSubview(addFavoriteButton)
         configurateUICell()
     }
@@ -57,6 +63,18 @@ final class PosterTableViewCell: UITableViewCell {
         durationLabel.text = "\(poster.voteCount)"
         self.movie = poster
         
+    }
+    
+    func buttonInitial(when: Bool) {
+        if when {
+            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
+            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
+            addFavoriteButton.setTitle("♥️", for: .normal)
+        } else {
+            self.addFavoriteButton.setTitle("add", for: .normal)
+            self.addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
+            self.addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+        }
     }
     
     //MARK: - Private Methods
@@ -94,22 +112,21 @@ final class PosterTableViewCell: UITableViewCell {
             return
         }
         switch buttonState {
-        case false:
-            UIView.animate(withDuration: 0.5, animations: {
-                self.addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
-                self.addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
-                self.addFavoriteButton.setTitle("♥️", for: .normal)
-            })
-            StorageService().saveMovie(movie)
-            self.buttonState = !self.buttonState
         case true:
             UIView.animate(withDuration: 0.5, animations: {
-                self.addFavoriteButton.setTitle("add", for: .normal)
-                self.addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
-                self.addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+                self.buttonInitial(when: true)
             })
+            saveToStorage?(movie)
+            self.buttonState = !self.buttonState
+        case false:
+            UIView.animate(withDuration: 0.5, animations: {
+                self.buttonInitial(when: false)
+            })
+            deleteFromStorage?(movie)
             self.buttonState = !self.buttonState
         }
     }
+    
+    
     
 }

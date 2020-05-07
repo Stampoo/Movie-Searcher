@@ -29,10 +29,13 @@ protocol DetailViewOutput: class {
     func viewLoaded()
     
     //reload view
-    func reload()
+    func reload(action: DeleteOrSave, target: Movie)
     
     //present module
-      func present(with data: Int)
+    func present(with data: Int)
+    
+    //check state
+    func checkState(when data: Movie) -> Bool
     
 }
 
@@ -42,6 +45,6 @@ protocol DetailViewOutput: class {
 protocol DetailRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput)
-
+    
 }
 

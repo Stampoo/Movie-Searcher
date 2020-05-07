@@ -84,7 +84,7 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
 extension FavoriteViewController: FavoriteViewInput {
     
     func configure() {
-        //TODO: - configure
+        checkEmptyState()
     }
     
     func setupInitialState() {
@@ -125,7 +125,7 @@ extension FavoriteViewController: UITableViewDelegate {
             dataInStorage.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             StorageService().save(list: dataInStorage)
-            checkEmptyState()
+            presenter?.reload()
         }
     }
     
