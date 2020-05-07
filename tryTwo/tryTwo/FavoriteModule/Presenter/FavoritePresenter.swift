@@ -20,7 +20,9 @@ final class FavoritePresenter: FavoriteViewOutput {
     }
     
     func reload() {
-        view?.configure()
+        let service = StorageService()
+        let actualList = service.decodeData()
+        view?.configure(actualList)
     }
     
     

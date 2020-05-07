@@ -70,6 +70,7 @@ extension DetailPresenter: DetailViewOutput {
             service.deleteMovie(target)
         case .save:
             service.saveMovie(target)
+            print("save")
         }
     }
     func checkState(when data: Movie) -> Bool {
