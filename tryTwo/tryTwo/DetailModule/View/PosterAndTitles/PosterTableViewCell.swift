@@ -13,6 +13,13 @@ final class PosterTableViewCell: UITableViewCell {
     //MARK: - typealias
     typealias MovieSaveClouser = (Movie) -> Void
     
+    //MARK: - Constants
+    enum Constants {
+        static let x: CGFloat = 0.70
+        static let y: CGFloat = 0.45
+        static let width: CGFloat = 0.08
+    }
+    
     //MARK: - Properties
     var saveToStorage: MovieSaveClouser?
     var deleteFromStorage: MovieSaveClouser?
@@ -35,13 +42,10 @@ final class PosterTableViewCell: UITableViewCell {
     //instance and config add button
     private  let addFavoriteButton: UIButton = {
         let button = UIButton()
-        let x: CGFloat = 0.70
-        let y: CGFloat = 0.45
-        let width: CGFloat = 0.08
-        button.frame = CGRect(x: ScreenSize().height * x,
-                              y: ScreenSize().width * y,
+        button.frame = CGRect(x: ScreenSize().height * Constants.x,
+                              y: ScreenSize().width * Constants.y,
                               width: ScreenSize().width * 0.25,
-                              height: ScreenSize().height * width)
+                              height: ScreenSize().height * Constants.width)
         return button
     }()
     
@@ -66,14 +70,14 @@ final class PosterTableViewCell: UITableViewCell {
     }
     
     func buttonInitial(when: Bool) {
+        buttonState = when
         if when {
             addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
             addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
             addFavoriteButton.setTitle("♥️", for: .normal)
         } else {
-            self.addFavoriteButton.setTitle("add", for: .normal)
-            self.addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
-            self.addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+            addFavoriteButton.setTitle("add", for: .normal)
+            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
         }
     }
     
@@ -108,25 +112,36 @@ final class PosterTableViewCell: UITableViewCell {
     
     //method call animation and add pressed data to test singletone container
     private func buttonAnim(_ buttonState: Bool) {
+        switch buttonState {
+        case true:
+            UIView.animate(withDuration: 0.5, animations: {
+                self.changeButton()
+            })
+        case false:
+            UIView.animate(withDuration: 0.5, animations: {
+                self.changeButton()
+            })
+        }
+    }
+    
+    private func changeButton() {
         guard let movie = movie else {
             return
         }
         switch buttonState {
         case true:
-            UIView.animate(withDuration: 0.5, animations: {
-                self.buttonInitial(when: true)
-            })
-            saveToStorage?(movie)
-            self.buttonState = !self.buttonState
-        case false:
-            UIView.animate(withDuration: 0.5, animations: {
-                self.buttonInitial(when: false)
-            })
+            addFavoriteButton.setTitle("add", for: .normal)
+            addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
+            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
             deleteFromStorage?(movie)
-            self.buttonState = !self.buttonState
+            buttonState = !buttonState
+        case false:
+            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
+            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
+            addFavoriteButton.setTitle("♥️", for: .normal)
+            saveToStorage?(movie)
+            buttonState = !buttonState
         }
     }
-    
-    
     
 }

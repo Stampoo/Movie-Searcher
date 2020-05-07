@@ -74,8 +74,8 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
             view.addSubview(emptyView)
         case false:
             emptyView.removeFromSuperview()
-            tableView.reloadData()
         }
+        presenter?.reload()
     }
 
 }
@@ -83,8 +83,9 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
 //MARK: - Extensions
 extension FavoriteViewController: FavoriteViewInput {
     
-    func configure() {
-        checkEmptyState()
+    func configure(_ actualData: [Movie]) {
+        dataInStorage = actualData
+        tableView.reloadData()
     }
     
     func setupInitialState() {

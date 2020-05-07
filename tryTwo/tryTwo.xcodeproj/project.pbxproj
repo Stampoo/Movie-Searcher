@@ -43,6 +43,7 @@
 		347BFFDD245EC93100F1E1B1 /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347BFFDB245EC93100F1E1B1 /* CastCollectionViewCell.swift */; };
 		347BFFDE245EC93100F1E1B1 /* CastCollectionViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 347BFFDC245EC93100F1E1B1 /* CastCollectionViewCell.xib */; };
 		347BFFE0245ECDFA00F1E1B1 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347BFFDF245ECDFA00F1E1B1 /* Cast.swift */; };
+		3483BA68246400D00015FB6C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483BA67246400D00015FB6C /* CustomTabBarController.swift */; };
 		3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6BC245AC0DC00FB2997 /* MovieList.swift */; };
 		3496F6C0245AE4F000FB2997 /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6BF245AE4F000FB2997 /* MainProtocols.swift */; };
 		3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */; };
@@ -96,6 +97,7 @@
 		347BFFDB245EC93100F1E1B1 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 		347BFFDC245EC93100F1E1B1 /* CastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastCollectionViewCell.xib; sourceTree = "<group>"; };
 		347BFFDF245ECDFA00F1E1B1 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		3483BA67246400D00015FB6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		3496F6BC245AC0DC00FB2997 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
 		3496F6BF245AE4F000FB2997 /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
 		3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionProtocols.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				3416CEA02462F7C7000E597F /* FavoriteTableViewCell.xib */,
 				3416CEA224631882000E597F /* FavoriteViewController.swift */,
 				3416CEA324631882000E597F /* FavoriteViewController.xib */,
+				3483BA67246400D00015FB6C /* CustomTabBarController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 			files = (
 				3416CEB124633F7C000E597F /* FavoriteTableViewCell.xib in Sources */,
 				346E473B245B6AA4002F9948 /* UIViewController.swift in Sources */,
+				3483BA68246400D00015FB6C /* CustomTabBarController.swift in Sources */,
 				3415980A245C1769005B0EA6 /* DetailRouter.swift in Sources */,
 				34159817245C31B1005B0EA6 /* TitleTableViewCell.swift in Sources */,
 				346E473E245B6AA4002F9948 /* Misc.swift in Sources */,
