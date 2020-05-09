@@ -40,7 +40,7 @@ final class MainPresenter: MainViewOutput {
     
     //load data from network
     func loadPopularData() {
-        loading.request(link: link.popular(page: 1), onComplete: { [weak self] (movieList) in
+        loading.request(link: link.feed(page: 1, type: .popularity), onComplete: { [weak self] (movieList) in
             guard let self = self else {
                 return
             }

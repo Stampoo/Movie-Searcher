@@ -54,6 +54,8 @@
 		3496F6D6245B5DDF00FB2997 /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D5245B5DDF00FB2997 /* GetData.swift */; };
 		3496F6D8245B5E1200FB2997 /* LinkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D7245B5E1200FB2997 /* LinkBuilder.swift */; };
 		3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496F6D9245B5E4700FB2997 /* ErrorCases.swift */; };
+		34EE48F92467234E00901FA1 /* CustomSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EE48F82467234E00901FA1 /* CustomSegmentView.swift */; };
+		34EE491D246756D000901FA1 /* CustomSegmentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EE491C246756D000901FA1 /* CustomSegmentProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		3496F6D5245B5DDF00FB2997 /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 		3496F6D7245B5E1200FB2997 /* LinkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkBuilder.swift; sourceTree = "<group>"; };
 		3496F6D9245B5E4700FB2997 /* ErrorCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCases.swift; sourceTree = "<group>"; };
+		34EE48F82467234E00901FA1 /* CustomSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentView.swift; sourceTree = "<group>"; };
+		34EE491C246756D000901FA1 /* CustomSegmentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				3483BA67246400D00015FB6C /* CustomTabBarController.swift */,
+				34EE48F82467234E00901FA1 /* CustomSegmentView.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */,
+				34EE491C246756D000901FA1 /* CustomSegmentProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3416CEB124633F7C000E597F /* FavoriteTableViewCell.xib in Sources */,
+				34EE491D246756D000901FA1 /* CustomSegmentProtocol.swift in Sources */,
 				346E473B245B6AA4002F9948 /* UIViewController.swift in Sources */,
 				3483BA68246400D00015FB6C /* CustomTabBarController.swift in Sources */,
 				3415980A245C1769005B0EA6 /* DetailRouter.swift in Sources */,
@@ -520,6 +527,7 @@
 				3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */,
 				3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */,
 				3415981A245C36CC005B0EA6 /* TitleTableViewCell.xib in Sources */,
+				34EE48F92467234E00901FA1 /* CustomSegmentView.swift in Sources */,
 				3414755E245DCBB4006AEC6C /* CastTableViewCell.xib in Sources */,
 				3496F6CD245B274F00FB2997 /* LaunchScreen.storyboard in Sources */,
 				3444A0F9245A0B8B00432678 /* Assets.xcassets in Sources */,

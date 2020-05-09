@@ -35,3 +35,10 @@ enum DeleteOrSave {
     case del
     case save
 }
+
+enum currentDisplayList: String {
+    case popularity = "movie/popular"
+    case nowPlaying = "movie/now_playing"
+    case topRated = "top_rated"
+}
+

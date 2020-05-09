@@ -69,6 +69,8 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
         navigationItem.title = "Popular"
         configureTitleLabel()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapOnTitle))
+        createSegment()
     }
     
     //refresh handler
@@ -100,7 +102,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         searchController.searchBar.showsCancelButton = true
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
+        //navigationItem.searchController = searchController
     }
     
     //configure titleLabel
@@ -118,6 +120,12 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     }
     @objc private func tapOnTitle() {
         //TODO: - Create switch to other data
+        print("adda")
+    }
+    private func createSegment() {
+        let segmentTitle: [String] = ["1", "2", "3"]
+        let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: 100, height: 44), buttonTitles: segmentTitle)
+        navigationItem.titleView = segment
     }
     
 }

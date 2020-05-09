@@ -16,14 +16,16 @@ struct LinkBuilder {
     private let baseUrl: String = "https://image.tmdb.org/t/p/"
     private let lng: String = "&language=en-US"
     private let popularity: String = "movie/popular"
+    private let nowPlaying: String = "movie/now_playing"
+    private let topRated: String = "top_rated"
     private let page: String = "&page="
     private let movie: String = "movie/"
     private let cast: String = "/credits"
     private let recommendation: String = "/recommendations"
     
     //return link at popular films
-    func popular(page: Int) -> String {
-        return self.mainPath + self.popularity + self.key + self.lng + self.page + "\(page)"
+    func feed(page: Int, type: currentDisplayList) -> String {
+        return self.mainPath + type.rawValue + self.key + self.lng + self.page + "\(page)"
     }
     
     //return link to film at depend id
