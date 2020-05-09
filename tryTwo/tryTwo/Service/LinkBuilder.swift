@@ -21,8 +21,6 @@ struct LinkBuilder {
     private let cast: String = "/credits"
     private let recommendation: String = "/recommendations"
     
-    
-    
     //return link at popular films
     func popular(page: Int) -> String {
         return self.mainPath + self.popularity + self.key + self.lng + self.page + "\(page)"

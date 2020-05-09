@@ -68,6 +68,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
         navigationItem.title = "Popular"
+        configureTitleLabel()
     }
     
     //refresh handler
@@ -100,6 +101,23 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+    }
+    
+    //configure titleLabel
+    private func configureTitleLabel() {
+        let titleHeaderLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Popular"
+            return label
+        }()
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnTitle))
+        titleHeaderLabel.addGestureRecognizer(recognizer)
+        titleHeaderLabel.isUserInteractionEnabled = true
+        navigationItem.titleView = titleHeaderLabel
+        
+    }
+    @objc private func tapOnTitle() {
+        //TODO: - Create switch to other data
     }
     
 }

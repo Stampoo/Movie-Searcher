@@ -8,13 +8,12 @@
 
 import UIKit
 
-//MARK: - load data from server and set this data to imgaeView instance
+//MARK: - load data from server and set this data to imageView instance
 extension UIImageView {
     
     func loadImage(_ path: String?) {
         self.contentMode = .scaleAspectFill
         guard let path = path else {
-            
             self.image = UIImage(named: "posterNotFound")
             return
         }
@@ -40,7 +39,6 @@ extension UIImageView {
                             self.image = UIImage(data: data)
                         }
                     }
-                    
                 }.resume()
             }
         }

@@ -84,6 +84,7 @@ final class GetData {
             }
         }.resume()
     }
+    
     func castRequest(link: String, onComplete: @escaping ([Cast]) -> Void, onError: @escaping (StuckMoment) -> Void) {
         guard let url = URL(string: link) else {
             return onError(.badLink)
