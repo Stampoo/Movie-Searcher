@@ -19,6 +19,7 @@ extension UIViewController {
 
 //MARK: - for crate shadow to UIView and inheritors
 extension UIView {
+    
     func createShadow() {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowRadius = 5
@@ -26,5 +27,13 @@ extension UIView {
         self.layer.shadowOpacity = 0.5
         self.layer.masksToBounds = false
     }
+
+    func createBloom(color: UIColor) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowRadius = 2.0
+        self.layer.shadowOpacity = 0.9
+        self.layer.shadowOffset = .zero
+    }
+
 }
 

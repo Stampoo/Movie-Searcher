@@ -89,10 +89,12 @@ class CustomSegmentView: UIView {
     }
 
     private func configureSegmentView() {
-        let segmentWidth = frame.width / CGFloat(self.titles.count)
+        let segmentWidth = frame.width / CGFloat(self.titles.count * 2)
         chooseView.frame = .init(x: 0, y: self.frame.height, width: segmentWidth, height: 3)
+        chooseView.frame.origin.x += chooseView.frame.width / 2
         chooseView.layer.cornerRadius = chooseView.frame.height / 2
         chooseView.backgroundColor = chooseColor
+        chooseView.createBloom(color: .red)
         addSubview(chooseView)
     }
 
@@ -127,7 +129,7 @@ class CustomSegmentView: UIView {
     }
 
     private func configurateChoosePosition(index: Int) {
-        let choosePosition = frame.width / CGFloat(titles.count) * CGFloat(index)
+        let choosePosition = frame.width / CGFloat(titles.count * 2) * CGFloat(index) + chooseView.frame.width * (CGFloat(index) + 0.5)
         UIView.animate(withDuration: 0.2, animations: {
             self.chooseView.frame.origin.x = choosePosition
         }) {_ in
