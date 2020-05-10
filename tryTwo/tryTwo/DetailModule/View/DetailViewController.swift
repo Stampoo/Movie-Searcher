@@ -41,6 +41,16 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         configureTableView()
         presenter?.viewLoaded()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     //MARK: - Internal methods
     

@@ -70,8 +70,6 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
         navigationItem.title = "Popular"
-        configureTitleLabel()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapOnTitle))
         createSegment()
     }
     
@@ -104,26 +102,10 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         searchController.searchBar.showsCancelButton = true
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        //navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
     }
-    
-    //configure titleLabel
-    private func configureTitleLabel() {
-        let titleHeaderLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Popular"
-            return label
-        }()
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnTitle))
-        titleHeaderLabel.addGestureRecognizer(recognizer)
-        titleHeaderLabel.isUserInteractionEnabled = true
-        navigationItem.titleView = titleHeaderLabel
-        
-    }
-    @objc private func tapOnTitle() {
-        //TODO: - Create switch to other data
-        print("adda")
-    }
+
+    //Custom segment control
     private func createSegment() {
         let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50), buttonTitles: ["Popular","Now playing","Top rated"], handler: { (index) in
             self.switchFeed(by: index)
@@ -131,23 +113,23 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         segment.backgroundColor = .clear
         navigationItem.titleView = segment
     }
+
+    //switch feed state
     private func switchFeed(by index: Int) {
         switch index {
         case 0:
             displayData = popular
-            mainTable.reloadData()
             navigationItem.title = "Popular"
         case 1:
             displayData = nowPlaying
-            mainTable.reloadData()
             navigationItem.title = "Now Playing"
         case 2:
             displayData = topRated
-            mainTable.reloadData()
             navigationItem.title = "Top rated"
         default:
             break
         }
+        mainTable.reloadData()
     }
 
 }

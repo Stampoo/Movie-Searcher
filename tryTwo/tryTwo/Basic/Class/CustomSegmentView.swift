@@ -83,8 +83,8 @@ class CustomSegmentView: UIView {
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: self.topAnchor),
             stack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+            stack.rightAnchor.constraint(equalTo: self.rightAnchor),
+            stack.leftAnchor.constraint(equalTo: self.leftAnchor)
         ])
     }
 
@@ -140,7 +140,6 @@ class CustomSegmentView: UIView {
         createButtons()
         configureSegmentView()
         configureStack()
-
     }
 
 }

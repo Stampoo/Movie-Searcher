@@ -21,8 +21,8 @@ extension UIViewController {
 extension UIView {
     func createShadow() {
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowRadius = 4
-        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 5
+        self.layer.shadowOffset = .init(width: 0.5, height: 4.0)
         self.layer.shadowOpacity = 0.5
         self.layer.masksToBounds = false
     }

@@ -34,7 +34,7 @@
 		3444A109245A0C6700432678 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444A108245A0C6700432678 /* Movie.swift */; };
 		346E4731245B6923002F9948 /* MainTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 346E4730245B6923002F9948 /* MainTableViewCell.xib */; };
 		346E4733245B6A33002F9948 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E4732245B6A33002F9948 /* MainTableViewCell.swift */; };
-		346E473B245B6AA4002F9948 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E4737245B6AA4002F9948 /* UIViewController.swift */; };
+		346E473B245B6AA4002F9948 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E4737245B6AA4002F9948 /* UIView.swift */; };
 		346E473C245B6AA4002F9948 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E4738245B6AA4002F9948 /* UIImageView.swift */; };
 		346E473D245B6AA4002F9948 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E4739245B6AA4002F9948 /* UILabel.swift */; };
 		346E473E245B6AA4002F9948 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346E473A245B6AA4002F9948 /* Misc.swift */; };
@@ -89,7 +89,7 @@
 		3444A108245A0C6700432678 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		346E4730245B6923002F9948 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
 		346E4732245B6A33002F9948 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		346E4737245B6AA4002F9948 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		346E4737245B6AA4002F9948 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		346E4738245B6AA4002F9948 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		346E4739245B6AA4002F9948 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		346E473A245B6AA4002F9948 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Misc.swift; path = tryTwo/Library/Misc.swift; sourceTree = SOURCE_ROOT; };
@@ -345,7 +345,7 @@
 		346E4736245B6AA4002F9948 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				346E4737245B6AA4002F9948 /* UIViewController.swift */,
+				346E4737245B6AA4002F9948 /* UIView.swift */,
 				346E4738245B6AA4002F9948 /* UIImageView.swift */,
 				346E4739245B6AA4002F9948 /* UILabel.swift */,
 			);
@@ -489,7 +489,7 @@
 			files = (
 				3416CEB124633F7C000E597F /* FavoriteTableViewCell.xib in Sources */,
 				34EE491D246756D000901FA1 /* CustomSegmentProtocol.swift in Sources */,
-				346E473B245B6AA4002F9948 /* UIViewController.swift in Sources */,
+				346E473B245B6AA4002F9948 /* UIView.swift in Sources */,
 				3483BA68246400D00015FB6C /* CustomTabBarController.swift in Sources */,
 				3415980A245C1769005B0EA6 /* DetailRouter.swift in Sources */,
 				34159817245C31B1005B0EA6 /* TitleTableViewCell.swift in Sources */,

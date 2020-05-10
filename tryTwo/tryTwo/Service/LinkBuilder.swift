@@ -17,7 +17,7 @@ struct LinkBuilder {
     private let lng: String = "&language=en-US"
     private let popularity: String = "movie/popular"
     private let nowPlaying: String = "movie/now_playing"
-    private let topRated: String = "top_rated"
+    private let topRated: String = "movie/top_rated"
     private let page: String = "&page="
     private let movie: String = "movie/"
     private let cast: String = "/credits"

@@ -53,17 +53,6 @@ final class MainPresenter: MainViewOutput {
         }) { stuck in
         }
     }
-    //load data from network
-    func loadPopularData() {
-        loading.request(link: link.feed(page: 1, type: .popularResultUpdate), onComplete: { [weak self] (movieList) in
-            guard let self = self else {
-                return
-            }
-            self.view?.configure(with: movieList, use: .popularResultUpdate)
-            self.view?.setupInitialState(movieList)
-        }) { stuck in
-        }
-    }
     
     //Load search result
     func loadSearchResult(_ key: String) {

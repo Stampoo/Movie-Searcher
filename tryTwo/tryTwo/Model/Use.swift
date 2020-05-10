@@ -12,6 +12,6 @@ enum Use: String {
     case searchResultUpdate
     case popularResultUpdate = "movie/popular"
     case nowPlayingResultUpdate = "movie/now_playing"
-    case topRatedResultUpdate = "top_rated"
+    case topRatedResultUpdate = "movie/top_rated"
 }
 
