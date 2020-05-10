@@ -10,6 +10,9 @@ import UIKit
 
 class CustomSegmentView: UIView {
 
+    //MARK: - Typealias
+    typealias IdCloser = (Int) -> Void
+
     //MARK: Properties
     weak var delegate: CustomSegmentViewDelegate?
 
@@ -29,6 +32,7 @@ class CustomSegmentView: UIView {
         }
         return buttons
     }()
+    private var handler: IdCloser?
     private var chooseView = UIView()
     private var chooseColor: UIColor = .red
     var defaultIndex: Int = 0 {
@@ -44,9 +48,10 @@ class CustomSegmentView: UIView {
     }
 
     //MARK: - Methods
-    convenience init(frame: CGRect, buttonTitles: [String]) {
+    convenience init(frame: CGRect, buttonTitles: [String], handler: @escaping IdCloser) {
         self.init(frame: frame)
         self.titles = buttonTitles
+        self.handler = handler
     }
 
     func setTitles(buttonTitles: [String]) {
@@ -103,14 +108,19 @@ class CustomSegmentView: UIView {
             button.setTitleColor(self.titleColor, for: .normal)
             buttons.append(button)
         }
+        UIView.animate(withDuration: 0.2, animations: {
+            self.buttons[self.defaultIndex].titleLabel?.font = .boldSystemFont(ofSize: 21)
+        })
         buttons[defaultIndex].setTitleColor(chooseTitleColor, for: .normal)
     }
 
     @objc private func action(target: UIButton) {
         for (index, button) in buttons.enumerated() {
             button.setTitleColor(titleColor, for: .normal)
+            button.titleLabel?.font = .boldSystemFont(ofSize: 17)
             if target == button {
                 delegate?.changeToIndex(index: index)
+                handler?(index)
                 configurateChoosePosition(index: index)
             }
         }
@@ -122,6 +132,7 @@ class CustomSegmentView: UIView {
             self.chooseView.frame.origin.x = choosePosition
         }) {_ in
             self.buttons[index].setTitleColor(self.chooseTitleColor, for: .normal)
+            self.buttons[index].titleLabel?.font = .boldSystemFont(ofSize: 21)
         }
     }
 

@@ -22,7 +22,9 @@ final class MainPresenter: MainViewOutput {
     
     //MARK: - lifeCycle
     func viewLoaded() {
-        loadPopularData()
+        loadDataFromNetwork(source: .popularResultUpdate)
+        loadDataFromNetwork(source: .nowPlayingResultUpdate)
+        loadDataFromNetwork(source: .topRatedResultUpdate)
     }
     
     func reload() {
@@ -37,10 +39,23 @@ final class MainPresenter: MainViewOutput {
         id = data
         router?.showModule(self)
     }
-    
+
+    //load data depends at source
+    func loadDataFromNetwork(source: Use) {
+        loading.request(link: link.feed(page: 1, type: source), onComplete: { [weak self] (movieList) in
+            guard let self = self else {
+                return
+            }
+            self.view?.configure(with: movieList, use: source)
+            if source == .popularResultUpdate {
+                self.view?.setupInitialState(movieList)
+            }
+        }) { stuck in
+        }
+    }
     //load data from network
     func loadPopularData() {
-        loading.request(link: link.feed(page: 1, type: .popularity), onComplete: { [weak self] (movieList) in
+        loading.request(link: link.feed(page: 1, type: .popularResultUpdate), onComplete: { [weak self] (movieList) in
             guard let self = self else {
                 return
             }

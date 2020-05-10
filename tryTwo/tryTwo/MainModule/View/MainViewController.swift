@@ -58,6 +58,8 @@ final class MainViewController: UIViewController, ModuleTransitionable {
             mainTable.reloadData()
         }
     }
+    private var nowPlaying = [Result]()
+    private var topRated = [Result]()
     private let link = LinkBuilder()
 
     //MARK: - LifeCycle
@@ -123,11 +125,31 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         print("adda")
     }
     private func createSegment() {
-        let segmentTitle: [String] = ["1", "2", "3"]
-        let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: 100, height: 44), buttonTitles: segmentTitle)
+        let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50), buttonTitles: ["Popular","Now playing","Top rated"], handler: { (index) in
+            self.switchFeed(by: index)
+        })
+        segment.backgroundColor = .clear
         navigationItem.titleView = segment
     }
-    
+    private func switchFeed(by index: Int) {
+        switch index {
+        case 0:
+            displayData = popular
+            mainTable.reloadData()
+            navigationItem.title = "Popular"
+        case 1:
+            displayData = nowPlaying
+            mainTable.reloadData()
+            navigationItem.title = "Now Playing"
+        case 2:
+            displayData = topRated
+            mainTable.reloadData()
+            navigationItem.title = "Top rated"
+        default:
+            break
+        }
+    }
+
 }
 
 
@@ -147,6 +169,10 @@ extension MainViewController: MainViewInput {
         case .searchResultUpdate:
             displayData = list
             mainTable.reloadData()
+        case .nowPlayingResultUpdate:
+            nowPlaying = list
+        case .topRatedResultUpdate:
+            topRated = list
         }
     }
     

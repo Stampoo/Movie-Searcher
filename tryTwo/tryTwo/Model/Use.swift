@@ -8,7 +8,10 @@
 
 import Foundation
 
-enum Use {
+enum Use: String {
     case searchResultUpdate
-    case popularResultUpdate
+    case popularResultUpdate = "movie/popular"
+    case nowPlayingResultUpdate = "movie/now_playing"
+    case topRatedResultUpdate = "top_rated"
 }
+

@@ -63,9 +63,6 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
         
         //empty state configuration
         emptyView.addSubview(emptyLabel)
-        let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50), buttonTitles: ["Popular","Now playing","Top rated"])
-        emptyView.addSubview(segment)
-        segment.backgroundColor = .clear
         emptyLabel.text = "Nothing here yet..."
     }
     

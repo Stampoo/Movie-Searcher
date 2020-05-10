@@ -24,7 +24,7 @@ struct LinkBuilder {
     private let recommendation: String = "/recommendations"
     
     //return link at popular films
-    func feed(page: Int, type: currentDisplayList) -> String {
+    func feed(page: Int, type: Use) -> String {
         return self.mainPath + type.rawValue + self.key + self.lng + self.page + "\(page)"
     }
     
