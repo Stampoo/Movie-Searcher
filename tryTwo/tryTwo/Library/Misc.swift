@@ -36,4 +36,7 @@ enum DeleteOrSave {
     case save
 }
 
-
+enum ActivityAction {
+    case show
+    case dismiss
+}

@@ -19,7 +19,7 @@ extension UIViewController {
 
 //MARK: - for crate shadow to UIView and inheritors
 extension UIView {
-    
+
     func createShadow() {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowRadius = 5
@@ -33,6 +33,22 @@ extension UIView {
         self.layer.shadowRadius = 2.0
         self.layer.shadowOpacity = 0.9
         self.layer.shadowOffset = .zero
+    }
+
+}
+
+extension UIView {
+
+    func addBlur(on view: UIView) {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurredView = UIVisualEffectView(effect: blurEffect)
+        blurredView.frame = self.bounds
+        self.addSubview(blurredView)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.frame = blurredView.bounds
+        vibrancyView.contentView.addSubview(view)
+        blurredView.contentView.addSubview(vibrancyView)
     }
 
 }

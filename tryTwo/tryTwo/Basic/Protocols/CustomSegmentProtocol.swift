@@ -11,6 +11,6 @@ import UIKit
 //MARK: - Segment protocol
 protocol CustomSegmentViewDelegate: class {
 
-    func changeToIndex(index: Int)
+    func changeByIndex(index: Int)
     
 }

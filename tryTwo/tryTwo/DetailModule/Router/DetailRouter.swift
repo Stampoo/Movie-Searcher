@@ -25,4 +25,8 @@ extension DetailRouter: DetailRouterInput {
         view?.pushModule(module: detailVc, animation: true)
     }
 
+    func popModule(animation: Bool) {
+        view?.popModule(animation: true)
+    }
+
 }

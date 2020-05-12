@@ -18,4 +18,8 @@ final class FavoriteRouter: RouterInput {
         view?.presentModule(module: detailVC, animation: true, completion: nil)
     }
 
+    func popModule(animation: Bool) {
+        
+    }
+
 }

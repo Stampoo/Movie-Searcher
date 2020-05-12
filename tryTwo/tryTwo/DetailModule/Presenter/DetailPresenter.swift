@@ -81,6 +81,10 @@ extension DetailPresenter: DetailViewOutput {
         }
     }
     
+    func popModule(animation: Bool) {
+        router?.popModule(animation: true)
+    }
+    
 }
 
 extension DetailPresenter: ModuleOutput {

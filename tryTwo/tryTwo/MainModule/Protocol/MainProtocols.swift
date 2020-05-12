@@ -36,6 +36,8 @@ protocol MainViewOutput: class {
     
     //present module
     func present(with data: Int)
+
+    func popModule(animation: Bool)
     
 }
 
@@ -63,6 +65,8 @@ protocol ModuleOutput: class {
 protocol RouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput)
+
+    func popModule(animation: Bool)
 
 }
 

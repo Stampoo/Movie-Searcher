@@ -18,6 +18,10 @@ final class PosterTableViewCell: UITableViewCell {
         static let x: CGFloat = 0.70
         static let y: CGFloat = 0.45
         static let width: CGFloat = 0.08
+        static let alphaForButton: CGFloat = 0.9
+        static let buttonShrinkAt: CGFloat = 0.18
+        static let buttonMoveAt: CGFloat = 0.08
+        static let buttonExpandAt: CGFloat = 0.25
     }
     
     //MARK: - Properties
@@ -28,6 +32,8 @@ final class PosterTableViewCell: UITableViewCell {
     //Data and state containers
     private var buttonState = true
     private var movie: Movie? = nil
+    private let blurEffect = UIVisualEffectView()
+    var transition: (() -> Void?)?
     
     @IBOutlet private weak var posterImageView: UIImageView!
     
@@ -44,7 +50,7 @@ final class PosterTableViewCell: UITableViewCell {
         let button = UIButton()
         button.frame = CGRect(x: ScreenSize().height * Constants.x,
                               y: ScreenSize().width * Constants.y,
-                              width: ScreenSize().width * 0.25,
+                              width: ScreenSize().width * Constants.buttonExpandAt,
                               height: ScreenSize().height * Constants.width)
         return button
     }()
@@ -66,18 +72,17 @@ final class PosterTableViewCell: UITableViewCell {
         scoreView.backgroundColor = ColorVote().calculateColor(poster.voteAverage)
         durationLabel.text = (poster.genres[0]?.name ?? "Undefined") + ", " + (poster.genres[1]?.name ?? "Undefined")
         self.movie = poster
-        
     }
     
     func buttonInitial(when: Bool) {
         buttonState = when
         if when {
-            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
+            addFavoriteButton.frame.origin.x += ScreenSize().width * Constants.buttonShrinkAt
+            addFavoriteButton.frame.size.width = ScreenSize().width * Constants.buttonMoveAt
             addFavoriteButton.setTitle("♥️", for: .normal)
         } else {
             addFavoriteButton.setTitle("add", for: .normal)
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+            addFavoriteButton.frame.size.width = ScreenSize().width * Constants.buttonExpandAt
         }
     }
     
@@ -90,7 +95,7 @@ final class PosterTableViewCell: UITableViewCell {
         
         posterImageView.contentMode = .scaleAspectFill
         
-        addFavoriteButton.backgroundColor = .white
+        addFavoriteButton.backgroundColor = UIColor.white.withAlphaComponent(Constants.alphaForButton)
         addFavoriteButton.setTitle("add", for: .normal)
         addFavoriteButton.layer.cornerRadius = addFavoriteButton.frame.height / 2
         addFavoriteButton.setTitleColor(.black, for: .normal)
@@ -133,17 +138,25 @@ final class PosterTableViewCell: UITableViewCell {
         switch buttonState {
         case true:
             addFavoriteButton.setTitle("add", for: .normal)
-            addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+            addFavoriteButton.frame.origin.x -= ScreenSize().width * Constants.buttonShrinkAt
+            addFavoriteButton.frame.size.width = ScreenSize().width * Constants.buttonExpandAt
             deleteFromStorage?(movie)
             buttonState = !buttonState
         case false:
-            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
+            addFavoriteButton.frame.origin.x += ScreenSize().width * Constants.buttonShrinkAt
+            addFavoriteButton.frame.size.width = ScreenSize().width * Constants.buttonMoveAt
             addFavoriteButton.setTitle("♥️", for: .normal)
             saveToStorage?(movie)
             buttonState = !buttonState
         }
     }
     
+}
+
+private extension PosterTableViewCell {
+
+    @objc func backToPreviousController() {
+        transition?()
+    }
+
 }

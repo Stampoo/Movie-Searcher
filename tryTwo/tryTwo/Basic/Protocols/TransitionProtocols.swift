@@ -43,7 +43,7 @@ extension ModuleTransitionable where Self: UIViewController {
     func popModule(animation: Bool) {
         self.navigationController?.popViewController(animated: animation)
     }
-    
+
 }
 
 

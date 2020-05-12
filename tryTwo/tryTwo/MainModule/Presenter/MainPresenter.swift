@@ -40,6 +40,10 @@ final class MainPresenter: MainViewOutput {
         router?.showModule(self)
     }
 
+    func popModule(animation: Bool) {
+        router?.popModule(animation: true)
+    }
+
     //load data depends at source
     func loadDataFromNetwork(source: Use) {
         loading.request(link: link.feed(page: 1, type: source), onComplete: { [weak self] (movieList) in

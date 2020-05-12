@@ -48,7 +48,7 @@ class CustomSegmentView: UIView {
     }
 
     //MARK: - Methods
-    convenience init(frame: CGRect, buttonTitles: [String], handler: @escaping IdCloser) {
+    convenience init(frame: CGRect, buttonTitles: [String], handler: IdCloser?) {
         self.init(frame: frame)
         self.titles = buttonTitles
         self.handler = handler
@@ -121,7 +121,7 @@ class CustomSegmentView: UIView {
             button.setTitleColor(titleColor, for: .normal)
             button.titleLabel?.font = .boldSystemFont(ofSize: 17)
             if target == button {
-                delegate?.changeToIndex(index: index)
+                delegate?.changeByIndex(index: index)
                 handler?(index)
                 configurateChoosePosition(index: index)
             }

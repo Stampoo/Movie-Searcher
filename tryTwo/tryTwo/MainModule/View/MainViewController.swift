@@ -18,6 +18,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Properties
     var output: MainViewOutput?
+    let activityView = CustomActivityIndicator(frame: UIScreen.main.bounds, complitionHandler: nil)
     
     //MARK: - Private Properties
     private let refresh = UIRefreshControl()
@@ -67,6 +68,7 @@ final class MainViewController: UIViewController, ModuleTransitionable {
         super.viewDidLoad()
         configureSearch()
         createMainTable()
+        activityView.startActivity(view: self.view)
         output?.viewLoaded()
         refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
         navigationItem.title = "Popular"
@@ -82,19 +84,22 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     //configure mainTable
     private func createMainTable() {
         let nib = UINib(nibName: Constants.MainTableViewCellNib, bundle: nil)
+
         mainTable.register(nib, forCellReuseIdentifier: Constants.cellIdentifire)
-        self.view.addSubview(mainTable)
-        NSLayoutConstraint.activate([
-            mainTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            mainTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-            mainTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            mainTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-        ])
         mainTable.dataSource = self
         mainTable.delegate = self
         mainTable.separatorStyle = .none
         mainTable.backgroundColor = .white
         mainTable.addSubview(refresh)
+
+        self.view.addSubview(mainTable)
+        //constraint
+        NSLayoutConstraint.activate([
+                   mainTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
+                   mainTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+                   mainTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+                   mainTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+               ])
     }
     
     //configureSearch
@@ -107,9 +112,11 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 
     //Custom segment control
     private func createSegment() {
-        let segment = CustomSegmentView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50), buttonTitles: ["Popular","Now playing","Top rated"], handler: { (index) in
-            self.switchFeed(by: index)
-        })
+        let segment = CustomSegmentView(frame: .init(x: 0,
+                                                     y: 0,
+                                                     width: view.frame.width,
+                                                     height: 50), buttonTitles: ["Popular", "Now playing", "Top rated"], handler: nil)
+        segment.delegate = self
         segment.backgroundColor = .clear
         navigationItem.titleView = segment
     }
@@ -141,6 +148,7 @@ extension MainViewController: MainViewInput {
     
     func setupInitialState(_ data: [Result]) {
         popular = data
+        activityView.stopActiviy()
     }
     
     func configure(with list: [Result], use: Use) {
@@ -177,6 +185,7 @@ extension MainViewController: UITableViewDataSource {
 
 //SearchExtension
 extension MainViewController: UISearchResultsUpdating {
+
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, text.count > 2 {
             self.output?.send(key: text)
@@ -184,6 +193,7 @@ extension MainViewController: UISearchResultsUpdating {
             self.isSearch = true
         }
     }
+
 }
 
 extension MainViewController: UISearchBarDelegate {
@@ -206,3 +216,24 @@ extension MainViewController: UITableViewDelegate {
     
 }
 
+extension MainViewController: CustomSegmentViewDelegate {
+
+    func changeByIndex(index: Int) {
+        switch index {
+        case 0:
+            displayData = popular
+            navigationItem.title = "Popular"
+        case 1:
+            displayData = nowPlaying
+            navigationItem.title = "Now Playing"
+        case 2:
+            displayData = topRated
+            navigationItem.title = "Top rated"
+        default:
+            break
+        }
+        mainTable.reloadData()
+    }
+
+
+}

@@ -28,6 +28,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Properties
     var presenter: DetailViewOutput?
+    let activityView = CustomActivityIndicator(frame: UIScreen.main.bounds, complitionHandler: nil)
     
     //MARK: - Private Properties
     @IBOutlet private weak var tableView: UITableView!
@@ -113,6 +114,9 @@ extension DetailViewController: UITableViewDataSource {
         case 0:
             guard let cell = castCell(identifire: Constants.posterIdentifire) as? PosterTableViewCell else {
                 return UITableViewCell()
+            }
+            cell.transition = {
+                self.presenter?.popModule(animation: true)
             }
             cell.configurePoster(movie)
             cell.saveToStorage = { [weak self] movie in

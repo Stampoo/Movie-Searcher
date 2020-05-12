@@ -36,6 +36,8 @@ protocol DetailViewOutput: class {
     
     //check state
     func checkState(when data: Movie) -> Bool
+
+    func popModule(animation: Bool)
     
 }
 
@@ -45,6 +47,8 @@ protocol DetailViewOutput: class {
 protocol DetailRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput)
+
+    func popModule(animation: Bool)
     
 }
 
