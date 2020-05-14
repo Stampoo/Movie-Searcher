@@ -25,7 +25,6 @@ final class CustomActivityIndicator: UIView {
         indicator.center = self.center
         self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         indicator.color = .black
-        print("is configured")
     }
 
     func startActivity(view: UIView) {
