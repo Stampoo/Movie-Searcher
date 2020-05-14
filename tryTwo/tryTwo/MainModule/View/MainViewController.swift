@@ -112,14 +112,10 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 
     private func moviesTableConstraints() {
         NSLayoutConstraint.activate([
-            moviesTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
-                                             constant: 0),
-            moviesTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
-                                                  constant: 0),
-            moviesTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor,
-                                                 constant: 0),
-            moviesTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
-                                                constant: 0)
+            moviesTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            moviesTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            moviesTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            moviesTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 

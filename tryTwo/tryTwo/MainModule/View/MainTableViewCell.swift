@@ -10,6 +10,17 @@ import UIKit
 
 final class MainTableViewCell: UITableViewCell {
 
+    //MARK: - Constants
+
+    private enum Constants {
+        static let filmLabelFontSize: CGFloat = 17
+        static let voteLabelFontSize: CGFloat = 18
+        static let aboutLabelFontSize: CGFloat = 13
+        static let cardViewRoundingAngle: CGFloat = 8
+        static let multiplierVotedViewRoundingAngle: CGFloat = 0.07142857142857143
+    }
+
+
     //MARK: - IBOutlets
 
     @IBOutlet private weak var shadowView: UIView!
@@ -53,7 +64,7 @@ final class MainTableViewCell: UITableViewCell {
 
     private func configureCellCard() {
         viewCard.backgroundColor = .white
-        viewCard.layer.cornerRadius = 8
+        viewCard.layer.cornerRadius = Constants.cardViewRoundingAngle
         self.selectionStyle = .none
         viewCard.clipsToBounds = true
         shadowView.createShadow()
@@ -61,27 +72,27 @@ final class MainTableViewCell: UITableViewCell {
     }
 
     private func configureNameLabel() {
-        filmLabel.font = .boldSystemFont(ofSize: 17)
+        filmLabel.font = .boldSystemFont(ofSize: Constants.filmLabelFontSize)
         filmLabel.textAlignment = .left
         filmLabel.textColor = .black
         filmLabel.numberOfLines = 0
     }
 
     private func configureVoteView() {
-        votedView.layer.cornerRadius = 3
+        votedView.layer.cornerRadius = votedView.frame.height * Constants.multiplierVotedViewRoundingAngle
         votedLabel.textColor = .white
-        votedLabel.font = .boldSystemFont(ofSize: 18)
+        votedLabel.font = .boldSystemFont(ofSize: Constants.voteLabelFontSize)
         votedLabel.textAlignment = .center
     }
 
     private func configureAboutLabel() {
         aboutLabel.numberOfLines = 0
-        aboutLabel.font = .systemFont(ofSize: 13)
+        aboutLabel.font = .systemFont(ofSize: Constants.aboutLabelFontSize)
     }
 
     private func configureYearLabel() {
         yearLabel.textColor = .lightGray
-        yearLabel.font = .systemFont(ofSize: 13)
+        yearLabel.font = .systemFont(ofSize: Constants.aboutLabelFontSize)
     }
 
 }
