@@ -11,24 +11,35 @@ import UIKit
 final class MainViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
+
     private enum Constants {
-        static let cellIdentifire = "mainCell"
-        static let MainTableViewCellNib = "MainTableViewCell"
+        static let movieCellIdentifire = "mainCell"
+        static let moviesTableViewCellNib = "MainTableViewCell"
+        static let screenSize = UIScreen.main.bounds
+        static let defaultNavigationTitle = "Popular"
+        static let popularNavigationTitle = "Popular"
+        static let nowPlayingNaviationTitle = "Now playing"
+        static let topRatedNavigationTitle = "Top Rated"
+        static let minCharInSearch = 2
     }
-    
+
+
     //MARK: - Properties
+
     var output: MainViewOutput?
-    let activityView = CustomActivityIndicator(frame: UIScreen.main.bounds, complitionHandler: nil)
-    
+    let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
+
+
     //MARK: - Private Properties
-    private let refresh = UIRefreshControl()
+
+    private let refreshOrb = UIRefreshControl()
     private let searchController: UISearchController = {
         let bar  = UISearchController(searchResultsController: nil)
         bar.searchBar.barStyle = .default
         bar.searchBar.sizeToFit()
         return bar
     }()
-    private let mainTable: UITableView = {
+    private let moviesTable: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -36,158 +47,172 @@ final class MainViewController: UIViewController, ModuleTransitionable {
     private var isSearch = false {
         willSet {
             if newValue {
-                displayData = searchData
+                displayedMoviesInTable = searchMovies
                 DispatchQueue.main.async {
-                    self.mainTable.reloadData()
+                    self.moviesTable.reloadData()
                 }
             } else {
-                displayData = popular
+                displayedMoviesInTable = popularMovies
                 DispatchQueue.main.async {
-                    self.mainTable.reloadData()
+                    self.moviesTable.reloadData()
                 }
             }
         }
     }
-    private var displayData = [Result]() {
+    private var displayedMoviesInTable = [Result]() {
         didSet {
-            mainTable.reloadData()
+            moviesTable.reloadData()
         }
     }
-    private var searchData = [Result]()
-    private var popular = [Result]() {
+    private var searchMovies = [Result]()
+    private var popularMovies = [Result]() {
         didSet {
-            mainTable.reloadData()
+            moviesTable.reloadData()
         }
     }
-    private var nowPlaying = [Result]()
-    private var topRated = [Result]()
-    private let link = LinkBuilder()
+    private var nowPlayingMovies = [Result]()
+    private var topRatedMovies = [Result]()
+
 
     //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSearch()
-        createMainTable()
         activityView.startActivity(view: self.view)
+
         output?.viewLoaded()
-        refresh.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
-        navigationItem.title = "Popular"
-        createSegment()
-    }
-    
-    //refresh handler
-    @objc private func reloadTable() {
-        mainTable.reloadData()
-        refresh.endRefreshing()
-    }
-    
-    //configure mainTable
-    private func createMainTable() {
-        let nib = UINib(nibName: Constants.MainTableViewCellNib, bundle: nil)
+        configureSearchBar()
+        configureMoviesTable()
+        configureFeedSegment()
 
-        mainTable.register(nib, forCellReuseIdentifier: Constants.cellIdentifire)
-        mainTable.dataSource = self
-        mainTable.delegate = self
-        mainTable.separatorStyle = .none
-        mainTable.backgroundColor = .white
-        mainTable.addSubview(refresh)
+        navigationItem.title = Constants.defaultNavigationTitle
+        refreshOrb.addTarget(self, action: #selector(refreshTablePullTop), for: .valueChanged)
+    }
 
-        self.view.addSubview(mainTable)
-        //constraint
+
+    //MARK: - Private methods
+
+    @objc private func refreshTablePullTop() {
+        moviesTable.reloadData()
+        refreshOrb.endRefreshing()
+    }
+
+    private func configureMoviesTable() {
+        let nib = UINib(nibName: Constants.moviesTableViewCellNib, bundle: nil)
+
+        moviesTable.register(nib, forCellReuseIdentifier: Constants.movieCellIdentifire)
+        moviesTable.dataSource = self
+        moviesTable.delegate = self
+        moviesTable.separatorStyle = .none
+        moviesTable.backgroundColor = .white
+        moviesTable.addSubview(refreshOrb)
+        self.view.addSubview(moviesTable)
+        moviesTableConstraints()
+    }
+
+    private func moviesTableConstraints() {
         NSLayoutConstraint.activate([
-                   mainTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
-                   mainTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-                   mainTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-                   mainTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-               ])
+            moviesTable.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
+                                             constant: 0),
+            moviesTable.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
+                                                  constant: 0),
+            moviesTable.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor,
+                                                 constant: 0),
+            moviesTable.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
+                                                constant: 0)
+        ])
     }
-    
-    //configureSearch
-    private func configureSearch() {
+
+    private func configureSearchBar() {
         searchController.searchBar.showsCancelButton = true
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
     }
 
-    //Custom segment control
-    private func createSegment() {
+    private func configureFeedSegment() {
+        let titlesForSegment =  [
+            Constants.popularNavigationTitle,
+            Constants.nowPlayingNaviationTitle,
+            Constants.topRatedNavigationTitle
+        ]
         let segment = CustomSegmentView(frame: .init(x: 0,
                                                      y: 0,
                                                      width: view.frame.width,
-                                                     height: 50), buttonTitles: ["Popular", "Now playing", "Top rated"], handler: nil)
+                                                     height: 50), buttonTitles: titlesForSegment, handler: nil)
         segment.delegate = self
         segment.backgroundColor = .clear
         navigationItem.titleView = segment
     }
 
-    //switch feed state
     private func switchFeed(by index: Int) {
         switch index {
         case 0:
-            displayData = popular
-            navigationItem.title = "Popular"
+            displayedMoviesInTable = popularMovies
+            navigationItem.title = Constants.popularNavigationTitle
         case 1:
-            displayData = nowPlaying
-            navigationItem.title = "Now Playing"
+            displayedMoviesInTable = nowPlayingMovies
+            navigationItem.title = Constants.nowPlayingNaviationTitle
         case 2:
-            displayData = topRated
-            navigationItem.title = "Top rated"
+            displayedMoviesInTable = topRatedMovies
+            navigationItem.title = Constants.topRatedNavigationTitle
         default:
             break
         }
-        mainTable.reloadData()
+        moviesTable.reloadData()
     }
 
 }
 
 
-
 //MARK: - Extensions
+
 extension MainViewController: MainViewInput {
     
     func setupInitialState(_ data: [Result]) {
-        popular = data
+        popularMovies = data
         activityView.stopActiviy()
     }
     
     func configure(with list: [Result], use: Use) {
         switch use {
         case .popularResultUpdate:
-            displayData = list
-            mainTable.reloadData()
+            displayedMoviesInTable = list
+            moviesTable.reloadData()
         case .searchResultUpdate:
-            displayData = list
-            mainTable.reloadData()
+            displayedMoviesInTable = list
+            moviesTable.reloadData()
         case .nowPlayingResultUpdate:
-            nowPlaying = list
+            nowPlayingMovies = list
         case .topRatedResultUpdate:
-            topRated = list
+            topRatedMovies = list
         }
     }
     
 }
 
-//MainTableDataSource
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayData.count
+        return displayedMoviesInTable.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifire, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        cell.configureCell(displayData[indexPath.row])
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.movieCellIdentifire,
+                                                       for: indexPath) as? MainTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configureCell(displayedMoviesInTable[indexPath.row])
         return cell
     }
     
 }
 
-//SearchExtension
 extension MainViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, text.count > 2 {
+        if let text = searchController.searchBar.text,
+            text.count > Constants.minCharInSearch {
             self.output?.send(key: text)
             self.output?.reload()
             self.isSearch = true
@@ -200,9 +225,9 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearch = false
-        displayData = popular
+        displayedMoviesInTable = popularMovies
         DispatchQueue.main.async {
-            self.mainTable.reloadData()
+            self.moviesTable.reloadData()
         }
     }
     
@@ -211,7 +236,7 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output?.present(with: displayData[indexPath.row].id)
+        output?.present(with: displayedMoviesInTable[indexPath.row].id)
     }
     
 }
@@ -221,18 +246,18 @@ extension MainViewController: CustomSegmentViewDelegate {
     func changeByIndex(index: Int) {
         switch index {
         case 0:
-            displayData = popular
-            navigationItem.title = "Popular"
+            displayedMoviesInTable = popularMovies
+            navigationItem.title = Constants.popularNavigationTitle
         case 1:
-            displayData = nowPlaying
-            navigationItem.title = "Now Playing"
+            displayedMoviesInTable = nowPlayingMovies
+            navigationItem.title = Constants.nowPlayingNaviationTitle
         case 2:
-            displayData = topRated
-            navigationItem.title = "Top rated"
+            displayedMoviesInTable = topRatedMovies
+            navigationItem.title = Constants.topRatedNavigationTitle
         default:
             break
         }
-        mainTable.reloadData()
+        moviesTable.reloadData()
     }
 
 
