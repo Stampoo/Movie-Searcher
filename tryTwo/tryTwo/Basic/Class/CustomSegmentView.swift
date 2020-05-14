@@ -94,7 +94,6 @@ class CustomSegmentView: UIView {
         chooseView.frame.origin.x += chooseView.frame.width / 2
         chooseView.layer.cornerRadius = chooseView.frame.height / 2
         chooseView.backgroundColor = chooseColor
-        chooseView.createBloom(color: .red)
         addSubview(chooseView)
     }
 
