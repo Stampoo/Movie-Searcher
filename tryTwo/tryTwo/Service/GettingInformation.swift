@@ -7,99 +7,92 @@
 //
 import Foundation
 
-//MARK: - Class implements load and translate data in structs Model and MovieList
-final class GetData {
-    
-    // Complition closer for transfer data, ifError for handling error at parsing or load
-    func request(link: String, onComplete: @escaping ([Result]) -> Void, ifError: @escaping (StuckMoment) -> Void) {
+//MARK: - Class implements load and translate data in structs Model
+
+final class GettingInformation {
+
+    func requestMovieList(link: String, completionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
         guard let url = URL(string: link) else {
-            return ifError(.badLink)
+            return errorHandler(.badLink)
         }
-        //Create task for connect session
         let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, _, _) in
             guard let data = data else {
-                return ifError(.errorResponce)
+                return errorHandler(.errorInResponce)
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let result = try? decoder.decode(MovieList.self, from: data) else {
-                ifError(.errorParcing)
+                errorHandler(.errorParcing)
                 return
             }
             DispatchQueue.main.async {
-                onComplete(result.results)
+                completionHandler(result.results)
             }
         })
-        //start up task
         task.resume()
     }
-    
-    // Complition closer for transfer data, ifError for handling error at parsing or load
-    func request(link: String, complition: @escaping (Movie) -> Void, ifError: @escaping (StuckMoment) -> Void) {
+
+    func requestMovie(link: String, completionHandler: @escaping (Movie) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
         guard let url = URL(string: link) else {
-            return ifError(.badLink
+            return errorHandler(.badLink
             )}
         let _ = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, responce, error) in
             guard let data = data else {
-                return ifError(.errorResponce)
+                return errorHandler(.errorInResponce)
             }
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                //try translate recive data to struct
                 let parce: Movie = try decoder.decode(Movie.self, from: data)
                 DispatchQueue.main.async {
-                    complition(parce)
+                    completionHandler(parce)
                 }
             } catch {
                 DispatchQueue.main.async {
-                    ifError(.errorParcing)
+                    errorHandler(.errorParcing)
                     print(error)
                 }
             }
         })
-        //Create task for connect session
         task.resume()
     }
-    
-    //MARK: - Search request
-    func searchRequest(link: String, onComplete: @escaping ([Result]) -> Void, onError: @escaping (StuckMoment) -> Void) {
+
+    func requestSearch(link: String, complitionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
         guard let url = URL(string: link) else {
-            return onError(.badLink)
+            return errorHandler(.badLink)
         }
-        
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
-                return onError(.errorResponce)
+                return errorHandler(.errorInResponce)
             }
             
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let result = try? decoder.decode(MovieList.self, from: data) else {
-                return onError(.errorParcing)
+                return errorHandler(.errorParcing)
             }
             DispatchQueue.main.async {
-                onComplete(result.results)
+                complitionHandler(result.results)
             }
         }.resume()
     }
     
-    func castRequest(link: String, onComplete: @escaping ([Cast]) -> Void, onError: @escaping (StuckMoment) -> Void) {
+    func requestCast(link: String, completionHandler: @escaping ([Cast]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
         guard let url = URL(string: link) else {
-            return onError(.badLink)
+            return errorHandler(.badLink)
         }
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
-                return onError(.errorResponce)
+                return errorHandler(.errorInResponce)
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let result = try? decoder.decode(CastArray.self, from: data) else {
-                return onError(.errorParcing)
+            guard let result = try? decoder.decode(CastList.self, from: data) else {
+                return errorHandler(.errorParcing)
             }
             DispatchQueue.main.async {
-                onComplete(result.cast)
+                completionHandler(result.cast)
             }
         }.resume()
     }

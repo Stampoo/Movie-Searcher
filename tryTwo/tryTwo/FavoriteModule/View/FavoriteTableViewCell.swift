@@ -34,7 +34,7 @@ final class FavoriteTableViewCell: UITableViewCell {
     //transfer data into this controller
     func configureCell(_ film: Movie) {
         let link = LinkBuilder()
-        imageViewCell.loadImage(link.posterPath(path: film.posterPath, size: .w500))
+        imageViewCell.loadImage(link.pathPoster(path: film.posterPath, size: .w500))
         titleLabel.text = film.title
         releaseLabel.setYear(film)
         scoreLabel.text = "\(film.voteAverage)"

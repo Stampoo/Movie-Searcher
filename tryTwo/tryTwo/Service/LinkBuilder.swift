@@ -12,64 +12,52 @@ import Foundation
 struct LinkBuilder {
     
     private let key: String = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
-    private let mainPath: String = "https://api.themoviedb.org/3/"
-    private let baseUrl: String = "https://image.tmdb.org/t/p/"
-    private let lng: String = "&language=en-US"
+    private let baseUrl: String = "https://api.themoviedb.org/3/"
+    private let imageBaseUrl: String = "https://image.tmdb.org/t/p/"
+    private let language: String = "&language=en-US"
     private let popularity: String = "movie/popular"
     private let nowPlaying: String = "movie/now_playing"
     private let topRated: String = "movie/top_rated"
-    private let page: String = "&page="
-    private let movie: String = "movie/"
-    private let cast: String = "/credits"
-    private let recommendation: String = "/recommendations"
-    
-    //return link at popular films
-    func feed(page: Int, type: Use) -> String {
-        return self.mainPath + type.rawValue + self.key + self.lng + self.page + "\(page)"
+    private let pagePrefix: String = "&page="
+    private let searchPrefix: String = "&query="
+    private let moviePrefix: String = "movie/"
+    private let castPrefix: String = "/credits"
+    private let recommendationPrefix: String = "/recommendations"
+
+    func pathMovies(pageNumber: Int, type: Category) -> String {
+        return baseUrl + type.rawValue + key + language + pagePrefix + "\(pageNumber)"
+    }
+
+    func pathMovie(id: Int) -> String {
+        return baseUrl + moviePrefix + "\(id)" + key + language
+    }
+
+    func pathPoster(path: String?, size: PosterSize) -> String {
+        guard let path = path else {
+            return ""
+        }
+        return baseUrl + size.rawValue + path
     }
     
-    //return link to film at depend id
-    func movie(id: Int) -> String {
-        return self.mainPath + self.movie + "\(id)" + self.key + self.lng
+    func pathToCastMovie(_ id: String) -> String {
+        return baseUrl + moviePrefix + id + castPrefix + key
     }
     
-    //return link to poster
-    func posterPath(path: String?, size: PosterSize) -> String {
-        guard let path = path else { return ""}
-        return self.baseUrl + size.rawValue + path
-    }
-    
-    func cast(_ id: String) -> String {
-        return mainPath + movie + id + cast + key
-    }
-    
-    func query(target: QuerySearch, keyWords: String) -> String {
-        let modifyKeyWords = keyWords.split(separator: " ")
-        var finalKeyWords = String()
-        for word in modifyKeyWords {
-            if modifyKeyWords.firstIndex(of: word) == 0 {
-                finalKeyWords += word
+    func pathToSearchResults(category: SearchCategory, keyWords: String) -> String {
+        let separatedKeyWords = keyWords.split(separator: " ")
+        var editedKeyWords = String()
+        for word in separatedKeyWords {
+            if separatedKeyWords.firstIndex(of: word) == 0 {
+                editedKeyWords += word
             } else {
-                finalKeyWords += "+\(word)"
+                editedKeyWords += "+\(word)"
             }
         }
-        return self.mainPath + target.rawValue + self.key + "&query=\(finalKeyWords)"
+        return baseUrl + category.rawValue + key + searchPrefix + editedKeyWords
     }
     
-    func seeAlso(_ id: String) -> String {
-        return mainPath + movie + id + recommendation + key + lng + page + "\(1)"
+    func pathToSeeAlsoMovie(id: String, pageNumber: Int) -> String {
+        return baseUrl + moviePrefix + id + recommendationPrefix + key + language + pagePrefix + "\(pageNumber)"
     }
     
-}
-
-//MARK: - for poster path build
-//TODO: - add new size constant
-enum PosterSize: String {
-    case w500 = "/w500"
-}
-
-enum QuerySearch: String {
-    case actor = "search/actor"
-    case movie = "search/movie"
-    case series = "search/series"
 }

@@ -51,7 +51,7 @@ final class MainTableViewCell: UITableViewCell {
 
     func configureCell(_ film: Result) {
         let link = LinkBuilder()
-        posterView.loadImage(link.posterPath(path: film.posterPath, size: .w500))
+        posterView.loadImage(link.pathPoster(path: film.posterPath, size: .w500))
         yearLabel.setYear(film)
         filmLabel.text = film.title
         aboutLabel.text = film.overview

@@ -11,13 +11,14 @@ import Foundation
 final class DetailRouter {
     
     //MARK: - Properties
+
     var view: ModuleTransitionable?
-    
-    //MARK: - Private Properties
     
 }
 
+
 //MARK: - Extensions
+
 extension DetailRouter: DetailRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput) {

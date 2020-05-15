@@ -24,7 +24,7 @@ final class FavoritePresenter: FavoriteViewOutput {
     
     func reload() {
         let service = StorageService()
-        let actualList = service.decodeData()
+        let actualList = service.decodeMovieFromData()
         view?.configure(actualList)
     }
     
@@ -38,11 +38,11 @@ final class FavoritePresenter: FavoriteViewOutput {
 
 extension FavoritePresenter: ModuleOutput {
     
-    func moduleEdited(complition: (Int) -> Void) {
+    func moduleEdited(complitionHandler: (Int) -> Void) {
         guard let id = id else {
             return
         }
-        complition(id)
+        complitionHandler(id)
     }
     
     

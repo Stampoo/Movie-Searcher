@@ -10,43 +10,46 @@ import UIKit
 
 final class TitleTableViewCell: UITableViewCell {
 
-    //MARK: - Private properties
+    //MARK: - Constants
+
+    private enum Constants {
+        static let titleFontSize: CGFloat = 24
+        static let yearFontSize: CGFloat = 13
+    }
+
+    //MARK: - IBOutlets
+
     @IBOutlet private weak var titleLabel: UILabel!
-    
     @IBOutlet private weak var originalTitleLabel: UILabel!
-    
     @IBOutlet private weak var yearLabel: UILabel!
-    
-    @IBOutlet weak var aboutTextLabel: UILabel!
-    
-    //state and data containers
-    private var filmState = false
-    
+    @IBOutlet private weak var aboutTextLabel: UILabel!
+
+
     //MARK: - LifeCycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         configureUICell()
     }
-    
+
+
     //MARK: - Internal Methods
-    //transfer data into cell through this method
-    func configureCell(film: Movie) {
-        titleLabel.text = film.title
-        aboutTextLabel.text = film.overview
-        originalTitleLabel.text = film.originalTitle
-        yearLabel.setYear(film)
+
+    func configureCell(with movie: Movie) {
+        titleLabel.text = movie.title
+        aboutTextLabel.text = movie.overview
+        originalTitleLabel.text = movie.originalTitle
+        yearLabel.setYear(movie)
     }
-    
+
+
     //MARK: - Private Methods
-    //configure cell
+
     private func configureUICell() {
         aboutTextLabel.numberOfLines = 0
-        
-        titleLabel.font = .boldSystemFont(ofSize: 24)
-        
+        titleLabel.font = .boldSystemFont(ofSize: Constants.titleFontSize)
         yearLabel.textColor = .lightGray
-        yearLabel.font = .systemFont(ofSize: 13)
+        yearLabel.font = .systemFont(ofSize: Constants.yearFontSize)
     }
     
 }

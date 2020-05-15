@@ -18,7 +18,7 @@ extension UILabel {
         if !date.isEmpty {
             let year = date[0]
             let day = date[2]
-            var month: MonthPick = .undefined
+            var month: Months = .undefined
             switch date[1] {
             case "01":
                 month = .january
@@ -61,7 +61,7 @@ extension UILabel {
         if !date.isEmpty {
             let year = date[0]
             let day = date[2]
-            var month: MonthPick = .undefined
+            var month: Months = .undefined
             switch date[1] {
             case "01":
                 month = .january

@@ -13,10 +13,10 @@ final class MainModuleConfigurator {
 
     // MARK: Internal methods
 
-    func configure() -> MainViewController {
-        let view = MainViewController()
-        let presenter = MainPresenter()
-        let router = MainRouter()
+    func configureModule() -> MainModuleViewController {
+        let view = MainModuleViewController()
+        let presenter = MainModulePresenter()
+        let router = MainModuleRouter()
 
         presenter.view = view
         presenter.router = router

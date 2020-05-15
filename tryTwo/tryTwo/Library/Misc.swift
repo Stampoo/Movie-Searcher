@@ -31,7 +31,7 @@ struct ColorVote {
     }
 }
 
-enum DeleteOrSave {
+enum StorageActions {
     case del
     case save
 }
@@ -39,4 +39,14 @@ enum DeleteOrSave {
 enum ActivityAction {
     case show
     case dismiss
+}
+
+enum PosterSize: String {
+    case w500 = "/w500"
+}
+
+enum SearchCategory: String {
+    case actor = "search/actor"
+    case movie = "search/movie"
+    case series = "search/series"
 }

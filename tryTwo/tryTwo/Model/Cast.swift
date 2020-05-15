@@ -10,7 +10,7 @@ import Foundation
 
 //MARK: - Cast
 
-struct CastArray: Codable {
+struct CastList: Codable {
     let cast: [Cast]
 }
 

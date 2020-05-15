@@ -89,7 +89,7 @@ extension FavoriteViewController: FavoriteViewInput {
     }
     
     func setupInitialState() {
-        dataInStorage = StorageService().decodeData()
+        dataInStorage = StorageService().decodeMovieFromData()
     }
     
     
@@ -125,7 +125,7 @@ extension FavoriteViewController: UITableViewDelegate {
         if editingStyle == .delete {
             dataInStorage.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            StorageService().save(list: dataInStorage)
+            StorageService().saveToStorage(list: dataInStorage)
             checkEmptyState()
         }
     }

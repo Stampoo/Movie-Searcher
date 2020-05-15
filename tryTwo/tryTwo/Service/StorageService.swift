@@ -8,37 +8,42 @@
 
 import Foundation
 
-//Storage
 final class StorageService {
     
     //MARK: - Constants
+
     enum Constants {
         static let key = "favoriteStorage"
     }
-    
+
+
     //MARK: - Properties
-    let dataFromStorage = UserDefaults.standard.array(forKey: Constants.key)
-    
+
+    let listFromStorage = UserDefaults.standard.array(forKey: Constants.key)
+
+
     //MARK: - Private properties
+
     private let storage = UserDefaults.standard
-    
+
+
     //MARK: - Methods
-    func saveMovie(_ data: Movie) {
-        guard let actualData = dataFromStorage as? [Data] else {
+
+    func saveMovieInStorage(_ data: Movie) {
+        guard let actualData = listFromStorage as? [Data] else {
             return
         }
-        if !actualData.contains(encodeMovie(data)) {
-            var currentList = decodeData()
+        if !actualData.contains(encodeMovieFromModel(data)) {
+            var currentList = decodeMovieFromData()
             currentList.append(data)
-            save(list: currentList)
+            saveToStorage(list: currentList)
         }
-        
     }
     
-    func deleteMovie(_ data: Movie) {
+    func deleteMovieFromStorage(_ data: Movie) {
         var encodeData: [Data] = {
             var encodeData = [Data]()
-            for film in decodeData() {
+            for film in decodeMovieFromData() {
                 guard  let filmData = try? JSONEncoder().encode(film) else {
                     continue
                 }
@@ -46,20 +51,20 @@ final class StorageService {
             }
             return encodeData
         }()
-        if let index = encodeData.firstIndex(of: encodeMovie(data)) {
+        if let index = encodeData.firstIndex(of: encodeMovieFromModel(data)) {
             encodeData.remove(at: index)
-            save(list: decodeData(encodeData))
+            saveToStorage(list: decodeMovieFromData(encodeData))
         }
     }
     
-    func encodeMovie(_ movie: Movie) -> Data {
+    func encodeMovieFromModel(_ movie: Movie) -> Data {
         guard let encodeMovie = try? JSONEncoder().encode(movie) else {
             return Data()
         }
         return encodeMovie
     }
     
-    func save(list: [Movie]) {
+    func saveToStorage(list: [Movie]) {
         let encodeData: [Data] = {
             var encodeData = [Data]()
             for film in list {
@@ -73,7 +78,7 @@ final class StorageService {
         storage.setValue(encodeData, forKey: Constants.key)
     }
     
-    func decodeData(_ data: [Data] = [Data]()) -> [Movie] {
+    func decodeMovieFromData(_ data: [Data] = [Data]()) -> [Movie] {
         var dataToDecode = [Data]()
         switch data.isEmpty {
         case true:
@@ -93,5 +98,6 @@ final class StorageService {
         }
         return decodableData
     }
+
 }
 

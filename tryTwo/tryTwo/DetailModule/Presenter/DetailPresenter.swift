@@ -9,72 +9,83 @@
 import Foundation
 
 final class DetailPresenter {
-    
+
     //MARK: - Properties
+
     weak var view: DetailViewInput?
     var router: DetailRouterInput?
     var outputModule: ModuleOutput?
-    
+
+
     //MARK: - Private Properties
+
     private var id: Int?
-    
+
+
     //MARK: - Private methods
-    private func loadData() {
+
+    private func loadInformation() {
         guard let id = id else {
             return
         }
         let link = LinkBuilder()
-        let service = GetData()
-        service.request(link: link.movie(id: id), complition: {(movie) in
+        let service = GettingInformation()
+        service.requestMovie(link: link.pathMovie(id: id), completionHandler: { movie in
             self.view?.configure(with: movie)
             self.view?.setupInitialState()
-        }) { (stuck) in
+        }) { error in
+            //TODO: - Defination error case
         }
-        service.castRequest(link: link.cast("\(id)"), onComplete: { (cast) in
-            self.view?.configure(with: cast)
+        service.requestCast(link: link.pathToCastMovie("\(id)"), completionHandler: { castMovie in
+            self.view?.configure(with: castMovie)
             self.view?.setupInitialState()
-        }) { (stuck) in
+        }) { stuck in
+            //TODO: - Defination error case
         }
-        service.request(link: link.seeAlso("\(id)"), onComplete: { (also) in
-            self.view?.configure(with: also)
+        service.requestMovieList(link: link.pathToSeeAlsoMovie(id: "\(id)", pageNumber: 1), completionHandler: { alsoMovie in
+            self.view?.configure(with: alsoMovie)
             self.view?.setupInitialState()
-        }) { (stuck) in
+        }) { stuck in
+            //TODO: - Defination error case
         }
     }
     
 }
 
+
 //MARK: - Extensions
+
 extension DetailPresenter: DetailViewOutput {
     
-    func present(with data: Int) {
+    func presentModule(with data: Int) {
         id = data
         router?.showModule(self)
     }
     
     func viewLoaded() {
-        outputModule?.moduleEdited(complition: { (id) in
+        outputModule?.moduleEdited(complitionHandler: { (id) in
             self.id = id
         })
-        loadData()
+        loadInformation()
     }
     
-    func reload(action: DeleteOrSave, target: Movie) {
+    func reloadViewAfter(action: StorageActions, target: Movie) {
         let service = StorageService()
         switch action {
         case .del:
-            service.deleteMovie(target)
+            service.deleteMovieFromStorage(target)
         case .save:
-            service.saveMovie(target)
+            service.saveMovieInStorage(target)
         }
     }
-    func checkState(when data: Movie) -> Bool {
+
+    func isMovieInStorage(_ movie: Movie) -> Bool {
         let service = StorageService()
-        let movie = service.encodeMovie(data)
-        guard let currentList = service.dataFromStorage as? [Data] else {
+        let movie = service.encodeMovieFromModel(movie)
+        guard let currentListMoviesInStorage = service.listFromStorage as? [Data] else {
             return false
         }
-        if currentList.contains(movie) {
+        if currentListMoviesInStorage.contains(movie) {
             return true
         } else {
             return false
@@ -88,11 +99,12 @@ extension DetailPresenter: DetailViewOutput {
 }
 
 extension DetailPresenter: ModuleOutput {
-    func moduleEdited(complition: (Int) -> Void) {
+
+    func moduleEdited(complitionHandler: (Int) -> Void) {
         guard let id = id else {
                 return
             }
-            complition(id)
+            complitionHandler(id)
     }
     
 }

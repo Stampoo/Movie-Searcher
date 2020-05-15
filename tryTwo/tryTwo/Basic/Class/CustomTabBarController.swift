@@ -12,7 +12,7 @@ final class CustomTabBarController: UITabBarController {
     
     //MARK: - Private Methods
     //controllers in tab bar container
-    private let mainVc = MainModuleConfigurator().configure()
+    private let mainVc = MainModuleConfigurator().configureModule()
     private let favoriteVc = FavoriteConfigurator().configure()
     private var nc = UINavigationController()
     

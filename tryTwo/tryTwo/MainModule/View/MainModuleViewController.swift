@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MainViewController: UIViewController, ModuleTransitionable {
+final class MainModuleViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
 
@@ -163,31 +163,31 @@ final class MainViewController: UIViewController, ModuleTransitionable {
 
 //MARK: - Extensions
 
-extension MainViewController: MainViewInput {
+extension MainModuleViewController: MainViewInput {
     
     func setupInitialState(_ data: [Result]) {
         popularMovies = data
         activityView.stopActiviy()
     }
     
-    func configure(with list: [Result], use: Use) {
+    func configure(with list: [Result], use: Category) {
         switch use {
-        case .popularResultUpdate:
+        case .popularMovies:
             displayedMoviesInTable = list
             moviesTable.reloadData()
-        case .searchResultUpdate:
+        case .searchResultsMovies:
             displayedMoviesInTable = list
             moviesTable.reloadData()
-        case .nowPlayingResultUpdate:
+        case .nowPlayingMovies:
             nowPlayingMovies = list
-        case .topRatedResultUpdate:
+        case .topRatedMovies:
             topRatedMovies = list
         }
     }
     
 }
 
-extension MainViewController: UITableViewDataSource {
+extension MainModuleViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return displayedMoviesInTable.count
@@ -204,20 +204,20 @@ extension MainViewController: UITableViewDataSource {
     
 }
 
-extension MainViewController: UISearchResultsUpdating {
+extension MainModuleViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text,
             text.count > Constants.minCharInSearch {
             self.output?.send(key: text)
-            self.output?.reload()
+            self.output?.reloadView()
             self.isSearch = true
         }
     }
 
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension MainModuleViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearch = false
@@ -229,7 +229,7 @@ extension MainViewController: UISearchBarDelegate {
     
 }
 
-extension MainViewController: UITableViewDelegate {
+extension MainModuleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         output?.present(with: displayedMoviesInTable[indexPath.row].id)
@@ -237,7 +237,7 @@ extension MainViewController: UITableViewDelegate {
     
 }
 
-extension MainViewController: CustomSegmentViewDelegate {
+extension MainModuleViewController: CustomSegmentViewDelegate {
 
     func changeByIndex(index: Int) {
         switch index {

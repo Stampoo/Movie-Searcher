@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class MainRouter: RouterInput {
+final class MainModuleRouter: MainModuleRouterInput {
     
     //MARK: - Properties
    weak var view: ModuleTransitionable? // Транзит

@@ -11,36 +11,62 @@ import UIKit
 final class DetailViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
+
     private enum Constants {
-        static let posterIdentifire: String = "detailCell"
+        static let posterCellPositionInTable = 0
+        static let posterCellIdentifire: String = "detailCell"
         static let posterCellNib: String = "PosterTableViewCell"
-        static let titleIdentifire: String = "titleCell"
+
+        static let titleCellPositionInTable = 1
+        static let titleCellIdentifire: String = "titleCell"
         static let titleCellNib: String = "TitleTableViewCell"
-        static let castIdentifire: String = "castCell"
+
+        static let castTitleCellPositionInTable = 2
         static let castTitleIdentifire: String = "castTitleCell"
+
+        static let castCellPositionInTable = 3
+        static let castCellIdentifire: String = "castCell"
         static let castCellNib: String = "CastTableViewCell"
-        static let alsoIdentifire: String = "alsoCell"
+
+        static let alsoTitleCellPositionInTable = 4
         static let alsoTitleIdentifire: String = "alsoTitleCell"
+
+        static let alsoCellPositionInTable = 5
+        static let alsoIdentifire: String = "alsoCell"
         static let alsoCellNib: String = "AlsoSeeTableViewCell"
-        static let constructDetailList: Int = 6
-        static let rowHeightAlsoAndCast: CGFloat = 200.0
+
+        static let numberOfCellsInTable: Int = 6
+        static let rowHeightCastCell: CGFloat = 200.0
+        static let screenSize = UIScreen.main.bounds
+        static let estimateHeight: CGFloat = 50
+        static let titleCellsFontSize: CGFloat = 27
     }
-    
-    //MARK: - Properties
-    var presenter: DetailViewOutput?
-    let activityView = CustomActivityIndicator(frame: UIScreen.main.bounds, complitionHandler: nil)
-    
-    //MARK: - Private Properties
+
+
+    //MARK: - IBOutlets
+
     @IBOutlet private weak var tableView: UITableView!
+
+
+    //MARK: - Properties
+
+    var output: DetailViewOutput?
+    let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
+
+
+    //MARK: - Private Properties
+
     private var movie: Movie?
-    private var cast: [Cast]?
-    private var also: [Result]?
+    private var movieCasts: [Cast]?
+    private var alsoList: [Result]?
+
     
     //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        presenter?.viewLoaded()
+        output?.viewLoaded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -52,42 +78,44 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         super.viewWillDisappear(true)
         showNavigationBar(animated)
     }
-    
-    //MARK: - Internal methods
-    
+
+
     //MARK: - Private methods
-    //configure cell from nib
+
     private func configureTableView() {
         let nib = UINib(nibName: Constants.posterCellNib, bundle: nil)
         let nibTitle = UINib(nibName: Constants.titleCellNib, bundle: nil)
         let nibCast = UINib(nibName: Constants.castCellNib, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: Constants.posterIdentifire)
-        tableView.register(nibTitle, forCellReuseIdentifier: Constants.titleIdentifire)
-        tableView.register(nibCast, forCellReuseIdentifier: Constants.castIdentifire)
+        tableView.register(nib, forCellReuseIdentifier: Constants.posterCellIdentifire)
+        tableView.register(nibTitle, forCellReuseIdentifier: Constants.titleCellIdentifire)
+        tableView.register(nibCast, forCellReuseIdentifier: Constants.castCellIdentifire)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.castTitleIdentifire)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.alsoTitleIdentifire)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = Constants.estimateHeight
     }
     
 }
 
+
 //MARK: - Extensions
+
 extension DetailViewController: DetailViewInput {
     
     func setupInitialState() {
         tableView.reloadData()
     }
-    
-    func configure(with target: Any) {
-        switch target {
+
+    //TODO: - refactor this method
+    func configure(with information: Any) {
+        switch information {
         case is Movie:
-            self.movie = target as? Movie
+            self.movie = information as? Movie
         case is [Cast]:
-            self.cast = target as? [Cast]
+            self.movieCasts = information as? [Cast]
         case is [Result]:
-            self.also = target as? [Result]
+            self.alsoList = information as? [Result]
         default:
             break
         }
@@ -95,69 +123,65 @@ extension DetailViewController: DetailViewInput {
     
 }
 
-//dataSource
 extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.constructDetailList
+        return Constants.numberOfCellsInTable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let movie = movie else {
             return UITableViewCell()
         }
-        func castCell(identifire: String) -> UITableViewCell {
+        func createCellWith(identifire: String) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
             return cell
         }
         switch indexPath.row {
-        case 0:
-            guard let cell = castCell(identifire: Constants.posterIdentifire) as? PosterTableViewCell else {
+        case Constants.posterCellPositionInTable:
+            guard let cell = createCellWith(identifire: Constants.posterCellIdentifire) as? PosterTableViewCell else {
                 return UITableViewCell()
             }
-            cell.transition = {
-                self.presenter?.popModule(animation: true)
-            }
-            cell.configurePoster(movie)
+            cell.configureCell(with: movie)
             cell.saveToStorage = { [weak self] movie in
-                self?.presenter?.reload(action: .save, target: movie)
+                self?.output?.reloadViewAfter(action: .save, target: movie)
             }
             cell.deleteFromStorage = { [weak self] movie in
-                self?.presenter?.reload(action: .del, target: movie)
+                self?.output?.reloadViewAfter(action: .del, target: movie)
             }
-            if let booleanValue = presenter?.checkState(when: movie) {
-                cell.buttonInitial(when: booleanValue)
+            if let booleanValue = output?.isMovieInStorage(movie) {
+                cell.initialButtonState(when: booleanValue)
             }
             return cell
-        case 1:
-            guard let cell = castCell(identifire: Constants.titleIdentifire) as? TitleTableViewCell else {
+        case Constants.titleCellPositionInTable:
+            guard let cell = createCellWith(identifire: Constants.titleCellIdentifire) as? TitleTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configureCell(film: movie)
+            cell.configureCell(with: movie)
             return cell
-        case 2:
-            let cell = castCell(identifire: Constants.castTitleIdentifire)
-            cell.textLabel?.font = .boldSystemFont(ofSize: 27)
+        case Constants.castTitleCellPositionInTable:
+            let cell = createCellWith(identifire: Constants.castTitleIdentifire)
+            cell.textLabel?.font = .boldSystemFont(ofSize: Constants.titleCellsFontSize)
             cell.textLabel?.text = "Cast"
             return cell
-        case 3:
-            guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
+        case Constants.castCellPositionInTable:
+            guard let cell = createCellWith(identifire: Constants.castCellIdentifire) as? CastTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(cast)
+            cell.configureDisplayedCasts(movieCasts)
             return cell
-        case 4:
-            let cell = castCell(identifire: Constants.alsoTitleIdentifire)
-            cell.textLabel?.font = .boldSystemFont(ofSize: 27)
+        case Constants.alsoTitleCellPositionInTable:
+            let cell = createCellWith(identifire: Constants.alsoTitleIdentifire)
+            cell.textLabel?.font = .boldSystemFont(ofSize: Constants.titleCellsFontSize)
             cell.textLabel?.text = "Also see"
             return cell
-        case 5:
-            guard let cell = castCell(identifire: Constants.castIdentifire) as? CastTableViewCell else {
+        case Constants.alsoCellPositionInTable:
+            guard let cell = createCellWith(identifire: Constants.castCellIdentifire) as? CastTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(also)
-            cell.pushDetail = { [weak self] id in
-                self?.presenter?.present(with: id)
+            cell.configureDisplayedCasts(alsoList)
+            cell.pushDetailView = { [weak self] id in
+                self?.output?.presentModule(with: id)
             }
             return cell
         default:
@@ -167,13 +191,11 @@ extension DetailViewController: UITableViewDataSource {
     
 }
 
-
-
 extension DetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 3 || indexPath.row == 5 {
-            return Constants.rowHeightAlsoAndCast
+            return Constants.rowHeightCastCell
         }
         return UITableView.automaticDimension
     }
