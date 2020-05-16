@@ -42,7 +42,7 @@ struct LinkBuilder {
         guard let path = path else {
             return ""
         }
-        return baseUrl + size.rawValue + path
+        return imageBaseUrl + size.rawValue + path
     }
     
     func pathToCastMovie(_ id: String) -> String {

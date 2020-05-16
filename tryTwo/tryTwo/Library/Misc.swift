@@ -44,6 +44,10 @@ enum ActivityAction {
 
 enum PosterSize: String {
     case w500 = "/w500"
+    case w780 = "/w780"
+    case w1000 = "/w1280"
+    case w1920 = "/w1920"
+    case original = "/original"
 }
 
 enum SearchCategory: String {
@@ -51,3 +55,4 @@ enum SearchCategory: String {
     case movie = "search/movie"
     case series = "search/series"
 }
+//https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US

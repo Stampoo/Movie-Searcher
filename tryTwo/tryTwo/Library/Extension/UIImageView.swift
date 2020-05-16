@@ -31,11 +31,10 @@ extension UIImageView {
             if let imageData = cache.cachedResponse(for: request)?.data {
                 self.image = UIImage(data: imageData)
             } else {
-
                 //download image and paste into cache
                 let activityView = CustomActivityIndicator(frame: self.bounds, complitionHandler: nil)
                 activityView.startActivity(view: self)
-                URLSession.shared.dataTask(with: request) {(data, response, _) in
+                URLSession.shared.dataTask(with: request) {(data, response, error) in
                     let queue = DispatchQueue.global(qos: .utility)
                     queue.async {
                         guard let data = data, let responce = response else {
