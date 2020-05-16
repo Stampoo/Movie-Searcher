@@ -10,22 +10,27 @@ import Foundation
 
 final class FavoritePresenter: FavoriteViewOutput {
     
-    //MARK: - Properties
+    //MARK: - Public properties
+
     weak var view: FavoriteViewInput?
-    var router: RouterInput?
+    var router: FavoriteRouterInput?
+
     
     //MARK: - Private Properties
+
     private var id: Int?
-    
-    //MARK: - Methods
+
+
+    //MARK: - Public methods
+
     func viewLoaded() {
         view?.setupInitialState()
     }
     
-    func reload() {
+    func reloadView() {
         let service = StorageService()
-        let actualList = service.decodeMovieFromData()
-        view?.configure(actualList)
+        let moviesInStorage = service.decodeMovieFromData()
+        view?.configure(with: moviesInStorage)
     }
     
     func present(with id: Int) {
@@ -36,6 +41,9 @@ final class FavoritePresenter: FavoriteViewOutput {
     
 }
 
+
+//MARK: - Extensions
+
 extension FavoritePresenter: ModuleOutput {
     
     func moduleEdited(complitionHandler: (Int) -> Void) {
@@ -44,6 +52,5 @@ extension FavoritePresenter: ModuleOutput {
         }
         complitionHandler(id)
     }
-    
-    
+
 }

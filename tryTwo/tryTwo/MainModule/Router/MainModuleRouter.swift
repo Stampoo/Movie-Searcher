@@ -8,12 +8,19 @@
 
 import Foundation
 
-final class MainModuleRouter: MainModuleRouterInput {
+final class MainModuleRouter {
     
-    //MARK: - Properties
-   weak var view: ModuleTransitionable? // Транзит
+    //MARK: - Public properties
+
+   weak var view: ModuleTransitionable?
+
+}
+
+
+//MARK: - Extensions
+
+extension MainModuleRouter: MainRouterInput {
     
-    //MARK: - Private Properties
     func showModule(_ moduleOutput: ModuleOutput) {
         let detailVc = DetailModuleConfigurator().configure(with: moduleOutput)
         view?.pushModule(module: detailVc, animation: true)
@@ -22,5 +29,5 @@ final class MainModuleRouter: MainModuleRouterInput {
     func popModule(animation: Bool) {
         view?.popModule(animation: true)
     }
-    
+
 }

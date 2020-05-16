@@ -17,7 +17,7 @@ final class StorageService {
     }
 
 
-    //MARK: - Properties
+    //MARK: - Public properties
 
     let listFromStorage = UserDefaults.standard.array(forKey: Constants.key)
 
@@ -27,7 +27,7 @@ final class StorageService {
     private let storage = UserDefaults.standard
 
 
-    //MARK: - Methods
+    //MARK: - Public methods
 
     func saveMovieInStorage(_ data: Movie) {
         guard let actualData = listFromStorage as? [Data] else {

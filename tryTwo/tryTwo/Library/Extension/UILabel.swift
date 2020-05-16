@@ -9,9 +9,9 @@
 import UIKit
 
 //MARK: - extensions for converts Models date to Month 10 1993 format
+
 extension UILabel {
     
-    //for movie
     func setYear(_ movie: Movie) {
         let releaseDate = movie.releaseDate
         let date = releaseDate.split(separator: "-")
@@ -53,8 +53,7 @@ extension UILabel {
             self.text = "Unknow"
         }
     }
-    
-    //for Welcome
+
     func setYear(_ film: Result) {
         guard let releaseDate = film.releaseDate else { return }
         let date = releaseDate.split(separator: "-")
@@ -96,4 +95,5 @@ extension UILabel {
             self.text = "Unknow"
         }
     }
+    
 }

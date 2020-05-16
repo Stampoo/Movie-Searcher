@@ -9,6 +9,7 @@
 import UIKit
 
 //MARK: - Segment protocol
+
 protocol CustomSegmentViewDelegate: class {
 
     func changeByIndex(index: Int)

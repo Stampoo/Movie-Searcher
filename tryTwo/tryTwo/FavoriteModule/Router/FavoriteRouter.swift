@@ -8,18 +8,22 @@
 
 import Foundation
 
-final class FavoriteRouter: RouterInput {
-    
-    //MARK: - Properties
+final class FavoriteRouter {
+
+    //MARK: - Public properties
+
     weak var view: ModuleTransitionable?
-    
+
+}
+
+
+//MARK: - Extensions
+
+extension FavoriteRouter: FavoriteRouterInput {
+
     func showModule(_ moduleOutput: ModuleOutput) {
         let detailVC = DetailModuleConfigurator().configure(with: moduleOutput)
         view?.presentModule(module: detailVC, animation: true, completion: nil)
-    }
-
-    func popModule(animation: Bool) {
-        
     }
 
 }

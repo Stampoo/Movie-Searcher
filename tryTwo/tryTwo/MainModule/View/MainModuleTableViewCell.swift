@@ -47,7 +47,7 @@ final class MainTableViewCell: UITableViewCell {
     }
 
     
-    //MARK: - Internal methods
+    //MARK: - Public methods
 
     func configureCell(_ film: Result) {
         let link = LinkBuilder()

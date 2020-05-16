@@ -11,22 +11,20 @@ import UIKit
 final class CustomActivityIndicator: UIView {
 
     //MARK: Private properties
+
     private var indicator = UIActivityIndicatorView(style: .whiteLarge)
+
+
+    //MARK: - Initializers
 
     convenience init(frame: CGRect, complitionHandler: (() -> Void)?) {
         self.init(frame: frame)
         self.configureIndicator()
     }
 
-    
-    //MARK: - Private properties
-    private func configureIndicator() {
-        self.addBlur(on: indicator)
-        indicator.center = self.center
-        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        indicator.color = .black
-    }
 
+    //MARK: - Public methods
+    
     func startActivity(view: UIView) {
         UIView.animate(withDuration: 0.1, animations: {
             view.addSubview(self)
@@ -38,6 +36,16 @@ final class CustomActivityIndicator: UIView {
         UIView.animate(withDuration: 0.1, animations: {
             self.removeFromSuperview()
         })
+    }
+
+
+    //MARK: - Private methods
+
+    private func configureIndicator() {
+        self.addBlur(on: indicator)
+        indicator.center = self.center
+        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        indicator.color = .black
     }
     
 }

@@ -17,7 +17,8 @@ final class CastCollectionViewCell: UICollectionViewCell {
         static let nameLabelFontSize: CGFloat = 13
         static let castLabelFontSize: CGFloat = 12
     }
-    
+
+
     //MARK: - IBOutlets
 
     @IBOutlet private weak var shadowView: UIView!
@@ -35,7 +36,7 @@ final class CastCollectionViewCell: UICollectionViewCell {
     }
 
 
-    //MARK: - Internal methods
+    //MARK: - Public methods
 
     func configureCell(with cast: Cast) {
         posterImageView.loadImage(LinkBuilder().pathPoster(path: cast.profilePath, size: .w500))

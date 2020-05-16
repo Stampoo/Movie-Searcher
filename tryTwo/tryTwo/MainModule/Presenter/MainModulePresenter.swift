@@ -22,10 +22,10 @@ final class MainModulePresenter: MainViewOutput {
     }
 
     
-    //MARK:- Properties
+    //MARK:- Public properties
 
     weak var view: MainViewInput?
-    var router: MainModuleRouterInput?
+    var router: MainRouterInput?
 
 
     //MARK: - Private properties
@@ -45,7 +45,7 @@ final class MainModulePresenter: MainViewOutput {
     }
 
 
-    //MARK: - Methods
+    //MARK: - Public methods
 
     func reloadView() {
         delay(delayInSeconds: Constants.searchDelay) {
@@ -93,6 +93,9 @@ final class MainModulePresenter: MainViewOutput {
     }
     
 }
+
+
+//MARK: - Extensions
 
 extension MainModulePresenter: ModuleOutput {
     

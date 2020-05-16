@@ -8,10 +8,7 @@
 
 import UIKit
 
-//entry point class
 final class MainModuleConfigurator {
-
-    // MARK: Internal methods
 
     func configureModule() -> MainModuleViewController {
         let view = MainModuleViewController()

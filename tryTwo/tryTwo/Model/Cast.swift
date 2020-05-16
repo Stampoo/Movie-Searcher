@@ -8,8 +8,6 @@
 
 import Foundation
 
-//MARK: - Cast
-
 struct CastList: Codable {
     let cast: [Cast]
 }

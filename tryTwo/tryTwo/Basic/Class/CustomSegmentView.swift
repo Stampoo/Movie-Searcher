@@ -11,12 +11,17 @@ import UIKit
 class CustomSegmentView: UIView {
 
     //MARK: - Typealias
+
     typealias IdCloser = (Int) -> Void
 
-    //MARK: Properties
+
+    //MARK: Public properties
+
     weak var delegate: CustomSegmentViewDelegate?
 
+
     //MARK: - Private properties
+
     private var titles: [String]!
     private var titleColor: UIColor = .lightGray
     private var chooseTitleColor: UIColor = .black
@@ -41,25 +46,32 @@ class CustomSegmentView: UIView {
         }
     }
 
-    //MARK: - lifeCycles
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        updateView()
-    }
 
-    //MARK: - Methods
+    //MARK: - Initializers
+
     convenience init(frame: CGRect, buttonTitles: [String], handler: IdCloser?) {
         self.init(frame: frame)
         self.titles = buttonTitles
         self.handler = handler
     }
 
+
+    //MARK: - lifeCycles
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        updateView()
+    }
+
+
+    //MARK: - Public methods
+
     func setTitles(buttonTitles: [String]) {
         self.titles = buttonTitles
         updateView()
     }
 
-    private func setDefault(index: Int) {
+    func setDefault(index: Int) {
         configurateChoosePosition(index: index)
         let choosePosition = frame.width / CGFloat(titles.count) * CGFloat(index)
         UIView.animate(withDuration: 0.3, animations: {
@@ -70,16 +82,16 @@ class CustomSegmentView: UIView {
         }
     }
 
+
     //MARK: - Private Methods
-    private func configureStack() {
+
+    private func configureStackView() {
         let stack = UIStackView(arrangedSubviews: buttons)
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
         self.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
-
-        //constraints
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: self.topAnchor),
             stack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -100,7 +112,7 @@ class CustomSegmentView: UIView {
     private func createButtons() {
         buttons = [UIButton]()
         buttons.removeAll()
-        self.subviews.map {$0.removeFromSuperview()}
+        let _ = self.subviews.map {$0.removeFromSuperview()}
         for title in titles {
             let button = UIButton()
             button.setTitle(title, for: .normal)
@@ -140,7 +152,7 @@ class CustomSegmentView: UIView {
     private func updateView() {
         createButtons()
         configureSegmentView()
-        configureStack()
+        configureStackView()
     }
 
 }

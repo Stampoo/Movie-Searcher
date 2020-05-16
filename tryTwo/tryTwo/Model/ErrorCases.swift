@@ -8,7 +8,6 @@
 
 import Foundation
 
-//Error cases
 enum ErrorCases: Error {
     case noConnection
     case slowConnection

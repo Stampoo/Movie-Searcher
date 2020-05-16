@@ -28,7 +28,7 @@ final class CastTableViewCell: UITableViewCell {
     @IBOutlet private weak var castCollectionView: UICollectionView!
 
 
-    //MARK: - Properties
+    //MARK: - Public properties
 
     var pushDetailView: IdCloser?
 
@@ -45,13 +45,14 @@ final class CastTableViewCell: UITableViewCell {
     
 
     //MARK: - LifeCycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configureCollectionView()
     }
 
 
-    //MARK: - Internal methods
+    //MARK: - Public methods
 
     func configureDisplayedCasts(_ with: Any){
         switch with {
@@ -65,7 +66,7 @@ final class CastTableViewCell: UITableViewCell {
     }
 
 
-    //MARK: - Private Methods
+    //MARK: - Private methods
 
     private func configureCollectionView() {
         let castCollectionNib = UINib(nibName: Constants.collectionCellNib, bundle: nil)

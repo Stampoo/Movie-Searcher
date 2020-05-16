@@ -65,19 +65,11 @@ protocol ModuleOutput: class {
 
 //RouterInput
 
-protocol RouterInput {
+protocol MainRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput)
 
     func popModule(animation: Bool)
 
-}
-
-protocol MainModuleRouterInput: class {
-
-    func showModule(_ moduleOutput: ModuleOutput)
-
-    func popModule(animation: Bool)
-    
 }
 

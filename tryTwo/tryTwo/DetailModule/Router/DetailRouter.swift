@@ -10,7 +10,7 @@ import Foundation
 
 final class DetailRouter {
     
-    //MARK: - Properties
+    //MARK: - Public properties
 
     var view: ModuleTransitionable?
     

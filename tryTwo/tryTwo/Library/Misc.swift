@@ -10,6 +10,7 @@ import UIKit
 
 
 //MARK:- Temp structs
+
 struct ScreenSize {
     let width: CGFloat = UIScreen.main.bounds.width
     let height: CGFloat = UIScreen.main.bounds.width

@@ -8,7 +8,6 @@
 
 import Foundation
 
-//Cases for data pick
 enum Months: String {
     case january = "January"
     case february = "February"

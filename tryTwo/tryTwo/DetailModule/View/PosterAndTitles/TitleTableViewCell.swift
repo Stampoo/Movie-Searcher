@@ -17,6 +17,7 @@ final class TitleTableViewCell: UITableViewCell {
         static let yearFontSize: CGFloat = 13
     }
 
+
     //MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
@@ -33,7 +34,7 @@ final class TitleTableViewCell: UITableViewCell {
     }
 
 
-    //MARK: - Internal Methods
+    //MARK: - Public methods
 
     func configureCell(with movie: Movie) {
         titleLabel.text = movie.title
@@ -43,7 +44,7 @@ final class TitleTableViewCell: UITableViewCell {
     }
 
 
-    //MARK: - Private Methods
+    //MARK: - Private methods
 
     private func configureUICell() {
         aboutTextLabel.numberOfLines = 0

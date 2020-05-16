@@ -8,9 +8,12 @@
 
 import Foundation
 
-//MARK: - for simple link constructor
+//MARK: - simple link constructor
+
 struct LinkBuilder {
-    
+
+    //MARK: - Private properties
+
     private let key: String = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
     private let baseUrl: String = "https://api.themoviedb.org/3/"
     private let imageBaseUrl: String = "https://image.tmdb.org/t/p/"
@@ -23,6 +26,9 @@ struct LinkBuilder {
     private let moviePrefix: String = "movie/"
     private let castPrefix: String = "/credits"
     private let recommendationPrefix: String = "/recommendations"
+
+
+    //MARK: - Public methods
 
     func pathMovies(pageNumber: Int, type: Category) -> String {
         return baseUrl + type.rawValue + key + language + pagePrefix + "\(pageNumber)"

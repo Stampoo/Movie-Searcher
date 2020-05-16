@@ -11,6 +11,8 @@ import Foundation
 
 final class GettingInformation {
 
+    //MARK: - Public methods
+
     func requestMovieList(link: String, completionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
         guard let url = URL(string: link) else {
             return errorHandler(.badLink)

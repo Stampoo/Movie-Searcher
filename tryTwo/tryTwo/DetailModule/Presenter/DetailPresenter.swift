@@ -10,7 +10,7 @@ import Foundation
 
 final class DetailPresenter {
 
-    //MARK: - Properties
+    //MARK: - Public properties
 
     weak var view: DetailViewInput?
     var router: DetailRouterInput?
@@ -56,7 +56,7 @@ final class DetailPresenter {
 //MARK: - Extensions
 
 extension DetailPresenter: DetailViewOutput {
-    
+
     func presentModule(with data: Int) {
         id = data
         router?.showModule(self)

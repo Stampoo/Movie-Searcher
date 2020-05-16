@@ -48,7 +48,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     @IBOutlet private weak var tableView: UITableView!
 
 
-    //MARK: - Properties
+    //MARK: - Public properties
 
     var output: DetailViewOutput?
     let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
@@ -194,7 +194,8 @@ extension DetailViewController: UITableViewDataSource {
 extension DetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 || indexPath.row == 5 {
+        if indexPath.row == Constants.castCellPositionInTable,
+        indexPath.row == Constants.alsoCellPositionInTable {
             return Constants.rowHeightCastCell
         }
         return UITableView.automaticDimension

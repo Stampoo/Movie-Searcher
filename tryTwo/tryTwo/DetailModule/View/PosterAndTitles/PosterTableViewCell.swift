@@ -42,13 +42,13 @@ final class PosterTableViewCell: UITableViewCell {
     @IBOutlet private weak var scoreLabel: UILabel!
 
 
-    //MARK: - Properties
+    //MARK: - Public properties
 
     var saveToStorage: MovieSaveClouser?
     var deleteFromStorage: MovieSaveClouser?
 
 
-    //MARK: Private properties
+    //MARK: - Private properties
 
     private var isButtonPressed = true
     private var movie: Movie? = nil
@@ -60,7 +60,8 @@ final class PosterTableViewCell: UITableViewCell {
                               height: ScreenSize().height * Constants.width)
         return button
     }()
-    
+
+
     //MARK: - LifeCycle
 
     override func awakeFromNib() {
@@ -76,7 +77,7 @@ final class PosterTableViewCell: UITableViewCell {
     }
 
 
-    //MARK: - Internal methods
+    //MARK: - Public methods
 
     func configureCell(with movie: Movie) {
         let link = LinkBuilder()
@@ -103,7 +104,7 @@ final class PosterTableViewCell: UITableViewCell {
     }
 
 
-    //MARK: - Private Methods
+    //MARK: - Private methods
 
     private func configureMainPoster() {
         mainPosterView.createShadow()
@@ -125,17 +126,15 @@ final class PosterTableViewCell: UITableViewCell {
         scoreLabel.textAlignment = .center
         scoreView.layer.cornerRadius = Constants.scoreViewRoundingAngle
     }
-    
-    //this method call buttonAnim at touch button
+
     @objc private func buttonHandler(target: UIButton) {
         if target == addToFavorite {
-            buttonAnim(isButtonPressed)
+            clickButtonAnimation(isButtonPressed)
         }
     }
-    
-    //method call animation and add pressed data to test singletone container
-    private func buttonAnim(_ buttonState: Bool) {
-        switch buttonState {
+
+    private func clickButtonAnimation(_ isPressed: Bool) {
+        switch isPressed {
         case true:
             UIView.animate(withDuration: Constants.buttonAnimationDuration, animations: {
                 self.changeButtonState()
