@@ -41,7 +41,7 @@ extension UIView {
 
 extension UIView {
 
-    func addBlur(on view: UIView) {
+    func addBlurAndVibrancy(on view: UIView) {
         let blurEffect = UIBlurEffect(style: .regular)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = self.bounds
@@ -51,6 +51,14 @@ extension UIView {
         vibrancyView.frame = blurredView.bounds
         vibrancyView.contentView.addSubview(view)
         blurredView.contentView.addSubview(vibrancyView)
+    }
+
+    func addBlur() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurredView = UIVisualEffectView(effect: blurEffect)
+        blurredView.alpha = 0.98
+        blurredView.frame = self.bounds
+        self.addSubview(blurredView)
     }
 
 }

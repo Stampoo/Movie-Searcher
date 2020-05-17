@@ -42,7 +42,7 @@ final class CustomActivityIndicator: UIView {
     //MARK: - Private methods
 
     private func configureIndicator() {
-        self.addBlur(on: indicator)
+        self.addBlurAndVibrancy(on: indicator)
         indicator.center = self.center
         self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         indicator.color = .black

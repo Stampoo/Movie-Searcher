@@ -76,6 +76,7 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
 
         emptyView.addSubview(emptyLabel)
         emptyLabel.text = Constants.emptyLabelText
+        createTestPoster()
     }
 
     
@@ -89,6 +90,29 @@ class FavoriteViewController: UIViewController, ModuleTransitionable {
             emptyView.removeFromSuperview()
         }
         output?.reloadView()
+    }
+
+
+    //MARK: - Private methods
+
+    func createTestPoster() {
+        let imageView = UIImageView(frame: Constants.screenSize)
+        let newPoster = UIImageView(frame: .init(x: Constants.screenSize.width * 0.2,
+                                                 y: Constants.screenSize.height * 0.3,
+                                                 width: Constants.screenSize.width * 0.6,
+                                                 height: Constants.screenSize.height * 0.4))
+        newPoster.loadImage(LinkBuilder().pathPoster(path: "/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", size: .w500))
+        imageView.loadImage(LinkBuilder().pathPoster(path: "/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", size: .original))
+        imageView.addBlur()
+        let shadowViewForImageView = UIView(frame: newPoster.bounds)
+        imageView.addSubview(shadowViewForImageView)
+        shadowViewForImageView.createShadow()
+        shadowViewForImageView.layer.cornerRadius = 30
+        imageView.addSubview(newPoster)
+        newPoster.createShadow()
+        newPoster.layer.cornerRadius = 30
+        newPoster.layer.masksToBounds = true
+        emptyView.addSubview(imageView)
     }
 
 }
@@ -118,7 +142,7 @@ extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.favoriteCellIdentifire,
                                                        for: indexPath) as? FavoriteTableViewCell else {
-            return UITableViewCell()
+                                                        return UITableViewCell()
         }
         cell.configureCell(with: moviesInStorage[indexPath.row])
         return cell
