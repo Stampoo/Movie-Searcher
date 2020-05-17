@@ -10,6 +10,7 @@ import UIKit
 
 
 //MARK:- Temp structs
+
 struct ScreenSize {
     let width: CGFloat = UIScreen.main.bounds.width
     let height: CGFloat = UIScreen.main.bounds.width
@@ -31,7 +32,27 @@ struct ColorVote {
     }
 }
 
-enum DeleteOrSave {
+enum StorageActions {
     case del
     case save
 }
+
+enum ActivityAction {
+    case show
+    case dismiss
+}
+
+enum PosterSize: String {
+    case w500 = "/w500"
+    case w780 = "/w780"
+    case w1000 = "/w1280"
+    case w1920 = "/w1920"
+    case original = "/original"
+}
+
+enum SearchCategory: String {
+    case actor = "search/actor"
+    case movie = "search/movie"
+    case series = "search/series"
+}
+//https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US

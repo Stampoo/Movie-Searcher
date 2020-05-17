@@ -10,19 +10,24 @@ import Foundation
 
 final class DetailRouter {
     
-    //MARK: - Properties
+    //MARK: - Public properties
+
     var view: ModuleTransitionable?
-    
-    //MARK: - Private Properties
     
 }
 
+
 //MARK: - Extensions
+
 extension DetailRouter: DetailRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput) {
         let detailVc = DetailModuleConfigurator().configure(with: moduleOutput)
         view?.pushModule(module: detailVc, animation: true)
+    }
+
+    func popModule(animation: Bool) {
+        view?.popModule(animation: true)
     }
 
 }

@@ -9,14 +9,23 @@
 import UIKit
 
 final class CustomTabBarController: UITabBarController {
+
+    //MARK: - Constants
+
+    private enum Constants {
+        static let keyForMovieListInStorage = "favoriteStorage"
+    }
+
     
-    //MARK: - Private Methods
-    //controllers in tab bar container
-    private let mainVc = MainModuleConfigurator().configure()
+    //MARK: - Private properties
+
+    private let mainVc = MainModuleConfigurator().configureModule()
     private let favoriteVc = FavoriteConfigurator().configure()
     private var nc = UINavigationController()
-    
+
+
     //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,29 +37,32 @@ final class CustomTabBarController: UITabBarController {
         self.setViewControllers([nc, favoriteVc], animated: true)
         self.delegate = self
     }
-    
+
+
     //MARK: - Private methods
-    //set icon to tabBar, before load them
+
     private func setTabBarIcon() {
         mainVc.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         favoriteVc.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
     }
     
     private func checkToFirstStart() {
-        if let _ = UserDefaults.standard.array(forKey: "favoriteStorage") as? [Data] {
+        if let _ = UserDefaults.standard.array(forKey: Constants.keyForMovieListInStorage) as? [Data] {
         } else {
-            UserDefaults.standard.set([Data](), forKey: "favoriteStorage")
+            UserDefaults.standard.set([Data](), forKey: Constants.keyForMovieListInStorage)
         }
     }
     
 }
 
-//MARK: - Extenstions
+
+//MARK: - Extensions
+
 extension CustomTabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController == favoriteVc {
-            favoriteVc.checkEmptyState()
+            favoriteVc.checkMoviesInStorage()
         }
     }
     

@@ -11,139 +11,160 @@ import UIKit
 final class PosterTableViewCell: UITableViewCell {
     
     //MARK: - typealias
+
     typealias MovieSaveClouser = (Movie) -> Void
-    
+
+
     //MARK: - Constants
-    enum Constants {
+
+    private enum Constants {
         static let x: CGFloat = 0.70
         static let y: CGFloat = 0.45
         static let width: CGFloat = 0.08
+        static let alphaForButton: CGFloat = 0.9
+        static let buttonShrinkAt: CGFloat = 0.18
+        static let buttonMoveAt: CGFloat = 0.08
+        static let buttonExpandAt: CGFloat = 0.25
+        static let buttonTitile = "add"
+        static let buttonFontSize: CGFloat = 13
+        static let buttonAnimationDuration: Double = 0.5
+        static let posterRoundingAngle: CGFloat = 12
+        static let scoreViewRoundingAngle: CGFloat = 4
     }
-    
-    //MARK: - Properties
+
+
+    //MARK: - IBOutlets
+
+    @IBOutlet private weak var posterImageView: UIImageView!
+    @IBOutlet private weak var mainPosterView: UIImageView!
+    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var scoreView: UIView!
+    @IBOutlet private weak var scoreLabel: UILabel!
+
+
+    //MARK: - Public properties
+
     var saveToStorage: MovieSaveClouser?
     var deleteFromStorage: MovieSaveClouser?
-    
-    //MARK: Private properties
-    //Data and state containers
-    private var buttonState = true
+
+
+    //MARK: - Private properties
+
+    private var isButtonPressed = true
     private var movie: Movie? = nil
-    
-    @IBOutlet private weak var posterImageView: UIImageView!
-    
-    @IBOutlet private weak var mainPosterView: UIImageView!
-    
-    @IBOutlet private weak var durationLabel: UILabel!
-    
-    @IBOutlet private weak var scoreView: UIView!
-    
-    @IBOutlet private weak var scoreLabel: UILabel!
-    
-    //instance and config add button
-    private  let addFavoriteButton: UIButton = {
+    private  let addToFavorite: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: ScreenSize().height * Constants.x,
                               y: ScreenSize().width * Constants.y,
-                              width: ScreenSize().width * 0.25,
+                              width: ScreenSize().width * Constants.buttonExpandAt,
                               height: ScreenSize().height * Constants.width)
         return button
     }()
-    
+
+
     //MARK: - LifeCycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addSubview(addFavoriteButton)
-        configurateUICell()
-    }
-    
-    //MARK: - Internal methods
-    //transfer data into this controller
-    func configurePoster(_ poster: Movie) {
-        let link = LinkBuilder()
-        posterImageView.loadImage(link.posterPath(path: poster.backdropPath, size: .w500))
-        mainPosterView.loadImage(link.posterPath(path: poster.posterPath, size: .w500))
-        scoreLabel.text = "\(poster.voteAverage)"
-        scoreView.backgroundColor = ColorVote().calculateColor(poster.voteAverage)
-        durationLabel.text = (poster.genres[0]?.name ?? "Undefined") + ", " + (poster.genres[1]?.name ?? "Undefined")
-        self.movie = poster
-        
-    }
-    
-    func buttonInitial(when: Bool) {
-        buttonState = when
-        if when {
-            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
-            addFavoriteButton.setTitle("♥️", for: .normal)
-        } else {
-            addFavoriteButton.setTitle("add", for: .normal)
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
-        }
-    }
-    
-    //MARK: - Private Methods
-    //configurate cell
-    private func configurateUICell() {
-        mainPosterView.createShadow()
-        mainPosterView.layer.cornerRadius = 12
-        mainPosterView.contentMode = .scaleAspectFill
-        
-        posterImageView.contentMode = .scaleAspectFill
-        
-        addFavoriteButton.backgroundColor = .white
-        addFavoriteButton.setTitle("add", for: .normal)
-        addFavoriteButton.layer.cornerRadius = addFavoriteButton.frame.height / 2
-        addFavoriteButton.setTitleColor(.black, for: .normal)
-        addFavoriteButton.titleLabel?.font = .systemFont(ofSize: 13)
-        addFavoriteButton.addTarget(self, action: #selector(buttonHandler(target:)), for: .touchUpInside)
-        
-        scoreLabel.textColor = .white
-        scoreLabel.textAlignment = .center
-        
-        scoreView.layer.cornerRadius = 4
+        self.addSubview(addToFavorite)
 
+        configureMainPoster()
+        configureAddToFavoriteButton()
+        configureScoreView()
+
+        posterImageView.contentMode = .scaleAspectFill
         durationLabel.numberOfLines = 0
     }
-    
-    //this method call buttonAnim at touch button
-    @objc private func buttonHandler(target: UIButton) {
-        if target == addFavoriteButton {
-            buttonAnim(self.buttonState)
-        }
+
+
+    //MARK: - Public methods
+
+    func configureCell(with movie: Movie) {
+        let link = LinkBuilder()
+        posterImageView.loadImage(link.pathPoster(path: movie.backdropPath, size: .w500))
+        mainPosterView.loadImage(link.pathPoster(path: movie.posterPath, size: .w500))
+        scoreLabel.text = "\(movie.voteAverage)"
+        scoreView.backgroundColor = ColorVote().calculateColor(movie.voteAverage)
+
+        //TODO: - refactor this label and received information
+        durationLabel.text = (movie.genres[0]?.name ?? "Undefined") + ", " + (movie.genres[1]?.name ?? "Undefined")
+        self.movie = movie
     }
     
-    //method call animation and add pressed data to test singletone container
-    private func buttonAnim(_ buttonState: Bool) {
-        switch buttonState {
+    func initialButtonState(when: Bool) {
+        isButtonPressed = when
+        if when {
+            addToFavorite.frame.origin.x += ScreenSize().width * Constants.buttonShrinkAt
+            addToFavorite.frame.size.width = ScreenSize().width * Constants.buttonMoveAt
+            addToFavorite.setTitle("♥️", for: .normal)
+        } else {
+            addToFavorite.setTitle(Constants.buttonTitile, for: .normal)
+            addToFavorite.frame.size.width = ScreenSize().width * Constants.buttonExpandAt
+        }
+    }
+
+
+    //MARK: - Private methods
+
+    private func configureMainPoster() {
+        mainPosterView.createShadow()
+        mainPosterView.layer.cornerRadius = Constants.posterRoundingAngle
+        mainPosterView.contentMode = .scaleAspectFill
+    }
+
+    private func configureAddToFavoriteButton() {
+        addToFavorite.backgroundColor = UIColor.white.withAlphaComponent(Constants.alphaForButton)
+        addToFavorite.setTitle(Constants.buttonTitile, for: .normal)
+        addToFavorite.layer.cornerRadius = addToFavorite.frame.height / 2
+        addToFavorite.setTitleColor(.black, for: .normal)
+        addToFavorite.titleLabel?.font = .systemFont(ofSize: Constants.buttonFontSize)
+        addToFavorite.addTarget(self, action: #selector(buttonHandler(target:)), for: .touchUpInside)
+    }
+
+    private func configureScoreView() {
+        scoreLabel.textColor = .white
+        scoreLabel.textAlignment = .center
+        scoreView.layer.cornerRadius = Constants.scoreViewRoundingAngle
+    }
+
+    @objc private func buttonHandler(target: UIButton) {
+        if target == addToFavorite {
+            clickButtonAnimation(isButtonPressed)
+        }
+    }
+
+    private func clickButtonAnimation(_ isPressed: Bool) {
+        switch isPressed {
         case true:
-            UIView.animate(withDuration: 0.5, animations: {
-                self.changeButton()
+            UIView.animate(withDuration: Constants.buttonAnimationDuration, animations: {
+                self.changeButtonState()
             })
         case false:
-            UIView.animate(withDuration: 0.5, animations: {
-                self.changeButton()
+            UIView.animate(withDuration: Constants.buttonAnimationDuration, animations: {
+                self.changeButtonState()
             })
         }
     }
     
-    private func changeButton() {
+    private func changeButtonState() {
         guard let movie = movie else {
             return
         }
-        switch buttonState {
+        switch isButtonPressed {
         case true:
-            addFavoriteButton.setTitle("add", for: .normal)
-            addFavoriteButton.frame.origin.x -= ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.25
+            addToFavorite.setTitle(Constants.buttonTitile, for: .normal)
+            addToFavorite.frame.origin.x -= ScreenSize().width * Constants.buttonShrinkAt
+            addToFavorite.frame.size.width = ScreenSize().width * Constants.buttonExpandAt
             deleteFromStorage?(movie)
-            buttonState = !buttonState
+            isButtonPressed = !isButtonPressed
         case false:
-            addFavoriteButton.frame.origin.x += ScreenSize().width * 0.18
-            addFavoriteButton.frame.size.width = ScreenSize().width * 0.08
-            addFavoriteButton.setTitle("♥️", for: .normal)
+            addToFavorite.frame.origin.x += ScreenSize().width * Constants.buttonShrinkAt
+            addToFavorite.frame.size.width = ScreenSize().width * Constants.buttonMoveAt
+            addToFavorite.setTitle("♥️", for: .normal)
             saveToStorage?(movie)
-            buttonState = !buttonState
+            isButtonPressed = !isButtonPressed
         }
     }
     
 }
+

@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        //MARK: - App entry point
         let mainTabBar = CustomTabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = mainTabBar

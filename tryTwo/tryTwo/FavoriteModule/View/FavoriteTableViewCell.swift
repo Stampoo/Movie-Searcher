@@ -10,47 +10,54 @@ import UIKit
 
 
 final class FavoriteTableViewCell: UITableViewCell {
-    
-    //MARK: - Private properties
+
+    //MARK: - Constants
+
+    private enum Constants {
+        static let aboutLabelFontSize: CGFloat = 13
+        static let releaseLabelFontSize: CGFloat = 14
+    }
+
+
+    //MARK: - IBOutlets
+
     @IBOutlet private weak var imageViewCell: UIImageView!
-    
     @IBOutlet private weak var titleLabel: UILabel!
-    
     @IBOutlet private weak var aboutLabel: UILabel!
-    
     @IBOutlet private weak var scoreLabel: UILabel!
-    
     @IBOutlet private weak var releaseLabel: UILabel!
     
     
     //MARK: - LifeCycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         configureLabels()
     }
 
-    //MARK: - Internal methods
-    //transfer data into this controller
-    func configureCell(_ film: Movie) {
+
+    //MARK: - Public methods
+
+    func configureCell(with movie: Movie) {
         let link = LinkBuilder()
-        imageViewCell.loadImage(link.posterPath(path: film.posterPath, size: .w500))
-        titleLabel.text = film.title
-        releaseLabel.setYear(film)
-        scoreLabel.text = "\(film.voteAverage)"
-        aboutLabel.text = film.overview
+        imageViewCell.loadImage(link.pathPoster(path: movie.posterPath, size: .w500))
+        titleLabel.text = movie.title
+        releaseLabel.setYear(movie)
+        scoreLabel.text = "\(movie.voteAverage)"
+        aboutLabel.text = movie.overview
     }
-    
+
+
     //MARK: - Private methods
-    //configure all labels
+
     private func configureLabels() {
         titleLabel.numberOfLines = 0
         
         aboutLabel.numberOfLines = 0
-        aboutLabel.font = .systemFont(ofSize: 13)
+        aboutLabel.font = .systemFont(ofSize: Constants.aboutLabelFontSize)
         
         releaseLabel.textColor = .lightGray
-        releaseLabel.font = .systemFont(ofSize: 14)
+        releaseLabel.font = .systemFont(ofSize: Constants.releaseLabelFontSize)
     }
     
 }

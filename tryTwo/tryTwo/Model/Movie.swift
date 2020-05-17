@@ -8,7 +8,6 @@
 
 import Foundation
 
-//MARK: - Struct for transfer film data from JSON into this struct
 struct Movie: Codable {
     let backdropPath: String?
     let homepage: String?

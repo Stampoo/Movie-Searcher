@@ -17,7 +17,7 @@ class FavoriteConfigurator {
         
         presenter.view = view
         presenter.router = router
-        view.presenter = presenter
+        view.output = presenter
         router.view = view
         
         return view

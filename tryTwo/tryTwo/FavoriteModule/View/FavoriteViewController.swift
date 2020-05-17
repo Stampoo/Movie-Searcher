@@ -12,128 +12,145 @@ import CoreData
 class FavoriteViewController: UIViewController, ModuleTransitionable {
     
     //MARK: - Constants
+
     private enum Constants {
         static let favoriteCellIdentifire = "favoriteCell"
         static let favoriteCellNib = "FavoriteTableViewCell"
         static let favoriteStorage = "favoriteStorage"
+        static let screenSize = UIScreen.main.bounds
+        static let middleScreenAtY = Constants.screenSize.height / 2
+        static let emptyLabelHeight = Constants.screenSize.height * 0.1
+        static let emptyLabelFontSize: CGFloat = 25
+        static let emptyLabelText = "Nothing here yet..."
+        static let heightRowInTable = Constants.screenSize.height * 0.16964285714285715
     }
-    
-    //MARK: - Properties
-    var presenter: FavoriteViewOutput?
-    
+
+
+    //MARK: - Public properties
+
+    var output: FavoriteViewOutput?
+
+
     //MARK: - Private properties
-    //element for empty state
+
     private let emptyView: UIView = {
-        let view = UIView(frame: UIScreen.main.bounds)
+        let view = UIView(frame: Constants.screenSize)
         view.backgroundColor = .white
         return view
     }()
     private let emptyLabel: UILabel = {
         let label = UILabel()
         label.frame = .init(x: 0,
-                            y: ScreenSize().height * 0.5,
-                            width: ScreenSize().width,
-                            height: ScreenSize().height * 0.1)
+                            y: Constants.middleScreenAtY,
+                            width: Constants.screenSize.width,
+                            height: Constants.emptyLabelHeight)
         label.textAlignment = .center
         label.textColor = .black
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = .boldSystemFont(ofSize: Constants.emptyLabelFontSize)
         return label
     }()
     private let tableView: UITableView = {
-        let table = UITableView(frame: UIScreen.main.bounds)
+        let table = UITableView(frame: Constants.screenSize)
         let nib = UINib(nibName: Constants.favoriteCellNib, bundle: nil)
         table.register(nib, forCellReuseIdentifier: Constants.favoriteCellIdentifire)
         return table
     }()
-    private var dataInStorage = [Movie]() {
+    private var moviesInStorage = [Movie]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
-    
+
+
+    //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewLoaded()
+        output?.viewLoaded()
         
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        
-        //empty state configuration
+
         emptyView.addSubview(emptyLabel)
-        emptyLabel.text = "Nothing here yet..."
+        emptyLabel.text = Constants.emptyLabelText
     }
+
     
-    //MARK: - Internal methods
-    //check empty states for this instance and out
-    func checkEmptyState() {
-        switch dataInStorage.isEmpty {
+    //MARK: - Public methods
+
+    func checkMoviesInStorage() {
+        switch moviesInStorage.isEmpty {
         case true:
             view.addSubview(emptyView)
         case false:
             emptyView.removeFromSuperview()
         }
-        presenter?.reload()
+        output?.reloadView()
     }
 
 }
 
+
 //MARK: - Extensions
+
 extension FavoriteViewController: FavoriteViewInput {
     
-    func configure(_ actualData: [Movie]) {
-        dataInStorage = actualData
+    func configure(with moviesInStorage: [Movie]) {
+        self.moviesInStorage = moviesInStorage
         tableView.reloadData()
     }
     
     func setupInitialState() {
-        dataInStorage = StorageService().decodeData()
+        moviesInStorage = StorageService().decodeMovieFromData()
     }
-    
-    
+
 }
 
-//configure table, cell (DataSource)
 extension FavoriteViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataInStorage.count
+        return moviesInStorage.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.favoriteCellIdentifire, for: indexPath) as? FavoriteTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.favoriteCellIdentifire,
+                                                       for: indexPath) as? FavoriteTableViewCell else {
             return UITableViewCell()
         }
-        cell.configureCell(dataInStorage[indexPath.row])
+        cell.configureCell(with: moviesInStorage[indexPath.row])
         return cell
     }
+
 }
 
-//tableView Delegate (Delete method, static row height)
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.16964285714285715
+        return Constants.heightRowInTable
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            dataInStorage.remove(at: indexPath.row)
+            moviesInStorage.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            StorageService().save(list: dataInStorage)
-            checkEmptyState()
+            StorageService().saveToStorage(list: moviesInStorage)
+            checkMoviesInStorage()
         }
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let id = dataInStorage[indexPath.row].id else {
+        guard let id = moviesInStorage[indexPath.row].id else {
             return
         }
-        presenter?.present(with: id)
+        output?.present(with: id)
     }
     
 }

@@ -8,11 +8,10 @@
 
 import Foundation
 
-//Error cases
-enum StuckMoment: Error {
+enum ErrorCases: Error {
     case noConnection
     case slowConnection
     case errorParcing
     case badLink
-    case errorResponce
+    case errorInResponce
 }

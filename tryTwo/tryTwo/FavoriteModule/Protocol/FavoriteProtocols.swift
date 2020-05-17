@@ -10,7 +10,7 @@ import Foundation
 
 protocol FavoriteViewInput: class {
     
-    func configure(_ actualData: [Movie])
+    func configure(with actualData: [Movie])
     
     func setupInitialState()
     
@@ -20,7 +20,7 @@ protocol FavoriteViewOutput: class {
     
     func viewLoaded()
     
-    func reload()
+    func reloadView()
     
     func present(with id: Int)
     

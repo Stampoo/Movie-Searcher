@@ -9,22 +9,33 @@
 import UIKit
 
 final class CastTableViewCell: UITableViewCell {
-    
+
     //MARK: - TypeAlias
+
     typealias IdCloser = (_ id: Int) -> Void
-    
+
+
     //MARK: - Constants
-    enum Constants {
+
+   private enum Constants {
         static let collectionCellIdentifire = "castCollectionCell"
         static let collectionCellNib = "CastCollectionViewCell"
     }
-    
-    //MARK: - Properties
-    var pushDetail: IdCloser?
+
+
+    //MARK: IBOutlets
+
+    @IBOutlet private weak var castCollectionView: UICollectionView!
+
+
+    //MARK: - Public properties
+
+    var pushDetailView: IdCloser?
+
     
     //MARK: - Private Properties
-    @IBOutlet private weak var castCollectionView: UICollectionView!
-    private var displayArray: Any? {
+
+    private var displayedCasts: Any? {
         didSet {
             DispatchQueue.main.async {
                 self.castCollectionView.reloadData()
@@ -34,27 +45,30 @@ final class CastTableViewCell: UITableViewCell {
     
 
     //MARK: - LifeCycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureUI()
-        
+        configureCollectionView()
     }
-    
-    //MARK: - Methods
-    func configure(_ with: Any){
+
+
+    //MARK: - Public methods
+
+    func configureDisplayedCasts(_ with: Any){
         switch with {
         case is [Cast]:
-            self.displayArray = with as? [Cast]
+            self.displayedCasts = with as? [Cast]
         case is [Result]:
-            self.displayArray = with as? [Result]
+            self.displayedCasts = with as? [Result]
         default:
             break
         }
     }
-    
-    //MARK: - Private Methods
-    private func configureUI() {
-        //TODO: - create UI
+
+
+    //MARK: - Private methods
+
+    private func configureCollectionView() {
         let castCollectionNib = UINib(nibName: Constants.collectionCellNib, bundle: nil)
         castCollectionView.register(castCollectionNib, forCellWithReuseIdentifier: Constants.collectionCellIdentifire)
         castCollectionView.dataSource = self
@@ -63,18 +77,20 @@ final class CastTableViewCell: UITableViewCell {
     
 }
 
+
 //MARK: - Extensions
+
 extension CastTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch displayArray {
+        switch displayedCasts {
         case is [Cast]:
-            guard let display = displayArray as? [Cast] else {
+            guard let display = displayedCasts as? [Cast] else {
                 return 0
             }
             return display.count
         case is [Result]:
-            guard let display = displayArray as? [Result] else {
+            guard let display = displayedCasts as? [Result] else {
                 return 0
             }
             return display.count
@@ -84,18 +100,19 @@ extension CastTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionCellIdentifire, for: indexPath) as? CastCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionCellIdentifire,
+                                                            for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
         }
-        switch displayArray {
+        switch displayedCasts {
         case is [Cast]:
-            guard let display = displayArray as? [Cast] else {
+            guard let display = displayedCasts as? [Cast] else {
                 return UICollectionViewCell()
             }
             cell.configureCell(with: display[indexPath.row])
             return cell
         case is [Result]:
-            guard let display = displayArray as? [Result] else {
+            guard let display = displayedCasts as? [Result] else {
                 return UICollectionViewCell()
             }
             cell.configureCell(with: display[indexPath.row])
@@ -107,13 +124,13 @@ extension CastTableViewCell: UICollectionViewDataSource {
     
 }
 
-//Did select
 extension CastTableViewCell: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let data = displayArray as? [Result] {
-            pushDetail?(data[indexPath.row].id)
-            print(pushDetail)
+        if let data = displayedCasts as? [Result] {
+            pushDetailView?(data[indexPath.row].id)
         }
     }
+
 }
 
