@@ -11,12 +11,20 @@ import UIKit
 
 extension UIViewController {
 
-    func showNavigationBar(_ animation: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animation)
+    func showNavigationBar(_ isAnimated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: isAnimated)
     }
 
-    func hideNavigationBar(_ animation: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animation)
+    func hideNavigationBar(_ isAnimated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: isAnimated)
+    }
+
+    func hideTabBar(_ isAnimated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    func showTabBar(_ isAnimated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
 }

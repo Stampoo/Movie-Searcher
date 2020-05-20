@@ -28,7 +28,7 @@ final class AlternativeDetailModulePresenter: AlternativeDetailViewOutput {
         outputModule?.moduleEdited(complitionHandler: { id in
             self.movieId = id
         })
-        //BloadMovie()
+        loadMovie()
     }
 
     func reloadView() {}

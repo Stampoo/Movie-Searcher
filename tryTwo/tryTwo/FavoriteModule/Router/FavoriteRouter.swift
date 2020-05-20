@@ -22,7 +22,7 @@ final class FavoriteRouter {
 extension FavoriteRouter: FavoriteRouterInput {
 
     func showModule(_ moduleOutput: ModuleOutput) {
-        let detailVC = DetailModuleConfigurator().configure(with: moduleOutput)
+        let detailVC = DetailModuleConfigurator().configurateModule(with: moduleOutput)
         view?.presentModule(module: detailVC, animation: true, completion: nil)
     }
 

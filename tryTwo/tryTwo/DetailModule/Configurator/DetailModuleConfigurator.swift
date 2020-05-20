@@ -10,7 +10,7 @@ import UIKit
 
 final class DetailModuleConfigurator {
     
-    func configure(with outputModule: ModuleOutput) -> DetailViewController {
+    func configurateModule(with outputModule: ModuleOutput) -> DetailViewController {
         let view = DetailViewController()
         let presenter = DetailPresenter()
         let router = DetailRouter()

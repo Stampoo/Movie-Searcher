@@ -38,8 +38,6 @@ final class PosterTableViewCell: UITableViewCell {
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var mainPosterView: UIImageView!
     @IBOutlet private weak var durationLabel: UILabel!
-    @IBOutlet private weak var scoreView: UIView!
-    @IBOutlet private weak var scoreLabel: UILabel!
 
 
     //MARK: - Public properties
@@ -51,7 +49,7 @@ final class PosterTableViewCell: UITableViewCell {
     //MARK: - Private properties
 
     private var isButtonPressed = true
-    private var movie: Movie? = nil
+    private var movie: Movie?
     private  let addToFavorite: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: ScreenSize().height * Constants.x,
@@ -70,7 +68,6 @@ final class PosterTableViewCell: UITableViewCell {
 
         configureMainPoster()
         configureAddToFavoriteButton()
-        configureScoreView()
 
         posterImageView.contentMode = .scaleAspectFill
         durationLabel.numberOfLines = 0
@@ -83,8 +80,7 @@ final class PosterTableViewCell: UITableViewCell {
         let link = LinkBuilder()
         posterImageView.loadImage(link.pathPoster(path: movie.backdropPath, size: .w500))
         mainPosterView.loadImage(link.pathPoster(path: movie.posterPath, size: .w500))
-        scoreLabel.text = "\(movie.voteAverage)"
-        scoreView.backgroundColor = ColorVote().calculateColor(movie.voteAverage)
+        posterImageView.contentMode = .scaleAspectFit
 
         //TODO: - refactor this label and received information
         durationLabel.text = (movie.genres[0]?.name ?? "Undefined") + ", " + (movie.genres[1]?.name ?? "Undefined")
@@ -109,7 +105,6 @@ final class PosterTableViewCell: UITableViewCell {
     private func configureMainPoster() {
         mainPosterView.createShadow()
         mainPosterView.layer.cornerRadius = Constants.posterRoundingAngle
-        mainPosterView.contentMode = .scaleAspectFill
     }
 
     private func configureAddToFavoriteButton() {
@@ -119,12 +114,6 @@ final class PosterTableViewCell: UITableViewCell {
         addToFavorite.setTitleColor(.black, for: .normal)
         addToFavorite.titleLabel?.font = .systemFont(ofSize: Constants.buttonFontSize)
         addToFavorite.addTarget(self, action: #selector(buttonHandler(target:)), for: .touchUpInside)
-    }
-
-    private func configureScoreView() {
-        scoreLabel.textColor = .white
-        scoreLabel.textAlignment = .center
-        scoreView.layer.cornerRadius = Constants.scoreViewRoundingAngle
     }
 
     @objc private func buttonHandler(target: UIButton) {

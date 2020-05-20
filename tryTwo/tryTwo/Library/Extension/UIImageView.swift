@@ -12,47 +12,26 @@ import UIKit
 
 extension UIImageView {
 
-    //load default image
-    func loadImage(_ path: String?) {
-        self.contentMode = .scaleAspectFill
-        guard let path = path else {
-            self.image = UIImage(named: "posterNotFound")
-            return
-        }
-        guard let url = URL(string: path) else {
-            self.image = UIImage(named: "posterNotFound")
-            return
-        }
-        do {
-            let cache = URLCache.shared
-            let request = URLRequest(url: url)
-
-            //load cache
-            if let imageData = cache.cachedResponse(for: request)?.data {
-                self.image = UIImage(data: imageData)
-            } else {
-                //download image and paste into cache
-                let activityView = CustomActivityIndicator(frame: self.bounds, complitionHandler: nil)
-                activityView.startActivity(view: self)
-                URLSession.shared.dataTask(with: request) {(data, response, error) in
-                    let queue = DispatchQueue.global(qos: .utility)
-                    queue.async {
-                        guard let data = data, let responce = response else {
-                            return
-                        }
-                        let casheResponce = CachedURLResponse(response: responce, data: data)
-                        cache.storeCachedResponse(casheResponce, for: request)
-                        DispatchQueue.main.async {
-                            //set image from cached data
-                            self.image = UIImage(data: data)
-                            activityView.stopActiviy()
-                        }
-                    }
-                }.resume()
-            }
-        }
-    }
+    //MARK: - Public methods
     
+    func loadImage(_ path: String?) {
+        guard let urlPath = path else {
+            setupShieldImage()
+            return
+        }
+        let imageLoader = ImageLoader(linkToImage: urlPath)
+        imageLoader.loadImage(at: self, errorHandler: {_ in
+            setupShieldImage()
+        })
+        self.contentMode = .scaleAspectFill
+    }
+
+
+    //MARK: - Private methods
+
+    private func setupShieldImage() {
+        let shieldImage = UIImage(named: "posterNotFound")
+        self.image = shieldImage
+    }
+
 }
-
-
