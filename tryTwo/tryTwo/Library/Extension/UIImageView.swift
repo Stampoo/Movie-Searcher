@@ -15,12 +15,14 @@ extension UIImageView {
     //MARK: - Public methods
     
     func loadImage(_ path: String?) {
+        let activityView = CustomActivityIndicator(complitionHandler: nil)
+        activityView.startActivity(view: self)
         guard let urlPath = path else {
             setupShieldImage()
             return
         }
         let imageLoader = ImageLoader(linkToImage: urlPath)
-        imageLoader.loadImage(at: self, errorHandler: {_ in
+        imageLoader.loadImage(at: self, activityView: activityView, errorHandler: {_ in
             setupShieldImage()
         })
         self.contentMode = .scaleAspectFill

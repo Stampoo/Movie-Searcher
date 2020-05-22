@@ -21,6 +21,14 @@ final class AlternativeDetailRouter {
 
 extension AlternativeDetailRouter: AlternativeDetailRouterInput {
 
-    func showModule() {}
+    func pushModule(with moduleOutput: ModuleOutput) {
+        let detailModule = AlternativeDetailModuleConfigurator().configurateModule(with: moduleOutput)
+        view?.pushModule(module: detailModule, animation: true)
+    }
+
+    func pushActorModule(with moduleOutput: ModuleOutput) {
+        let actorDetailModule = ActorDetailModuleConfigurator().configureModule(with: moduleOutput)
+        view?.pushModule(module: actorDetailModule, animation: true)
+    }
 
 }

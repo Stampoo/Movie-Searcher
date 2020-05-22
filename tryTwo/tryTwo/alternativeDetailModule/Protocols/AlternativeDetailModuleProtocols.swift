@@ -12,6 +12,10 @@ protocol AlternativeDetailViewInput: class {
 
     func configure(with movie: Movie)
 
+    func configure(with cast: [Cast])
+
+    func configure(with movies: [Result])
+
     func setupInitialState()
 
 }
@@ -22,12 +26,14 @@ protocol AlternativeDetailViewOutput: class {
 
     func reloadView()
 
-    func showModule()
+    func showModule(with id: Int, type: DetailType)
 
 }
 
 protocol AlternativeDetailRouterInput: class {
 
-    func showModule()
+    func pushModule(with moduleOutput: ModuleOutput)
+
+    func pushActorModule(with moduleOutput: ModuleOutput)
 
 }

@@ -29,6 +29,12 @@
 		34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B76245D6722009F85A1 /* FavoriteProtocols.swift */; };
 		34228B7A245D70C1009F85A1 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B79245D70C1009F85A1 /* FavoritePresenter.swift */; };
 		34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */; };
+		34237BD224784CD800ADFC64 /* ActorDetailModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BD124784CD800ADFC64 /* ActorDetailModuleProtocols.swift */; };
+		34237BD824784E4000ADFC64 /* ActorDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BD724784E4000ADFC64 /* ActorDetailPresenter.swift */; };
+		34237BDA24784F6400ADFC64 /* ActorDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BD924784F6400ADFC64 /* ActorDetailRouter.swift */; };
+		34237BDD2478636C00ADFC64 /* ActorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BDB2478636C00ADFC64 /* ActorDetailViewController.swift */; };
+		34237BDF2478644400ADFC64 /* ActorDetailModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BDE2478644400ADFC64 /* ActorDetailModuleConfigurator.swift */; };
+		34237BE124786E2B00ADFC64 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34237BE024786E2B00ADFC64 /* Actor.swift */; };
 		342BC2DD2471BF68000274BF /* AlternativeDetailViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 34DF13402471B8C2004982B3 /* AlternativeDetailViewController.xib */; };
 		3435BFB7247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435BFB6247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift */; };
 		3435BFBC2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435BFBB2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift */; };
@@ -90,6 +96,13 @@
 		34228B76245D6722009F85A1 /* FavoriteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocols.swift; sourceTree = "<group>"; };
 		34228B79245D70C1009F85A1 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		34228B7D245D7202009F85A1 /* FavoriteConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteConfigurator.swift; sourceTree = "<group>"; };
+		34237BD124784CD800ADFC64 /* ActorDetailModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailModuleProtocols.swift; sourceTree = "<group>"; };
+		34237BD724784E4000ADFC64 /* ActorDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailPresenter.swift; sourceTree = "<group>"; };
+		34237BD924784F6400ADFC64 /* ActorDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailRouter.swift; sourceTree = "<group>"; };
+		34237BDB2478636C00ADFC64 /* ActorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailViewController.swift; sourceTree = "<group>"; };
+		34237BDC2478636C00ADFC64 /* ActorDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActorDetailViewController.xib; sourceTree = "<group>"; };
+		34237BDE2478644400ADFC64 /* ActorDetailModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailModuleConfigurator.swift; sourceTree = "<group>"; };
+		34237BE024786E2B00ADFC64 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		3435BFB6247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailModuleProtocols.swift; sourceTree = "<group>"; };
 		3435BFBB2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailModulePresenter.swift; sourceTree = "<group>"; };
 		3435BFBD247138BA00EEDD95 /* AlternativeDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailRouter.swift; sourceTree = "<group>"; };
@@ -267,6 +280,59 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		34237BCF24784CA500ADFC64 /* ActorDetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				34237BD024784CBD00ADFC64 /* Protocols */,
+				34237BD424784DC800ADFC64 /* Presenter */,
+				34237BD324784DC400ADFC64 /* Router */,
+				34237BD524784DCB00ADFC64 /* View */,
+				34237BD624784DFD00ADFC64 /* Configurator */,
+			);
+			path = ActorDetailModule;
+			sourceTree = "<group>";
+		};
+		34237BD024784CBD00ADFC64 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				34237BD124784CD800ADFC64 /* ActorDetailModuleProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		34237BD324784DC400ADFC64 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				34237BD924784F6400ADFC64 /* ActorDetailRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		34237BD424784DC800ADFC64 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				34237BD724784E4000ADFC64 /* ActorDetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		34237BD524784DCB00ADFC64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				34237BDB2478636C00ADFC64 /* ActorDetailViewController.swift */,
+				34237BDC2478636C00ADFC64 /* ActorDetailViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		34237BD624784DFD00ADFC64 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				34237BDE2478644400ADFC64 /* ActorDetailModuleConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		3435BFB02471324500EEDD95 /* alternativeDetailModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +410,7 @@
 				34159811245C1C52005B0EA6 /* Basic */,
 				3444A104245A0BE800432678 /* Model */,
 				3496F6D0245B573B00FB2997 /* MainModule */,
+				34237BCF24784CA500ADFC64 /* ActorDetailModule */,
 				3435BFB02471324500EEDD95 /* alternativeDetailModule */,
 				341597FF245C1657005B0EA6 /* DetailModule */,
 				34228B6E245D580E009F85A1 /* FavoriteModule */,
@@ -362,6 +429,7 @@
 				3496F6BC245AC0DC00FB2997 /* MovieList.swift */,
 				340B01B1245B7C6800082C55 /* Category.swift */,
 				347BFFDF245ECDFA00F1E1B1 /* Cast.swift */,
+				34237BE024786E2B00ADFC64 /* Actor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +642,7 @@
 				3416CEA12462F7C7000E597F /* FavoriteTableViewCell.swift in Sources */,
 				346E473C245B6AA4002F9948 /* UIImageView.swift in Sources */,
 				346E4733245B6A33002F9948 /* MainModuleTableViewCell.swift in Sources */,
+				34237BDF2478644400ADFC64 /* ActorDetailModuleConfigurator.swift in Sources */,
 				3496F6D6245B5DDF00FB2997 /* GettingInformation.swift in Sources */,
 				34159808245C173B005B0EA6 /* DetailPresenter.swift in Sources */,
 				34228B7E245D7202009F85A1 /* FavoriteConfigurator.swift in Sources */,
@@ -589,19 +658,24 @@
 				346E473D245B6AA4002F9948 /* UILabel.swift in Sources */,
 				340B01B2245B7C6800082C55 /* Category.swift in Sources */,
 				3414755D245DCBB4006AEC6C /* CastTableViewCell.swift in Sources */,
+				34237BD824784E4000ADFC64 /* ActorDetailPresenter.swift in Sources */,
+				34237BE124786E2B00ADFC64 /* Actor.swift in Sources */,
 				3496F6C9245B004300FB2997 /* MainModuleRouter.swift in Sources */,
 				347BFFDD245EC93100F1E1B1 /* CastCollectionViewCell.swift in Sources */,
 				3496F6DA245B5E4700FB2997 /* ErrorCases.swift in Sources */,
 				347A6F572475C3F9009AEFDD /* ImageLoader.swift in Sources */,
 				3444A109245A0C6700432678 /* Movie.swift in Sources */,
 				34228B74245D66CA009F85A1 /* FavoriteRouter.swift in Sources */,
+				34237BDA24784F6400ADFC64 /* ActorDetailRouter.swift in Sources */,
 				346E4740245B6AE7002F9948 /* Months.swift in Sources */,
 				347BFFE0245ECDFA00F1E1B1 /* Cast.swift in Sources */,
 				343600F02469E549004DA011 /* CustomActivityIndicator.swift in Sources */,
 				3496F6D8245B5E1200FB2997 /* LinkBuilder.swift in Sources */,
+				34237BD224784CD800ADFC64 /* ActorDetailModuleProtocols.swift in Sources */,
 				34228B77245D6722009F85A1 /* FavoriteProtocols.swift in Sources */,
 				3444A0F0245A0B8A00432678 /* AppDelegate.swift in Sources */,
 				3496F6C7245AFE0000FB2997 /* MainModulePresenter.swift in Sources */,
+				34237BDD2478636C00ADFC64 /* ActorDetailViewController.swift in Sources */,
 				3416CEB024633280000E597F /* StorageService.swift in Sources */,
 				3496F6C0245AE4F000FB2997 /* MainModuleProtocols.swift in Sources */,
 				3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */,

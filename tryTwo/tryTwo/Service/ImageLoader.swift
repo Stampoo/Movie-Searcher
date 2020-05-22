@@ -23,7 +23,6 @@ final class ImageLoader {
     private var request: URLRequest?
     
 
-
     //MARK: - Initializers
 
     init(linkToImage: String) {
@@ -36,17 +35,19 @@ final class ImageLoader {
 
     //MARK: - Public methods
 
-    func loadImage(at imageView: UIImageView, errorHandler: ErrorCloser) {
+    func loadImage(at imageView: UIImageView, activityView: CustomActivityIndicator, errorHandler: ErrorCloser) {
         guard let request = request else {
             return errorHandler(.errorInResponce)
         }
         if let imageData = cache.cachedResponse(for: request)?.data {
             DispatchQueue.main.async {
                 imageView.image = UIImage(data: imageData)
+                activityView.stopActiviy()
             }
         } else {
             loadImageToCache(completionHandler: { imageData in
                 imageView.image = UIImage(data: imageData)
+                activityView.stopActiviy()
             })
         }
     }

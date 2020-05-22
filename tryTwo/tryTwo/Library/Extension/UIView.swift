@@ -30,6 +30,14 @@ extension UIView {
         self.layer.masksToBounds = false
     }
 
+    func addLightShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = 10
+        self.layer.shadowOffset = .init(width: 0.5, height: 4.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.masksToBounds = false
+    }
+
     func createBloom(color: UIColor) {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowRadius = 2.0

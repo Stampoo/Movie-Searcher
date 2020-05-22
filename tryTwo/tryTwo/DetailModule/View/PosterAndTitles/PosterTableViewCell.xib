@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="343" height="314"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-hu-PqP">
-                        <rect key="frame" x="125" y="323" width="198" height="21"/>
+                        <rect key="frame" x="125" y="322.5" width="198" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,13 +32,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="LZ4-hu-PqP" firstAttribute="leading" secondItem="GDg-R2-GqM" secondAttribute="trailing" constant="8" id="2EZ-gz-J5K"/>
-                    <constraint firstItem="GDg-R2-GqM" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="-74" id="38U-AK-cg5"/>
                     <constraint firstAttribute="trailing" secondItem="4xZ-MF-HAB" secondAttribute="trailing" id="4Ua-UP-hXm"/>
                     <constraint firstItem="4xZ-MF-HAB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BrN-Sc-p6D"/>
                     <constraint firstItem="4xZ-MF-HAB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="K9y-ZK-sT8"/>
                     <constraint firstAttribute="trailing" secondItem="LZ4-hu-PqP" secondAttribute="trailing" constant="20" id="Vpv-H0-HtY"/>
-                    <constraint firstItem="4xZ-MF-HAB" firstAttribute="leading" secondItem="GDg-R2-GqM" secondAttribute="trailing" constant="-117" id="abd-mm-uYZ"/>
-                    <constraint firstAttribute="bottom" secondItem="LZ4-hu-PqP" secondAttribute="bottom" constant="36" id="gYE-JJ-xg3"/>
+                    <constraint firstAttribute="bottom" secondItem="LZ4-hu-PqP" secondAttribute="bottom" priority="750" constant="36" id="gYE-JJ-xg3"/>
                     <constraint firstItem="LZ4-hu-PqP" firstAttribute="top" secondItem="4xZ-MF-HAB" secondAttribute="bottom" constant="8.5" id="mhO-bE-5EG"/>
                 </constraints>
             </tableViewCellContentView>

@@ -14,18 +14,19 @@ struct LinkBuilder {
 
     //MARK: - Private properties
 
-    private let key: String = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
-    private let baseUrl: String = "https://api.themoviedb.org/3/"
-    private let imageBaseUrl: String = "https://image.tmdb.org/t/p/"
-    private let language: String = "&language=en-US"
-    private let popularity: String = "movie/popular"
-    private let nowPlaying: String = "movie/now_playing"
-    private let topRated: String = "movie/top_rated"
-    private let pagePrefix: String = "&page="
-    private let searchPrefix: String = "&query="
-    private let moviePrefix: String = "movie/"
-    private let castPrefix: String = "/credits"
-    private let recommendationPrefix: String = "/recommendations"
+    private let key = "?api_key=7104ec0d95ea0fd2f075baec48f313ba"
+    private let baseUrl = "https://api.themoviedb.org/3/"
+    private let imageBaseUrl = "https://image.tmdb.org/t/p/"
+    private let language = "&language=en-US"
+    private let popularity = "movie/popular"
+    private let nowPlaying = "movie/now_playing"
+    private let topRated = "movie/top_rated"
+    private let pagePrefix = "&page="
+    private let searchPrefix = "&query="
+    private let moviePrefix = "movie/"
+    private let castPrefix = "/credits"
+    private let actorPrefix = "/person"
+    private let recommendationPrefix = "/recommendations"
 
 
     //MARK: - Public methods
@@ -64,6 +65,10 @@ struct LinkBuilder {
     
     func pathToSeeAlsoMovie(id: String, pageNumber: Int) -> String {
         return baseUrl + moviePrefix + id + recommendationPrefix + key + language + pagePrefix + "\(pageNumber)"
+    }
+
+    func pathToActor(id: String) -> String {
+        return baseUrl + actorPrefix + id + key + language
     }
     
 }

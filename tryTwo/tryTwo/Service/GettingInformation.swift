@@ -7,9 +7,15 @@
 //
 import Foundation
 
-//MARK: - Class implements load and translate data in structs Model
+//TODO: - refactor this class in future
 
 final class GettingInformation {
+
+    //MARK: - Private properties
+
+    private let session = URLSession.shared
+    private let mainQueue = DispatchQueue.main
+    
 
     //MARK: - Public methods
 
@@ -97,6 +103,25 @@ final class GettingInformation {
                 completionHandler(result.cast)
             }
         }.resume()
+    }
+
+    func requestActor(link: String, completionHandler: @escaping (Actor) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
+        guard let url = URL(string: link) else {
+            return errorHandler(.badLink)
+        }
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return errorHandler(.errorInResponce)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let actor = try? decoder.decode(Actor.self, from: data) else {
+                return errorHandler(.errorParcing)
+            }
+            self.mainQueue.async {
+                completionHandler(actor)
+            }
+        }
     }
     
 }

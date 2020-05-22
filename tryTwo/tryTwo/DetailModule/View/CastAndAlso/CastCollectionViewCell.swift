@@ -39,7 +39,8 @@ final class CastCollectionViewCell: UICollectionViewCell {
     //MARK: - Public methods
 
     func configureCell(with cast: Cast) {
-        posterImageView.loadImage(LinkBuilder().pathPoster(path: cast.profilePath, size: .w500))
+        let link = LinkBuilder().pathPoster(path: cast.profilePath, size: .w500)
+        posterImageView.loadImage(link)
         nameLabel.text = cast.name
         castLabel.text = cast.character
     }

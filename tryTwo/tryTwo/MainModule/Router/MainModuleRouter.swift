@@ -22,7 +22,7 @@ final class MainModuleRouter {
 extension MainModuleRouter: MainRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput) {
-        let detailVc = DetailModuleConfigurator().configurateModule(with: moduleOutput)
+        let detailVc = AlternativeDetailModuleConfigurator().configurateModule(with: moduleOutput)
         view?.pushModule(module: detailVc, animation: true)
     }
 

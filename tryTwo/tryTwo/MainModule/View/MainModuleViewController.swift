@@ -27,7 +27,7 @@ final class MainModuleViewController: UIViewController, ModuleTransitionable {
     //MARK: - Public properties
 
     var output: MainViewOutput?
-    let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
+    let activityView = CustomActivityIndicator(complitionHandler: nil)
 
 
     //MARK: - Private Properties

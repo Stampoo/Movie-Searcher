@@ -51,7 +51,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     //MARK: - Public properties
 
     var output: DetailViewOutput?
-    let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
+    let activityView = CustomActivityIndicator(complitionHandler: nil)
 
 
     //MARK: - Private Properties

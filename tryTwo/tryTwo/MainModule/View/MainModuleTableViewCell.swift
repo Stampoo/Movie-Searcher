@@ -67,7 +67,7 @@ final class MainTableViewCell: UITableViewCell {
         viewCard.layer.cornerRadius = Constants.cardViewRoundingAngle
         self.selectionStyle = .none
         viewCard.clipsToBounds = true
-        shadowView.createShadow()
+        shadowView.addLightShadow()
         shadowView.backgroundColor = .clear
     }
 
