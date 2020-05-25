@@ -19,6 +19,8 @@ final class ActorDetailPresenter: ActorDetailViewOutput {
     //MARK: - Private properties
 
     private var actorID: Int?
+    private let service = GettingInformation()
+    private let link = LinkBuilder()
 
 
     //MARK: - Public methods
@@ -39,10 +41,17 @@ final class ActorDetailPresenter: ActorDetailViewOutput {
     //MARK: - Private methods
 
     private func loadActorDetail(by id: Int) {
-        let service = GettingInformation()
-        let link = LinkBuilder()
+        print(link.pathToActor(id: "\(id)"))
         service.requestActor(link: link.pathToActor(id: "\(id)"), completionHandler: { actor in
             self.view?.configure(with: actor)
+        }) { error in
+            //TODO: - Defination error cases
+        }
+    }
+
+    private func loadActorImages(by id: Int) {
+        service.requestActorImages(link: link.pathToImagesActor(id: "\(id)"), completionHandler: { actorImages in
+            //TODO: - create transfer method
         }) { error in
             //TODO: - Defination error cases
         }

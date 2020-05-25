@@ -14,5 +14,5 @@ struct Actor: Codable {
     let name: String
     let biography: String
     let placeOfBirth: String?
-    let profilePath: String
+    let profilePath: String?
 }

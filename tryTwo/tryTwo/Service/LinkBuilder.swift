@@ -25,8 +25,9 @@ struct LinkBuilder {
     private let searchPrefix = "&query="
     private let moviePrefix = "movie/"
     private let castPrefix = "/credits"
-    private let actorPrefix = "/person"
+    private let actorPrefix = "person/"
     private let recommendationPrefix = "/recommendations"
+    private let imagesPrefix = "/images"
 
 
     //MARK: - Public methods
@@ -69,6 +70,10 @@ struct LinkBuilder {
 
     func pathToActor(id: String) -> String {
         return baseUrl + actorPrefix + id + key + language
+    }
+
+    func pathToImagesActor(id: String) -> String {
+        return baseUrl + actorPrefix + id + imagesPrefix + key
     }
     
 }
