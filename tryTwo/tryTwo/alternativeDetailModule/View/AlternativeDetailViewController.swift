@@ -117,7 +117,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
                                  height: posterFrame.height * 0.15)
         voteView = Star(frame: starsPlaces, starCount: 5)
         posterImageView.isUserInteractionEnabled = true
-        posterImageView.addSubview(voteView)
+        posterImageView.addSubview(voteView) 
     }
 
 }
