@@ -25,6 +25,7 @@ final class Star: UIView {
 
     private var starCount = 0
     private var stars = [UIButton]()
+    private let cardView = UIView()
 
 
     //MARK: - Initializers
@@ -45,6 +46,16 @@ final class Star: UIView {
 
     //MARK: - Public methods
 
+    func configureStar() {
+        stars.removeAll()
+        for index in 0...starCount - 1 {
+            let star = UIButton()
+            star.setImage(Constants.emptyStarImage, for: .normal)
+            star.addTarget(self, action: #selector(touchAtStar(target:)), for: .touchUpInside)
+            stars.insert(star, at: index)
+        }
+    }
+
 
     //MARK: - Private methods
 
@@ -53,33 +64,40 @@ final class Star: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        self.addSubview(stack)
+        cardView.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: self.topAnchor),
-            stack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stack.rightAnchor.constraint(equalTo: self.rightAnchor),
-            stack.leftAnchor.constraint(equalTo: self.leftAnchor)
+            stack.topAnchor.constraint(equalTo: cardView.topAnchor),
+            stack.bottomAnchor.constraint(equalTo: cardView.bottomAnchor),
+            stack.rightAnchor.constraint(equalTo: cardView.rightAnchor, constant: -8),
+            stack.leftAnchor.constraint(equalTo: cardView.leftAnchor, constant: 8)
         ])
     }
 
-    private func configureStar() {
-        stars.removeAll()
-        for index in 0...starCount - 1 {
-            let star = UIButton()
-            star.setImage(Constants.emptyStarImage, for: .normal)
-            star.isUserInteractionEnabled = true
-            star.addTarget(self, action: #selector(touchAtStar(target:)), for: .touchUpInside)
-            star.isUserInteractionEnabled = true
-            stars.insert(star, at: index)
-        }
+    private func configureCard() {
+        cardView.layer.cornerRadius = cardView.frame.height / 2
+        cardView.backgroundColor = .white
+        cardView.createShadow()
+        self.addSubview(cardView)
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cardView.topAnchor.constraint(equalTo: self.topAnchor),
+            cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            cardView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            cardView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        ])
     }
 
     @objc private func touchAtStar(target: UIButton) {
         resetVote()
-        let currentIndex = stars.filter { $0 == target }
-        for i in stars {
-            print(i == target)
+        guard let currentIndex = stars.firstIndex(of: target) else {
+            return
+        }
+        for (index, star) in stars.enumerated() {
+            if currentIndex >= index {
+                star.setImage(Constants.votedStarImage, for: .normal)
+                jumpStar(star: star)
+            }
         }
     }
 
@@ -88,8 +106,16 @@ final class Star: UIView {
     }
 
     private func updateView() {
+        configureCard()
         configureStack()
-        configureStar()
+    }
+
+    private func jumpStar(star: UIButton) {
+        UIView.animate(withDuration: 0.1, animations: {
+            star.transform = CGAffineTransform(translationX: 0, y: -10)
+        }, completion: {_ in
+            star.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
     }
 
 }
