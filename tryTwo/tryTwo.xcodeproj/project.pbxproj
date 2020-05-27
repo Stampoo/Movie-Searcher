@@ -48,6 +48,7 @@
 		342D4CAC247ED18E00B18EE2 /* PhotoViewerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D4CAB247ED18E00B18EE2 /* PhotoViewerRouter.swift */; };
 		342D4CAE247ED22500B18EE2 /* PhotoViewerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D4CAD247ED22500B18EE2 /* PhotoViewerConfigurator.swift */; };
 		342D4CB0247ED44C00B18EE2 /* PhotoViewerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 342D4CAF247ED38500B18EE2 /* PhotoViewerViewController.xib */; };
+		342D4CB2247EDFE500B18EE2 /* NigthModeSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D4CB1247EDFE500B18EE2 /* NigthModeSetup.swift */; };
 		3435BFB7247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435BFB6247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift */; };
 		3435BFBC2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435BFBB2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift */; };
 		3435BFBE247138BA00EEDD95 /* AlternativeDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435BFBD247138BA00EEDD95 /* AlternativeDetailRouter.swift */; };
@@ -126,6 +127,7 @@
 		342D4CAB247ED18E00B18EE2 /* PhotoViewerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerRouter.swift; sourceTree = "<group>"; };
 		342D4CAD247ED22500B18EE2 /* PhotoViewerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerConfigurator.swift; sourceTree = "<group>"; };
 		342D4CAF247ED38500B18EE2 /* PhotoViewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewerViewController.xib; sourceTree = "<group>"; };
+		342D4CB1247EDFE500B18EE2 /* NigthModeSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NigthModeSetup.swift; sourceTree = "<group>"; };
 		3435BFB6247135AF00EEDD95 /* AlternativeDetailModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailModuleProtocols.swift; sourceTree = "<group>"; };
 		3435BFBB2471376F00EEDD95 /* AlternativeDetailModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailModulePresenter.swift; sourceTree = "<group>"; };
 		3435BFBD247138BA00EEDD95 /* AlternativeDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailRouter.swift; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				3496F6C2245AEBD000FB2997 /* TransitionProtocols.swift */,
 				34EE491C246756D000901FA1 /* CustomSegmentProtocol.swift */,
 				342D4C9B247EB06800B18EE2 /* CollectionCellFactoryProtocol.swift */,
+				342D4CB1247EDFE500B18EE2 /* NigthModeSetup.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				3416CEB024633280000E597F /* StorageService.swift in Sources */,
 				342D4CA8247ED03B00B18EE2 /* PhotoViewerViewController.swift in Sources */,
 				3496F6C0245AE4F000FB2997 /* MainModuleProtocols.swift in Sources */,
+				342D4CB2247EDFE500B18EE2 /* NigthModeSetup.swift in Sources */,
 				3496F6C3245AEBD000FB2997 /* TransitionProtocols.swift in Sources */,
 				342D4CA6247ECD6800B18EE2 /* PhotoViewerModuleProtocol.swift in Sources */,
 				3496F6BD245AC0DC00FB2997 /* MovieList.swift in Sources */,

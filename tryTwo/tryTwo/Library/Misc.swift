@@ -61,3 +61,8 @@ enum DetailType {
     case movie
     case photo
 }
+
+enum NightMode {
+    case on
+    case off
+}

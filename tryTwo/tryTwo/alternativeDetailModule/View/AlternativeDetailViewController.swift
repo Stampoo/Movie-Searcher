@@ -17,6 +17,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
         static let alsoTitleText = "Also see:"
         static let posterRoundingAngle: CGFloat = 15
         static let titleLabelFontSize: CGFloat = 33
+        static let collectionsTitleFontSize: CGFloat = 25
         static let castCollectionCellIdentifire = "castCollectionCell"
         static let castCollectionCellNibName = "CastCollectionViewCell"
         static let cellWidth: CGFloat = 140
@@ -51,7 +52,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
 
     private var castsInMovie = [Cast]()
     private var alsoMovies = [Result]()
-    private var movieId = 0
+    private var movieID: Int?
     
     
     //MARK: - LifeCycle
@@ -59,9 +60,9 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
     override func viewDidLoad() {
         super.viewDidLoad()
         output?.viewLoaded()
-        configureBackGroundPoster()
+        configureBackgroundPoster()
         confiurePoster()
-        configureFields()
+        configureLabels()
         configureCastCollectionView()
         configurePhotoViewer()
     }
@@ -79,7 +80,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
 
     //MARK: - Private methods
 
-    private func configureBackGroundPoster() {
+    private func configureBackgroundPoster() {
         blurredPosterImageView.addBlur()
     }
 
@@ -91,12 +92,14 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
         posterImageView.clipsToBounds = true
     }
 
-    private func configureFields() {
+    private func configureLabels() {
         aboutMovieLabel.numberOfLines = 0
         aboutMovieLabel.textColor = .white
         titleMovieLabel.numberOfLines = 0
         titleMovieLabel.font = .boldSystemFont(ofSize: Constants.titleLabelFontSize)
         titleMovieLabel.textColor = .white
+        castLabel.font = .boldSystemFont(ofSize: Constants.collectionsTitleFontSize)
+        alsoSeeLabel.font = .boldSystemFont(ofSize: Constants.collectionsTitleFontSize)
     }
 
     private func configureCastCollectionView() {
@@ -120,7 +123,10 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
     }
 
     @objc private func runMoviePhotoViewer() {
-        output?.showModule(with: movieId, type: .photo)
+        guard let id = movieID else {
+            return
+        }
+        output?.showModule(with: id, type: .photo)
     }
 
 }
@@ -138,6 +144,7 @@ extension AlternativeDetailViewController: AlternativeDetailViewInput {
         aboutMovieLabel.text = movie.overview
         castLabel.text = Constants.castTitleText
         alsoSeeLabel.text = Constants.castTitleText
+        movieID = movie.id
     }
 
     func configure(with casts: [Cast]) {
@@ -180,7 +187,6 @@ extension AlternativeDetailViewController: UICollectionViewDataSource {
             cell.configureCell(with: movie)
             return cell
         }
-
         return collectionView == alsoSeeCollectionView ? createAlsoCollectionViewCell() : createCastCollectionViewCell()
     }
 
@@ -192,18 +198,38 @@ extension AlternativeDetailViewController: UICollectionViewDelegate {
         let index = indexPath.row
         switch collectionView {
         case alsoSeeCollectionView:
-            selectedCell(index: index, type: .movie)
+            showSelectedCell(index: index, type: .movie)
         case castCollectionView:
-            selectedCell(index: index, type: .actor)
+            showSelectedCell(index: index, type: .actor)
         default:
             break
         }
     }
 
-    private func selectedCell(index: Int, type: DetailType) {
+    private func showSelectedCell(index: Int, type: DetailType) {
         let selectedMovieId = type == .movie ? alsoMovies[index].id : castsInMovie[index].id
         output?.showModule(with: selectedMovieId, type: type)
     }
 
 }
 
+extension AlternativeDetailViewController: NightModeSetup {
+
+    func setTextsFontColorAtMode(mode: NightMode) {
+        if mode == .on {
+            setColor(color: .black)
+        } else {
+            setColor(color: .white)
+        }
+    }
+
+    func setBackgroundsColorAtMode(mode: NightMode) {}
+
+    private func setColor(color: UIColor) {
+        titleMovieLabel.textColor = color
+        aboutMovieLabel.textColor = color
+        castLabel.textColor = color
+        alsoSeeLabel.textColor = color
+    }
+
+}
