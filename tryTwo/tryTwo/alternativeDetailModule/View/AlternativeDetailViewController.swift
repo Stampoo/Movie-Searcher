@@ -21,6 +21,10 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
         static let castCollectionCellNibName = "CastCollectionViewCell"
         static let cellWidth: CGFloat = 140
         static let cellHeight: CGFloat = 210
+        static let deepGreen = UIColor(displayP3Red: 17 / 255,
+                                       green: 70 / 255,
+                                       blue: 69 / 255,
+                                       alpha: 1)
     }
 
 
@@ -47,7 +51,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
 
     private var castsInMovie = [Cast]()
     private var alsoMovies = [Result]()
-    private var voteView = Star(frame: .zero, starCount: 5)
+    private var movieId = 0
     
     
     //MARK: - LifeCycle
@@ -59,7 +63,7 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
         confiurePoster()
         configureFields()
         configureCastCollectionView()
-        configureVotedStars()
+        configurePhotoViewer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -109,16 +113,14 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
         alsoSeeCollectionView.backgroundColor = .clear
     }
 
-    private func configureVotedStars() {
-        let posterFrame = posterImageView.frame
-        let starsPlaces = CGRect(x: posterFrame.width * 0.1,
-                                 y: posterFrame.height * 0.8,
-                                 width: posterFrame.width * 0.5,
-                                 height: posterFrame.height * 0.15)
-        voteView = Star(frame: starsPlaces, starCount: 5)
+    private func configurePhotoViewer() {
+        let tapToRunViewer = UITapGestureRecognizer(target: self, action: #selector(runMoviePhotoViewer))
         posterImageView.isUserInteractionEnabled = true
-        voteView.configureStar()
-        posterImageView.addSubview(voteView)
+        posterImageView.addGestureRecognizer(tapToRunViewer)
+    }
+
+    @objc private func runMoviePhotoViewer() {
+        output?.showModule(with: movieId, type: .photo)
     }
 
 }

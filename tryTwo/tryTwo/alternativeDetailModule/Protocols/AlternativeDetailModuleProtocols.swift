@@ -36,4 +36,6 @@ protocol AlternativeDetailRouterInput: class {
 
     func pushActorModule(with moduleOutput: ModuleOutput)
 
+    func pushPhotoModule(with moduleOutput: ModuleOutput)
+
 }

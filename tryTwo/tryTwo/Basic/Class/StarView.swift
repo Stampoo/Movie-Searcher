@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class Star: UIView {
+final class StarView: UIView {
 
     //MARK: - Constants
 
@@ -51,6 +51,7 @@ final class Star: UIView {
         for index in 0...starCount - 1 {
             let star = UIButton()
             star.setImage(Constants.emptyStarImage, for: .normal)
+            star.addBloom(color: .yellow)
             star.addTarget(self, action: #selector(touchAtStar(target:)), for: .touchUpInside)
             stars.insert(star, at: index)
         }
@@ -64,13 +65,13 @@ final class Star: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        cardView.addSubview(stack)
+        self.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: cardView.topAnchor),
-            stack.bottomAnchor.constraint(equalTo: cardView.bottomAnchor),
-            stack.rightAnchor.constraint(equalTo: cardView.rightAnchor, constant: -8),
-            stack.leftAnchor.constraint(equalTo: cardView.leftAnchor, constant: 8)
+            stack.topAnchor.constraint(equalTo: self.topAnchor),
+            stack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            stack.rightAnchor.constraint(equalTo: self.rightAnchor),
+            stack.leftAnchor.constraint(equalTo: self.leftAnchor)
         ])
     }
 
@@ -106,7 +107,6 @@ final class Star: UIView {
     }
 
     private func updateView() {
-        configureCard()
         configureStack()
     }
 

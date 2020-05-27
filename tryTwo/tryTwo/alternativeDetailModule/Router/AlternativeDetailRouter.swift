@@ -31,4 +31,9 @@ extension AlternativeDetailRouter: AlternativeDetailRouterInput {
         view?.pushModule(module: actorDetailModule, animation: true)
     }
 
+    func pushPhotoModule(with moduleOutput: ModuleOutput) {
+        let photoModule = PhotoViewerModuleConfigurator().configurateModule(moduleOutput: moduleOutput)
+        view?.pushModule(module: photoModule, animation: true)
+    }
+
 }

@@ -44,6 +44,8 @@ final class AlternativeDetailModulePresenter: AlternativeDetailViewOutput {
             router?.pushModule(with: self)
         case .actor:
             router?.pushActorModule(with: self)
+        case .photo:
+            router?.pushPhotoModule(with: self)
         }
     }
 

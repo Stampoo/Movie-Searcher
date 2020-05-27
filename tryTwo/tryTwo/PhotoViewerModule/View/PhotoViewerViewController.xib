@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoViewerViewController" customModule="tryTwo">
+            <connections>
+                <outlet property="photoCollectionView" destination="PCH-jl-lh0" id="axt-bu-AvG"/>
+                <outlet property="view" destination="1v7-gU-kkZ" id="PLk-0P-Fp5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1v7-gU-kkZ">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PCH-jl-lh0">
+                    <rect key="frame" x="0.0" y="44" width="414" height="770"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="770" id="ua9-48-Uac"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x1u-Rb-xNx">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="PCH-jl-lh0" firstAttribute="leading" secondItem="LnE-xF-730" secondAttribute="leading" id="9i9-0h-Q7x"/>
+                <constraint firstItem="LnE-xF-730" firstAttribute="bottom" secondItem="PCH-jl-lh0" secondAttribute="bottom" constant="48" id="JNG-VC-Mnv"/>
+                <constraint firstItem="PCH-jl-lh0" firstAttribute="top" secondItem="LnE-xF-730" secondAttribute="top" id="cj6-kz-5t1"/>
+                <constraint firstItem="PCH-jl-lh0" firstAttribute="trailing" secondItem="LnE-xF-730" secondAttribute="trailing" id="jUe-MP-RlW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="LnE-xF-730"/>
+            <point key="canvasLocation" x="8.6956521739130448" y="55.580357142857139"/>
+        </view>
+    </objects>
+</document>

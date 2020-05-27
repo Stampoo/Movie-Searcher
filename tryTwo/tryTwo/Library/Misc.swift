@@ -59,4 +59,5 @@ enum SearchCategory: String {
 enum DetailType {
     case actor
     case movie
+    case photo
 }

@@ -38,7 +38,7 @@ extension UIView {
         self.layer.masksToBounds = false
     }
 
-    func createBloom(color: UIColor) {
+    func addBloom(color: UIColor) {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowRadius = 2.0
         self.layer.shadowOpacity = 0.9

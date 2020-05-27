@@ -36,7 +36,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9d-RZ-CMz">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1088"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hiv-Vc-cXl">
                                     <rect key="frame" x="20" y="464" width="374" height="21"/>
@@ -44,7 +44,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QDh-wR-0zP">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QDh-wR-0zP">
                                     <rect key="frame" x="0.0" y="549" width="414" height="220"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
@@ -79,7 +79,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vF6-vM-rca">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vF6-vM-rca">
                                     <rect key="frame" x="0.0" y="805" width="414" height="220"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
@@ -111,22 +111,22 @@
                                 <constraint firstAttribute="trailing" secondItem="Q0G-P7-ui5" secondAttribute="trailing" constant="279" id="DxM-Sa-jxK"/>
                                 <constraint firstItem="N9c-5E-QTg" firstAttribute="top" secondItem="QDh-wR-0zP" secondAttribute="bottom" constant="8" id="GTq-l9-89o"/>
                                 <constraint firstItem="Q0G-P7-ui5" firstAttribute="leading" secondItem="k9d-RZ-CMz" secondAttribute="leading" constant="20" id="IeE-hd-4Pb"/>
-                                <constraint firstItem="QDh-wR-0zP" firstAttribute="leading" secondItem="2EP-Jh-37a" secondAttribute="leading" id="JOc-u8-wd9"/>
                                 <constraint firstItem="QDh-wR-0zP" firstAttribute="top" secondItem="Q0G-P7-ui5" secondAttribute="bottom" constant="7.5" id="KUJ-cz-4TW"/>
                                 <constraint firstAttribute="trailing" secondItem="BWQ-Qv-bPD" secondAttribute="trailing" constant="20" id="OYw-xu-2Yc"/>
                                 <constraint firstItem="BWQ-Qv-bPD" firstAttribute="leading" secondItem="k9d-RZ-CMz" secondAttribute="leading" constant="20" id="QeG-j8-P5k"/>
                                 <constraint firstItem="2SQ-LW-YDH" firstAttribute="leading" secondItem="k9d-RZ-CMz" secondAttribute="leading" constant="20" id="RWb-QK-Vxz"/>
                                 <constraint firstAttribute="trailing" secondItem="N9c-5E-QTg" secondAttribute="trailing" constant="252" id="SL4-sz-8PB"/>
+                                <constraint firstItem="2EP-Jh-37a" firstAttribute="centerX" secondItem="QDh-wR-0zP" secondAttribute="centerX" id="T6F-Sf-Xwb"/>
                                 <constraint firstAttribute="trailing" secondItem="Hiv-Vc-cXl" secondAttribute="trailing" constant="20" id="XP6-je-c7h"/>
                                 <constraint firstItem="BWQ-Qv-bPD" firstAttribute="top" secondItem="Hiv-Vc-cXl" secondAttribute="bottom" constant="8" id="ZA5-kL-W0u"/>
                                 <constraint firstItem="2EP-Jh-37a" firstAttribute="trailing" secondItem="2SQ-LW-YDH" secondAttribute="trailing" id="ZVw-vZ-Ibh"/>
                                 <constraint firstItem="vF6-vM-rca" firstAttribute="leading" secondItem="QDh-wR-0zP" secondAttribute="leading" id="bkl-1H-fIn"/>
-                                <constraint firstAttribute="bottom" secondItem="vF6-vM-rca" secondAttribute="bottom" constant="63" id="cNi-f7-rXM"/>
                                 <constraint firstItem="2SQ-LW-YDH" firstAttribute="top" secondItem="k9d-RZ-CMz" secondAttribute="top" constant="20" id="eoQ-tb-3Mm"/>
+                                <constraint firstItem="2EP-Jh-37a" firstAttribute="leading" secondItem="2SQ-LW-YDH" secondAttribute="leading" id="erD-HR-iOJ"/>
                                 <constraint firstItem="vF6-vM-rca" firstAttribute="top" secondItem="N9c-5E-QTg" secondAttribute="bottom" constant="7.5" id="hhq-dv-CrI"/>
                                 <constraint firstItem="QDh-wR-0zP" firstAttribute="trailing" secondItem="vF6-vM-rca" secondAttribute="trailing" id="lLP-W9-x0R"/>
-                                <constraint firstItem="QDh-wR-0zP" firstAttribute="leading" secondItem="N9c-5E-QTg" secondAttribute="leading" id="mnW-zo-068"/>
                                 <constraint firstItem="2EP-Jh-37a" firstAttribute="bottom" secondItem="2SQ-LW-YDH" secondAttribute="bottom" id="pwb-r6-8w4"/>
+                                <constraint firstAttribute="bottom" secondItem="vF6-vM-rca" secondAttribute="bottom" constant="175" id="wEf-DP-M72"/>
                             </constraints>
                         </view>
                     </subviews>
