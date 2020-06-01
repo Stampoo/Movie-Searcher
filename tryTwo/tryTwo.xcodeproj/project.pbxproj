@@ -151,6 +151,8 @@
 		347BFFDB245EC93100F1E1B1 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 		347BFFDC245EC93100F1E1B1 /* CastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastCollectionViewCell.xib; sourceTree = "<group>"; };
 		347BFFDF245ECDFA00F1E1B1 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		3480959424858E790093D09A /* detailMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailMenu.png; sourceTree = "<group>"; };
+		3480959524858E790093D09A /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		34832719247FE45A00288380 /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		3483BA67246400D00015FB6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		3496F6BC245AC0DC00FB2997 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 		3444A10D245A12EF00432678 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3480959324858E560093D09A /* Screenshots */,
 				3444A0F8245A0B8B00432678 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -594,6 +597,15 @@
 				347BFFDC245EC93100F1E1B1 /* CastCollectionViewCell.xib */,
 			);
 			path = CastAndAlso;
+			sourceTree = "<group>";
+		};
+		3480959324858E560093D09A /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				3480959424858E790093D09A /* detailMenu.png */,
+				3480959524858E790093D09A /* mainMenu.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		3483BA6924642B510015FB6C /* Class */ = {
