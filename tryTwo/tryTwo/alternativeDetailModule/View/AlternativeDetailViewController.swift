@@ -41,6 +41,8 @@ final class AlternativeDetailViewController: UIViewController, ModuleTransitiona
     @IBOutlet private weak var castCollectionView: UICollectionView!
     @IBOutlet private weak var alsoSeeLabel: UILabel!
     @IBOutlet private weak var alsoSeeCollectionView: UICollectionView!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var ratingView: UIView!
 
 
     //MARK: - Public properties
@@ -142,9 +144,9 @@ extension AlternativeDetailViewController: AlternativeDetailViewInput {
         posterImageView.loadImage(link.pathPoster(path: movie.posterPath, size: .original))
         titleMovieLabel.text = movie.title
         aboutMovieLabel.text = movie.overview
-        castLabel.text = Constants.castTitleText
-        alsoSeeLabel.text = Constants.castTitleText
         movieID = movie.id
+        ratingLabel.text = "\(movie.voteAverage)"
+        ratingView.backgroundColor = ColorVote().calculateColor(movie.voteAverage)
     }
 
     func configure(with casts: [Cast]) {
@@ -152,7 +154,14 @@ extension AlternativeDetailViewController: AlternativeDetailViewInput {
         castCollectionView.reloadData()
     }
 
-    func setupInitialState() {}
+    func setupInitialState() {
+        setTextsFontColorAtMode(mode: .off)
+        castLabel.text = Constants.castTitleText
+        alsoSeeLabel.text = Constants.alsoTitleText
+        ratingLabel.textAlignment = .center
+        ratingLabel.font = .boldSystemFont(ofSize: Constants.titleLabelFontSize)
+        ratingView.layer.cornerRadius = ratingView.frame.width / 8
+    }
 
     func configure(with movies: [Result]) {
         self.alsoMovies = movies
@@ -230,6 +239,7 @@ extension AlternativeDetailViewController: NightModeSetup {
         aboutMovieLabel.textColor = color
         castLabel.textColor = color
         alsoSeeLabel.textColor = color
+        ratingLabel.textColor = color
     }
 
 }

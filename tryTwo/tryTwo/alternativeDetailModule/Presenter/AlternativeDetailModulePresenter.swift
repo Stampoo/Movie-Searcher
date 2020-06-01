@@ -33,6 +33,7 @@ final class AlternativeDetailModulePresenter: AlternativeDetailViewOutput {
         loadMovie()
         loadCastMovieBy(id: movieId)
         loadAlsoSeeMoviesBy(id: movieId)
+        view?.setupInitialState()
     }
 
     func reloadView() {}
