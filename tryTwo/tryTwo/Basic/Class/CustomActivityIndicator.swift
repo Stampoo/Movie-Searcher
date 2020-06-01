@@ -17,8 +17,8 @@ final class CustomActivityIndicator: UIView {
 
     //MARK: - Initializers
 
-    convenience init(frame: CGRect, complitionHandler: (() -> Void)?) {
-        self.init(frame: frame)
+    convenience init(complitionHandler: (() -> Void)?) {
+        self.init()
         self.configureIndicator()
     }
 
@@ -26,6 +26,7 @@ final class CustomActivityIndicator: UIView {
     //MARK: - Public methods
     
     func startActivity(view: UIView) {
+        self.frame = view.bounds
         UIView.animate(withDuration: 0.1, animations: {
             view.addSubview(self)
             self.indicator.startAnimating()
@@ -42,7 +43,7 @@ final class CustomActivityIndicator: UIView {
     //MARK: - Private methods
 
     private func configureIndicator() {
-        self.addBlur(on: indicator)
+        self.addBlurAndVibrancy(on: indicator)
         indicator.center = self.center
         self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         indicator.color = .black

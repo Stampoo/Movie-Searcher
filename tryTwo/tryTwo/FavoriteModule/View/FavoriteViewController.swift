@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class FavoriteViewController: UIViewController, ModuleTransitionable {
     
@@ -118,7 +117,7 @@ extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.favoriteCellIdentifire,
                                                        for: indexPath) as? FavoriteTableViewCell else {
-            return UITableViewCell()
+                                                        return UITableViewCell()
         }
         cell.configureCell(with: moviesInStorage[indexPath.row])
         return cell

@@ -7,13 +7,29 @@
 //
 import Foundation
 
-//MARK: - Class implements load and translate data in structs Model
+//TODO: - refactor this class in future
 
 final class GettingInformation {
 
+    //MARK: - typealias
+
+    typealias ErrorCloser = (ErrorCases) -> Void
+
+
+    //MARK: - Private properties
+
+    private let session = URLSession.shared
+    private let mainQueue = DispatchQueue.main
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+    
+
     //MARK: - Public methods
 
-    func requestMovieList(link: String, completionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
+    func requestMovieList(link: String, completionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping ErrorCloser) {
         guard let url = URL(string: link) else {
             return errorHandler(.badLink)
         }
@@ -34,7 +50,7 @@ final class GettingInformation {
         task.resume()
     }
 
-    func requestMovie(link: String, completionHandler: @escaping (Movie) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
+    func requestMovie(link: String, completionHandler: @escaping (Movie) -> Void, errorHandler: @escaping ErrorCloser) {
         guard let url = URL(string: link) else {
             return errorHandler(.badLink
             )}
@@ -60,7 +76,7 @@ final class GettingInformation {
         task.resume()
     }
 
-    func requestSearch(link: String, complitionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
+    func requestSearch(link: String, complitionHandler: @escaping ([Result]) -> Void, errorHandler: @escaping ErrorCloser) {
         guard let url = URL(string: link) else {
             return errorHandler(.badLink)
         }
@@ -80,7 +96,7 @@ final class GettingInformation {
         }.resume()
     }
     
-    func requestCast(link: String, completionHandler: @escaping ([Cast]) -> Void, errorHandler: @escaping (ErrorCases) -> Void) {
+    func requestCast(link: String, completionHandler: @escaping ([Cast]) -> Void, errorHandler: @escaping ErrorCloser) {
         guard let url = URL(string: link) else {
             return errorHandler(.badLink)
         }
@@ -97,6 +113,42 @@ final class GettingInformation {
                 completionHandler(result.cast)
             }
         }.resume()
+    }
+
+    func requestActor(link: String, completionHandler: @escaping (Actor) -> Void, errorHandler: @escaping ErrorCloser) {
+        guard let url = URL(string: link) else {
+            return errorHandler(.badLink)
+        }
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return errorHandler(.errorInResponce)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let actor = try? decoder.decode(Actor.self, from: data) else {
+                return errorHandler(.errorParcing)
+            }
+            self.mainQueue.async {
+                completionHandler(actor)
+            }
+        }.resume()
+    }
+
+    func requestActorImages(link: String, completionHandler: @escaping (ActorImages) -> Void, errorHandler: @escaping ErrorCloser) {
+        guard let url = URL(string: link) else {
+            return errorHandler(.badLink)
+        }
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return errorHandler(.errorInResponce)
+            }
+            guard let actorImages = try? self.decoder.decode(ActorImages.self, from: data) else {
+                return errorHandler(.errorParcing)
+            }
+            self.mainQueue.async {
+                completionHandler(actorImages)
+            }
+        }
     }
     
 }

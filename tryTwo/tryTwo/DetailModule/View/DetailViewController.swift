@@ -51,7 +51,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
     //MARK: - Public properties
 
     var output: DetailViewOutput?
-    let activityView = CustomActivityIndicator(frame: Constants.screenSize, complitionHandler: nil)
+    let activityView = CustomActivityIndicator(complitionHandler: nil)
 
 
     //MARK: - Private Properties
@@ -68,17 +68,7 @@ final class DetailViewController: UIViewController, ModuleTransitionable {
         configureTableView()
         output?.viewLoaded()
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        hideNavigationBar(animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        showNavigationBar(animated)
-    }
-
+    
 
     //MARK: - Private methods
 
@@ -149,8 +139,8 @@ extension DetailViewController: UITableViewDataSource {
             cell.deleteFromStorage = { [weak self] movie in
                 self?.output?.reloadViewAfter(action: .del, target: movie)
             }
-            if let booleanValue = output?.isMovieInStorage(movie) {
-                cell.initialButtonState(when: booleanValue)
+            if let isMovieInStorage = output?.isMovieInStorage(movie) {
+                cell.initialButtonState(when: isMovieInStorage)
             }
             return cell
         case Constants.titleCellPositionInTable:

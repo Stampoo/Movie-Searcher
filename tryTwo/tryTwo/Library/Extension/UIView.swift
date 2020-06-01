@@ -10,9 +10,11 @@ import UIKit
 
 //this extension not done
 extension UIViewController {
+
     func loading(_ loading:() -> Bool) {
         
     }
+    
     func createShadow() {
     }
 }
@@ -30,7 +32,15 @@ extension UIView {
         self.layer.masksToBounds = false
     }
 
-    func createBloom(color: UIColor) {
+    func addLightShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = 10
+        self.layer.shadowOffset = .init(width: 0.5, height: 4.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.masksToBounds = false
+    }
+
+    func addBloom(color: UIColor) {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowRadius = 2.0
         self.layer.shadowOpacity = 0.9
@@ -41,7 +51,7 @@ extension UIView {
 
 extension UIView {
 
-    func addBlur(on view: UIView) {
+    func addBlurAndVibrancy(on view: UIView) {
         let blurEffect = UIBlurEffect(style: .regular)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = self.bounds
@@ -51,6 +61,14 @@ extension UIView {
         vibrancyView.frame = blurredView.bounds
         vibrancyView.contentView.addSubview(view)
         blurredView.contentView.addSubview(vibrancyView)
+    }
+
+    func addBlur() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurredView = UIVisualEffectView(effect: blurEffect)
+        blurredView.alpha = 0.98
+        blurredView.frame = self.bounds
+        self.addSubview(blurredView)
     }
 
 }

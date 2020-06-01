@@ -22,7 +22,7 @@ final class DetailRouter {
 extension DetailRouter: DetailRouterInput {
     
     func showModule(_ moduleOutput: ModuleOutput) {
-        let detailVc = DetailModuleConfigurator().configure(with: moduleOutput)
+        let detailVc = DetailModuleConfigurator().configurateModule(with: moduleOutput)
         view?.pushModule(module: detailVc, animation: true)
     }
 

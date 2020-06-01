@@ -55,4 +55,14 @@ enum SearchCategory: String {
     case movie = "search/movie"
     case series = "search/series"
 }
-//https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
+
+enum DetailType {
+    case actor
+    case movie
+    case photo
+}
+
+enum NightMode {
+    case on
+    case off
+}

@@ -63,7 +63,7 @@ extension DetailPresenter: DetailViewOutput {
     }
     
     func viewLoaded() {
-        outputModule?.moduleEdited(complitionHandler: { (id) in
+        outputModule?.moduleEdited(complitionHandler: { id in
             self.id = id
         })
         loadInformation()
